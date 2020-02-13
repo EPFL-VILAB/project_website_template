@@ -1,0 +1,1448 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://use.fontawesome.com/fb1c3247d7.js"></script>    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <!-- <script type="text/javascript" src="js/mdb.min.js"></script> -->
+    <!-- <script src="jquery-3.2.1.min.js"></script> -->
+    
+    <script src="../js/d3.js"></script>    
+    <link rel="stylesheet" href="../css/choose_tasks.css">
+    <link rel="stylesheet" href="../css/style4.css">
+    <link rel="stylesheet" type="text/css" href="../assets/loaders.css" />
+    
+    <!-- <link rel="stylesheet" href="../css/loading_pulse.css"> -->
+    
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico" />
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-89674082-5"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-89674082-5');
+    </script>
+    
+    <script>
+        var div = d3.select("body").append("div")   
+        .attr("class", "tooltip")               
+        .style("opacity", 0);
+
+        // function vidplay() {
+        //     var video = document.getElementById("Video1");
+        //     var video2 = document.getElementById("Video2");
+        //     var button = document.getElementById("play");
+        //     video.play();
+        //     video2.play();
+
+        // }
+
+        function getTransferDataSize(){
+            if (document.getElementById('transferData1k').checked) {
+                return [1,1]
+            } 
+            else {
+                return [16,16]
+            }
+        };
+        function isSrcOnly(task) {
+            return ["random", "impainting_whole", "colorization", "jigsaw", "class_selected"].includes(task);
+        }
+
+        function callApi(){
+            var params = {
+                supervision: {
+                    _titles: [],
+                    children: [
+                        {_titles: {}, children: [
+                            {_titles: {}, children: []},  // Full training
+                            {_titles: {}, children: []}  // Transfer cost
+                        ]},
+                        {description: 'Supervision budget:', value: parseFloat(document.getElementById('supervisionBudgetValue').value) }, 
+                        {description: 'Max number of inputs:', value: parseFloat(document.getElementById('maxOrderValue').value) }, 
+                        {_titles: {}, children: []}, // Full training
+                        {description: 'Data size (in thousands):', value: getTransferDataSize() }, 
+                        ]
+                },
+                tasks: {unused:[], src_only_tasks: [], target_only_tasks: [], targets: []}
+            }
+
+            // console.log(getTransferDataSize());
+            var items = document.getElementById('unused').getElementsByTagName("li");
+            for (var i = 0; i < items.length; ++i) {
+                params['tasks']['unused'].push(items[i].id);
+            }
+
+            var items = document.getElementById('src_only_tasks').getElementsByTagName("li");
+            for (var i = 0; i < items.length; ++i) {
+                params['tasks']['src_only_tasks'].push(items[i].id);
+            }
+
+            badTargetTasks = []
+            var items = document.getElementById('target_only_tasks').getElementsByTagName("li");
+            for (var i = 0; i < items.length; ++i) {
+                params['tasks']['target_only_tasks'].push(items[i].id);
+                if (isSrcOnly(items[i].id)) {
+                    badTargetTasks.push(items[i].innerText)
+                }
+            }
+
+            var items = document.getElementById('targets').getElementsByTagName("li");
+            for (var i = 0; i < items.length; ++i) {
+                params['tasks']['targets'].push(items[i].id);
+                if (isSrcOnly(items[i].id)) {
+                    badTargetTasks.push(items[i].innerText)
+                }
+            }
+
+            if (badTargetTasks.length  > 0){
+                badTaskString = badTargetTasks[0];
+                for (var i = 1; i < badTargetTasks.length; ++i) {
+                    badTaskString = badTaskString + ", " + badTargetTasks[i];
+                }
+                alert("The following tasks are source-only and cannot be used as targets: \n\t" + badTaskString);
+                return;
+            }
+
+
+            // Scale by relative cost
+            var items = document.getElementById('relativeLabelCostSubmenu').getElementsByTagName("li");
+            for (var i = 0; i < items.length; ++i) {
+                var prettyName = items[i].children[0].innerHTML.split("<")[0];
+                var value = items[i].children[0].children[0]
+                params.supervision.children[0].children[0]._titles[i.toString()] = prettyName;
+                params.supervision.children[0].children[0].children.push(
+                    {
+                        description: 'full cost', 
+                        value: 1.0 * parseFloat(items[i].children[0].children[0].value)
+                    }
+                );
+                if (parseFloat(items[i].children[0].children[0].value) < 0.0) {
+                    alert("Supervision costs must be nonnegative!");
+                    return;
+                }
+
+                params.supervision.children[0].children[1]._titles[i.toString()] = prettyName;
+                params.supervision.children[0].children[1].children.push(
+                    {
+                        description: 'transfer cost', 
+                        // value: getTransferDataSize()[0] / 120.0  * parseFloat(items[i].children[0].children[0].value )
+                        value: 0 // We'll say this is 0 to make the supervision budget more easily understandable
+                    }
+                );
+                // console.log(items[i].children[0].children[0].id, items[i].children[0].children[0].value);
+            }
+
+            // // Add fullsupervision parameters
+            // var items = document.getElementById('fullTaskSupervisionSubmenu').getElementsByTagName("li");
+            // for (var i = 0; i < items.length; ++i) {
+            //     var prettyName = items[i].children[0].innerHTML.split("<")[0];
+            //     var value = items[i].children[0].children[0]
+            //     params.supervision.children[0].children[0]._titles[i.toString()] = prettyName;
+            //     params.supervision.children[0].children[0].children.push(
+            //         {
+            //             description: 'full cost', 
+            //             value: parseFloat(items[i].children[0].children[0].value)
+            //         }
+            //     );
+            //     if (parseFloat(items[i].children[0].children[0].value) < 0.0) {
+            //         alert("Supervision costs must be nonnegative!");
+            //         return;
+            //     }
+            //     // console.log(items[i].children[0].children[0].id, items[i].children[0].children[0].value);
+            // }
+
+
+            // // Add transfer cost parameters
+            // var items = document.getElementById('transferTaskSupervisionSubmenu').getElementsByTagName("li");
+            // for (var i = 0; i < items.length; ++i) {
+            //     var prettyName = items[i].children[0].innerHTML.split("<")[0];
+            //     var value = items[i].children[0].children[0]
+            //     params.supervision.children[0].children[1]._titles[i.toString()] = prettyName;
+            //     params.supervision.children[0].children[1].children.push(
+            //         {
+            //             description: 'transfer cost', 
+            //             value: parseFloat(items[i].children[0].children[0].value )
+            //         }
+            //     );
+            //     if (parseFloat(items[i].children[0].children[0].value) < 0.0) {
+            //         alert("Transfer costs must be nonnegative!");
+            //         return;
+            //     }
+            //     // console.log(items[i].children[0].children[0].id, items[i].children[0].children[0].value);
+            // }
+
+
+            var items = document.getElementById('relativeTaskValueSubmenu').getElementsByTagName("li");
+            for (var i = 0; i < items.length; ++i) {
+                var prettyName = items[i].children[0].innerHTML.split("<")[0];
+                var value = items[i].children[0].children[0]
+                params.supervision.children[3]._titles[i.toString()] = prettyName;
+                params.supervision.children[3].children.push(
+                    {description: 'relative value', value: parseFloat(items[i].children[0].children[0].value)}
+                );
+                if (parseFloat(items[i].children[0].children[0].value) < 0.0) {
+                    alert("Relative values must be nonnegative!");
+                    return;
+                }
+                $("#loading-spinner").css("visibility", "visible");
+                // console.log(items[i].children[0].children[0].id, items[i].children[0].children[0].value);
+            }
+
+            // Make the API call and, if successful, draw the results. 
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "https://api.taskonomy.vision:8887/solve");            
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) { // If successful
+                    var parsed_res = JSON.parse(this.responseText);
+                    var $color_by_scheme = parsed_res.color_by_scheme;
+                    var $data = parsed_res.data;
+                    document.getElementById("graph_data").innerHTML = JSON.stringify(parsed_res.data);
+                    // console.log(document.getElementById("graph_data").innerHTML)
+                    $("#loading-spinner").css("visibility", "hidden");
+
+                    /*********************************************
+                     * START LOADING VIDEOS ON THE RIGHT SIDEBAR *
+                     *********************************************/
+
+                    // Clear any existing videos
+                    document.getElementById("vid-titles").innerHTML = "";
+                    document.getElementById("our-vids").innerHTML = "";
+                    document.getElementById("alex-vids").innerHTML = "";
+                    document.getElementById("scratch-vids").innerHTML = "";
+                    document.getElementById("source-title").innerHTML = "";
+                    
+                    // Append title for source videos, which will be fixed to the top
+                    var rowtitle = document.createElement("div");
+                    rowtitle.setAttribute("style","height:" + document.getElementById("our-vids").clientWidth + "px;width:" + document.getElementById("our-vids").clientWidth + "px;");
+                    rowtitle.setAttribute("class","video-titles");
+                    rowtitle.innerHTML = "<h4 class='rotate'>Source</h4>";
+                    document.getElementById("source-title").appendChild(rowtitle);
+
+                    // Load the source videos and append to the top of the scroll element
+                    var source_vid = '<video class="source-vid" width=' + document.getElementById("our-vids").clientWidth + ' height=' + document.getElementById("our-vids").clientWidth + ' preload="metadata" style="background-color:#ddd;">'+
+                        '<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/video_test/og_4.webm" type="video/webm">' +
+                        '<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/video_test/og_4.mp4" type="video/mp4">' +
+                        'Video not found.</video>';
+                    document.getElementById("source-vid-1").innerHTML = source_vid;
+                    document.getElementById("source-vid-2").innerHTML = source_vid;
+                    document.getElementById("source-vid-3").innerHTML = source_vid;
+                    document.getElementById("insert-hline").innerHTML = '<HR WIDTH="60%">';
+                    
+
+                    var all_videos = [ // We keep this list so that we can start the videos when all are loaded
+                        document.getElementById("source-vid-1"),
+                        document.getElementById("source-vid-2"),
+                        document.getElementById("source-vid-3")
+                    ] 
+                    
+
+                    // Sort the videos in the same order each time
+                    sortOrder = [
+                    'rgb2sfnorm',
+                    'reshade',
+                    'edge2d',
+                    'segmentsemantic',
+                    'vanishing_point_well_defined',
+                    'segment25d',
+                    'rgb2depth',
+                    'room_layout',
+                    'class_places', 
+                    'keypoint3d',
+                    'edge3d',
+                    'autoencoder',
+                    'rgb2mist',
+                    'segment2d', 
+                    'curvature',
+                    'keypoint2d', 
+                    'class_1000',
+                    'denoise',
+                    'impainting'
+                    ];
+        
+                    Array.prototype.indexOfPrefix = function(transfer_name) {
+                        for(var i=0; i<this.length; ++i)
+                        {
+                            if( transfer_name.startsWith(this[i]) )
+                                return i;
+                        }
+                        return -1;
+                    };
+
+                    video_nodes = parsed_res.data.nodes.slice() //copy
+                    video_nodes.sort(
+                        function(a, b){
+                                return sortOrder.indexOfPrefix(a.transfer_name) - sortOrder.indexOfPrefix(b.transfer_name);
+                        }
+                    );
+                    // console.log(video_nodes);
+
+                    // Now add all the videos to the video sidebar on the right, one row at a time
+                    for (var node in video_nodes){
+                        node = video_nodes[node];
+                        if (node.transfer_name == undefined || node.transfer_name.includes("NONE")) { // Some nodes do not have videos
+                            continue;
+                        }
+                        // console.log(node);
+
+                        var cls = 'wait-to-start';
+                        // console.log(node);
+                        var text_cls = node.is_transfer == 'true' ? 'source_title' : 'transfer_title' ;
+                        // if (node.transfer_name == node.alex_name) { // This node is a root
+                        //     cls = 'translucent';
+                        // }
+
+                        // Add the title for this row
+                        var rowtitle = document.createElement("div");
+                        rowtitle.setAttribute("style","height:" + document.getElementById("our-vids").clientWidth + "px;width:" + document.getElementById("our-vids").clientWidth + "px;");
+                        rowtitle.setAttribute("class","video-titles");
+
+                        // Add the videos
+                        var ours = document.createElement("div");
+                        var alex = document.createElement("div");
+                        var scratch = document.createElement("div");
+                        document.getElementById("vid-titles").appendChild(rowtitle);
+                        document.getElementById("our-vids").appendChild(ours);
+                        document.getElementById("alex-vids").appendChild(alex);
+                        document.getElementById("scratch-vids").appendChild(scratch);
+                        rowtitle.innerHTML = "<h4 class='rotate " + text_cls + " '>" + node.name + "</h4>";
+
+                        var vid_folder = 'video_short';
+                        if (node.name == "Scene Class." || node.name == "Object Class. (1000)") {
+                            vid_folder = 'video_api';
+                        }
+                        var vidWidth = document.getElementById("our-vids").clientWidth;
+                        ours.innerHTML = '<video preload="metadata" width=' + vidWidth + ' height=' + vidWidth + ' style="background-color:#ddd" class=' + cls + ' autoplay muted loop>'+
+                            '<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/' + vid_folder + '/' + node.transfer_name + '" type="video/webm">' +
+                            '<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/' + vid_folder + '_mp4/' + node.transfer_name.replace('webm', 'mp4') + '" type="video/mp4">' +
+                            'Video not found.</video>';
+                        alex.innerHTML = '<video preload="metadata" width=' + vidWidth + ' height=' + vidWidth + ' style="background-color:#ddd" class=' + cls + ' autoplay muted loop>' +
+                            '<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/' + vid_folder + '/' + node.alex_name + '" type="video/webm">' +
+                            '<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/' + vid_folder + '_mp4/' + node.alex_name.replace('webm', 'mp4') + '" type="video/mp4">' +
+                            'Video not found.</video>';
+                        scratch.innerHTML = '<video preload="metadata" width=' + vidWidth + ' height=' + vidWidth + ' style="background-color:#ddd" class=' + cls + ' autoplay muted loop>' +
+                            '<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/' + vid_folder + '/' + node.scratch_name + '#" type="video/webm">' +
+                            '<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/' + vid_folder + '_mp4/' + node.scratch_name.replace('webm', 'mp4') + '" type="video/mp4">' +
+                            'Video not found.</video>';
+                        
+                        all_videos = all_videos.concat([ours, alex, scratch]);
+                    }
+                    
+                    /*********************************************
+                     *    CODE FOR STARTING ALL VIDEOS IN SYNC   *
+                     *********************************************/
+                    var d = new Date();
+                    var start_time =  d.getTime()
+                    var timeout_length = 10000; // in millis
+                    var is_vid_load_timeout = function(vids) {
+                        return (d.getTime() - start_time > timeout_length)
+                    }
+
+                    var is_all_loaded = function(vids) {
+                        var n_loaded = 0;
+                        vids.forEach( function(vid) {
+                            vid = vid.children[0];
+                            if(vid.readyState === 4) {
+                                n_loaded += 1;
+                            }
+                        });
+                        // console.log(n_loaded);
+                        return (n_loaded == vids.length);
+                    };
+
+                    var play_all = function(vids) {
+                        vids.forEach( function(vid) {
+                            vid = vid.children[0];
+                            vid.play();
+                            vid.currentTime = 0;
+                        });
+                    };                   
+
+                    // Pause all videos until loaded
+                    all_videos.forEach( function(vid) {
+                        vid = vid.children[0];
+                        vid.onloadeddata = function() {
+                            // if(is_vid_load_timeout(all_videos)) {
+                            if(is_all_loaded(all_videos) && !is_vid_load_timeout(all_videos)) {
+                                play_all(all_videos);
+                            }
+                            else {
+                                vid.pause();
+                            }
+                        };
+                    });
+                    
+                    // Start playing videos after `timeout_length`
+                    // Repeat the videos after the shortest one finishes
+                    setTimeout(
+                        function() { 
+                            play_all(all_videos);
+                            var min_vid_length = 10000000;
+                            all_videos.forEach( function(vid) {
+                                vid = vid.children[0];
+                                if(!isNaN(vid.duration)){
+                                    min_vid_length = Math.min(min_vid_length, vid.duration * 1000);
+                                }
+                            });
+                            setInterval(function() { play_all(all_videos);}, min_vid_length);
+                        },
+                        timeout_length
+                    );
+
+                    // d3 = this.d3;
+                    // Based on http://bl.ocks.org/mbostock/4062045
+                    function sigmoid(t) {
+                        return 1/(1+Math.pow(Math.E, -t));
+                    }
+                    /* END LOADING VIDEO SIDEBAR */
+
+                    /*****************************************
+                     * BEGIN DRAWING OF FORCE-DIRECTED GRAPH *
+                     *****************************************/
+                    var width = document.getElementById("maindiv").clientWidth,
+                        height = window.innerHeight - document.getElementById("maindiv").offsetTop;
+                    // console.log(width);
+                    // console.log(height);
+                    //position scale
+                    var labelwidth = 500,
+                    labelheight = 13;
+
+
+                    // Set color schemes and convenience functions for graph drawing
+                    var color_by_scheme = $color_by_scheme ;    
+                    var color = d3.scale.category20();
+                    // var weightcolor = d3.interpolateRgb("white", "blue");
+                    var weightcolor = d3.scale.linear()
+                        .domain([0, 0.5, 1])
+                        .range(["red", "white", "blue"]);
+
+                    var affinitycolor = d3.scale.linear()
+                        .domain([0, 1])
+                        .range(["white", "green"]);
+
+                    function make_name(type, node){
+                        if (node.in_targets == 'false'){
+                            return node.name;
+                        }
+                        if (type == 'group'){
+                            return node.name + ' (' + node.affinity.toFixed(2) + ')'
+                        }
+                        if (type == 'affinity'){
+                            return node.name + ' (' + node.affinity.toFixed(2) + ')'
+                        }
+                        if (type == 'quality'){
+                            return node.name + ' (' + node.quality.toFixed(2) + ')'
+                        }
+                        if (type == 'gain'){
+                            return node.name + ' (' + node.gain.toFixed(2) + ')'
+                        }
+                        else {
+                            return weightcolor(node.nweight)
+                        }
+                    }
+                        
+
+                    function color_by(type, node){
+                        if (type == 'group'){
+                            return color(node.group)
+                        }
+                        if (type == 'affinity'){
+                            return affinitycolor(node.affinity)
+                        }
+                        if (type == 'quality'){
+                            return affinitycolor(node.quality)
+                        }
+                        if (type == 'gain'){
+                            return affinitycolor(node.gain)
+                        }
+                        else {
+                            return weightcolor(node.nweight)
+                        }
+                    }
+
+                    function edge_color(edge){
+
+                        // console.log(edge);
+                        return affinitycolor(edge);
+                    }
+
+
+                    function stroke_color(type, node){
+                        if (type == 'group'){
+                            return color(node.group)
+                        }
+                        if (type == 'affinity'){
+                            return affinitycolor(node.nweight + 0.3)
+                        }
+                        else {
+                            return weightcolor(node.nweight < 0.5 ? node.nweight - 0.3 : node.nweight + 0.3)
+                        }
+                    }
+
+
+
+                    var force = d3.layout.force()
+                        .charge(-1000)
+                        .linkDistance(100)
+                        // .linkStrength(0.1)
+                        .size([width, height - 6 * labelheight]);
+
+                    // force.linkStrength(function(link) {
+                    //        return sigmoid( link.value - 1 );
+                    //     });
+
+                    d3.select("#maindiv").selectAll("svg").remove();
+                    var svg = d3.select("#maindiv").append("svg")
+                        .attr("width", width)
+                        .attr("height", height);
+
+
+
+                    // Arrowheads
+                    svg.append("svg:defs").selectAll("marker")
+                        .data(["end"])      // Different link/path types can be defined here
+                    .enter().append("svg:marker")    // This section adds in the arrows
+                        .attr("id", String)
+                        .attr("viewBox", "0 -5 10 10")
+                        .attr("refX", 16)
+                        .attr("refY", 0)
+                        .attr("markerWidth", 8)
+                        .attr("markerHeight", 8)
+                        .attr("orient", "auto")
+                        .attr('xoverflow','visible')
+                    .append("svg:path")
+                        .attr('fill', 'RGBA(100, 100, 100, 1.0)')
+                        .attr("d", "M0,-5L10,0L0,5");
+
+                    // Graph data, which comes from the API
+                    var graph = $data ;
+
+                    force.nodes(graph.nodes)
+                        .links(graph.links)
+                        .start();
+
+                    // Arrow tails
+                    var link = svg.selectAll(".link")
+                        .data(graph.links)
+                        .enter().append("line")
+                        .attr("class", "link")
+                        .attr('marker-end','url(#end)')
+                        .style("stroke-width", function(d) { return 2.5 + 3 * d.priority; })
+                        .attr("stroke", function(d) {  return affinitycolor(d.priority * 2); })
+                        .attr('fill', 'RGBA(200,200,200, 1.0)')
+
+                    // Create the groups under svg
+                    var gnodes = svg.selectAll('g.gnode')
+                    .data(graph.nodes)
+                    .enter()
+                    .append('g')
+                    .classed('gnode', true);
+
+                    // Add one circle in each group
+                    var node = gnodes.append("circle")
+                        .attr("class", "node")
+                        .attr("cx", 0)
+                        .attr("cy", 0)
+                        .attr("r", function(d) { return d.r })
+                        .style("fill", function(d) { return color_by(d.color_by, d); })
+                        .style("stroke", function(d) { return stroke_color(d.color_by, d); })  
+                        .style("stroke-width", function(d) { return 1; })  
+                        .call(force.drag);
+
+                    // Labels for the nodes. We do this in a hacky way -- an opaque label over another label with a stroke
+                    var labels = gnodes.append("text")
+                        .attr("dx", -20)
+                        .text(function(d) { return make_name(d.color_by, d); })
+                        .attr("font-size", function(d) { return d.text_size; })
+                        .style("stroke", function(d) { return 'RGBA(0,0,0,0.7)'; })    
+                        .style("stroke-width", function(d) { return 3; })  
+                        .style("display", 'inline')  
+                        .style("background-color", 'RGBA(255,255,255,0.9)')  
+
+
+                    // Append the labels to each group
+                    var labels = gnodes.append("text")
+                        // .attr("class", "node")
+                        .attr("dx", -20)
+                        .text(function(d) { return make_name(d.color_by, d); })
+                        .attr("font-size", function(d) { return d.text_size; })
+                        //   .attr("fill", function(d) { return d3.rgb(color_by(d.color_by, d)).darker(2); });
+                        .attr("fill", function(d) { return 'RGBA(255,255,255,1.0)'; })
+
+                    // This is what allows the graph to move around
+                    force.on("tick", function() {
+                        link.attr("x1", function(d) { return d.source.x; })
+                            .attr("y1", function(d) { return d.source.y; })
+                            .attr("x2", function(d) { return d.target.x; })
+                            .attr("y2", function(d) { return d.target.y; });
+                        // node.attr("cx", function(d) { return d.x; })
+                        //     .attr("cy", function(d) { return d.y; });
+                        
+                        // Do the translation
+                        gnodes.attr("transform", function(d) { 
+                            return 'translate(' + [d.x, d.y] + ')'; 
+                        });    
+                    });
+                    recolorGraph('group');
+                    /* END DRAWING FORCE-DIRECTED GRAPH */
+                    
+                    // $('#download').attr('href', 'data:image/svg+xml;base64,' + btoa($("#maindiv").html())); 
+                }
+                else if (this.readyState == 4 && this.status == 400) { // If the API call failed 
+                    // Just notify the user and do nothing else
+                    $("#maindiv").html('<div class="alert alert-danger alert-dismissable" style="margin-left:60px;width:95%;">  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Oops!</strong> Looks like that request is unsatisfiable.</div>');
+                    $("#loading-spinner").css("visibility", "hidden");
+                }
+            };
+            xhttp.setRequestHeader("Content-Type", "application/json");
+            xhttp.send(JSON.stringify(params));
+        }
+
+    </script>
+</head>
+
+
+<!-- SideNav slide-out button -->
+
+
+<div class="wrapper container-fluid">
+    <div class="row">
+
+    <!-- Sidebar Holder -->
+    <nav id="sidebar" style='position: absolute;' class='active' >
+        <div class="sidebar-header" id="sidebarCollapse">
+            <h3>Taskonomy</h3>
+            <strong>T</b> </strong>
+        </div>
+
+        <ul class="list-unstyled components">
+            <li>                    
+                <a href="#supervisionBudgetSubmenu" data-toggle="collapse" aria-expanded="false">
+                    <i 
+                        class="glyphicon glyphicon-grain"
+                        data-toggle="tooltip"
+                        data-trigger="focus"
+                        data-container=""
+                        data-placement="right" 
+                        data-original-title="<div style='font-family: Poppins, sans-serif'>Supervision Budget</div>"
+                        data-content="Overall budget for training. By default, this is the number of task-specific networks. In Supervision Units. <br>
+                        Default:<b> <code>1 SU = 120k samples</code></b>">
+                    </i>
+                    Supervision Budget <i class="fa fa-caret-down" style="float:right;"></i>
+                </a>
+                <ul class="collapse list-unstyled" id="supervisionBudgetSubmenu">
+                    <li style='margin: 0px 10 0 10%;float:center;'><input style='width:5em;color:#222;' id="supervisionBudgetValue" type="number" value=7 min=1></li>
+                </ul>
+            </li>
+            <li>                    
+                <a href="#maxOrderSubmenu" data-toggle="collapse" aria-expanded="false">
+                    <i 
+                        class="glyphicon glyphicon-th-large"
+                        data-toggle="tooltip"
+                        data-trigger="focus"
+                        data-container=""
+                        data-placement="right" 
+                        data-original-title="<div style='font-family: Poppins, sans-serif'>Maximum Order</div>"
+                        data-content="The maximum number of tasks that can be used in any single transfer.">
+                    </i>
+                    Maximum Order of Transfer Functions <i class="fa fa-caret-down" style="float:right;"></i>
+                </a>
+                <ul class="collapse list-unstyled" id="maxOrderSubmenu">
+                    <li style='margin: 0px 10 0 10%;float:center;'><input style='width:5em;color:#222;' id="maxOrderValue" type="number" value=3  min=1 max=26></li>
+                </ul>
+            </li>
+            <li id="transferDataMenu">                    
+                    <a href="#transferDataSubmenu" data-toggle="collapse" aria-expanded="false">
+                        <i class="glyphicon glyphicon-hdd"
+                            data-toggle="tooltip"
+                            data-trigger="focus"
+                            data-container=""
+                            data-placement="right" 
+                            data-original-title="<div style='font-family: Poppins, sans-serif'>Transfer Data (k)</div>"
+                            data-content="How many samples to use to train each transfer function.">
+                        </i>
+                        Available Transfer Data <i class="fa fa-caret-down" style="float:right;"></i>
+                    </a>
+                    <ul class="collapse list-unstyled" id="transferDataSubmenu">
+                        <li style='margin: 0px 10 0 10%;float:center;'>
+                            <label class="radio-inline"><input id="transferData1k"  type="radio" name="optradio">1k</label>
+                            <label class="radio-inline"><input id="transferData16k" type="radio" name="optradio" checked>16k</label>
+                            <!-- <datalist id="tickmarks">
+                              <option value="1k" label="1k">
+                              <option value="16k" label="16k"> -->
+                            <!-- </datalist> -->
+                        </li>
+                    </ul>
+            </li>
+            <li id="relativeTaskValueMenu">
+                <a href="#relativeTaskValueSubmenu" data-toggle="collapse" aria-expanded="false">
+                    <i
+                        class="glyphicon glyphicon-scale"
+                        data-toggle="tooltip"
+                        data-trigger="focus"
+                        data-container=""
+                        data-placement="right" 
+                        data-original-title="<div style='font-family: Poppins, sans-serif'>Relative Task Weight</div>"
+                        data-content="Relative weighting of each task.">
+                    </i>
+                    (Relative) Task Importance<i class="fa fa-caret-down" style="float:right;"></i>
+                </a>
+                <ul class="collapse list-unstyled" id="relativeTaskValueSubmenu">
+                </ul>
+            </li>
+            <li id="fullTaskSupervisionMenu" >
+                <a href="#fullTaskSupervisionSubmenu" data-toggle="collapse" aria-expanded="false">
+                    <i
+                        class="glyphicon glyphicon-share-alt"
+                        data-toggle="tooltip"
+                        data-trigger="focus"
+                        data-container=""
+                        data-placement="right" 
+                        data-original-title="<div style='font-family: Poppins, sans-serif'>Task-Specific Cost</div>"
+                        data-content="How costly (in supervision units) it is to train each task.">
+                    </i>
+                    (Relative) Task-Specific Label / Training Cost<i class="fa fa-caret-down" style="float:right;"></i>
+                </a>
+                <ul class="collapse list-unstyled" id="fullTaskSupervisionSubmenu">
+                </ul>
+            </li>
+            <li id="transferTaskSupervisionMenu">
+                <a href="#transferTaskSupervisionSubmenu" data-toggle="collapse" aria-expanded="false">
+                    <i 
+                        class="glyphicon glyphicon-transfer"
+                        data-toggle="tooltip"
+                        data-trigger="focus"
+                        data-container=""
+                        data-placement="right" 
+                        data-original-title="<div style='font-family: Poppins, sans-serif'>Transfer Cost</div>"
+                        data-content="How costly (in supervision units) it is to train each transfer function.">
+                    </i>
+                    (Relative) Transfer Label / Training Cost<i class="fa fa-caret-down" style="float:right;"></i>
+                </a>
+                <ul class="collapse list-unstyled" id="transferTaskSupervisionSubmenu">
+                </ul>                
+            </li>
+            <li id="relativeLabelCostMenu">
+                <a href="#relativeLabelCostSubmenu" data-toggle="collapse" aria-expanded="false">
+                    <i
+                        class="glyphicon glyphicon-scale"
+                        data-toggle="tooltip"
+                        data-trigger="focus"
+                        data-container=""
+                        data-placement="right" 
+                        data-original-title="<div style='font-family: Poppins, sans-serif'>Relative Task Weight</div>"
+                        data-content="Relative cost of each label.">
+                    </i>
+                    (Relative) Label Cost<i class="fa fa-caret-down" style="float:right;"></i>
+                </a>
+                <ul class="collapse list-unstyled" id="relativeLabelCostSubmenu">
+                </ul>
+            </li>       
+        </ul>
+
+        <ul class="list-unstyled CTAs">
+            <!-- <li id='howto' class="" data-toggle="tooltip"
+                data-trigger="hover"
+                data-placement="right" 
+                data-container="body"                
+                data-original-title="<h3>API INSTRUCTIONS</h3>"
+                data-content="The supervision API allows you to explore the task space and find good transfers. Even low-order transfers (i.e. from two or three sources) can be competitive with networks trained on four times the data. 
+                <br><br>
+                Use the task selector above to include tasks in the task dictionary. Tasks can act as sources, targets, or both.
+                <br><br>                
+                Try hovering over the icons on the left. A tooltip will appear explaining what each setting does.
+                <br><br>
+                Once your settings are all entered, press the big green 'Solve!' button to find the set of transfers that gets the best overall performace according to your preferences. When the results are in, you use the pill-buttons in the top right to look at the quality and gain. 
+                <br><br>
+                <strong>Gain:</strong> The win rate of a network versus standard supervised learning on the same number of data points.
+                <br>
+                <strong>Quality:</strong> The win rate of a network versus the task-specific networks trained on 120k images.
+                <br><br>
+                <strong>Edge weights:</strong> The width of each edge (and the hue, greener=better) is related to how well that first-order transfer performed. It is a proxy for the importance of each source. This is meant to be qualitative! 
+                <br><br>
+                <strong>Videos:</strong> For each 16k transfer, we evaluate the result on a random YouTube video that was not in our dataset. The result is on the right.
+                
+
+                ">
+                <a href="#" class="article"><i class="glyphicon glyphicon-info-sign"></i> How-to</a>
+            </li> -->
+            <li><a href="//taskonomy.vision" class="article">Back to main site</a></li>
+        </ul>
+    </nav>
+
+    <!-- Page Content Holder -->
+    <div id="content container-fluid">
+
+        <!--  OPTIONS TOP -->
+        <div id='topoptions' class="container-fluid noselect panel-group">
+            <div id='taskselectorcollapse' class="row panel panel-default" data-toggle="collapse" href="#collapse1">
+                <!-- <div class='col-2'></div> -->
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapse1">Choose task dictionary   <i class="fa fa-caret-down"></i></a>
+                    </h4>
+                </div>
+            </div>
+            <div>
+            <div id='collapse1' class="row panel-collapse collapse hider">    
+                <div class="column">
+                    <div box>
+                        <h2 style="text-align:center;">Source-only Tasks</h2>
+                        <ol id='src_only_tasks' data-draggable="target" style="height:19.85em;" >
+                            <li data-draggable="item">Loading...</li>
+                        </ol>
+                    </div>
+        
+                    <div box>
+                        <h2 style="text-align:center;"> Target-only Tasks</h2>
+                        <ol id='target_only_tasks' data-draggable="target" style="height:19.85em;">
+                            <li data-draggable="item">Loading...</li>
+                        </ol>
+                    </div> 
+        
+                </div>
+                
+                <div class="column">
+                    <div box>
+                        <h2 style="text-align:center;"> Source or Target </h2>
+                        <ol id='targets' data-draggable="target" style="height:44em;">
+                            <li data-draggable="item">Loading...</li>
+                        </ol>
+                    </div>
+                </div>
+        
+                        
+                <div class="column">
+                    <div box>
+                        <h2 style="text-align:center;"> Unused Tasks </h2>
+                        <ol id='unused' data-draggable="target" style="height:44em;">
+                            <li data-draggable="item">Loading...</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            </div>
+        
+            <div class='row'>
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">                                    
+                    <div>
+                        <!-- <butt/on onclick="document.getElementById('link').click()">Download!</button>                             -->
+                        <button class="btn btn-primary button"
+                                style="float:left;height:2.5em"
+                                id=download_button
+                        >
+                                <i class="fa fa-download" aria-hidden="true"></i>
+                        </button>         
+                        <p id=graph_data hidden></p>               
+                        <a download="taskonomy_api_output.json" href="#" id="download" hidden></a>                        
+                        <button class="btn btn-success" style="float:left;width:30%;height:2.5em" onclick="callApi()">Solve!
+                                <i class="glyphicon glyphicon-send"></i>                                
+                        </button>    
+                        <button class="btn btn-info" id='howto' 
+                                data-toggle="tooltip"
+                                data-trigger="hover"
+                                data-placement="bottom" 
+                                data-container="body"                
+                                data-original-title="<h3>API INSTRUCTIONS</h3>"
+                                data-content="The supervision API allows you to explore the task space and find good transfers. Even low-order transfers (i.e. from two or three sources) can be competitive with networks trained on four times the data. 
+                                <br><br>
+                                Use the task selector above to include tasks in the task dictionary. Tasks can act as sources, targets, or both.
+                                <br><br>                
+                                Try hovering over the icons on the left. A tooltip will appear explaining what each setting does.
+                                <br><br>
+                                Once your settings are all entered, press the big green 'Solve!' button to find the set of transfers that gets the best overall performace according to your preferences. When the results are in, you use the pill-buttons in the top right to look at the quality and gain. 
+                                <br><br>
+                                <strong>Gain:</strong> The win rate of a network versus standard supervised learning on the same number of data points.
+                                <br>
+                                <strong>Quality:</strong> The win rate of a network versus the task-specific networks trained on 120k images.
+                                <br><br>
+                                <strong>Edge weights:</strong> The width of each edge (and the hue, greener=better) is related to how well that first-order transfer performed. It is a proxy for the importance of each source. This is meant to be qualitative! 
+                                <br><br>
+                                <strong>Videos:</strong> For each 16k transfer, we evaluate the result on a random YouTube video that was not in our dataset. The result is on the right.
+                                
+                
+                                ">
+                                 Instructions/Definitions <i class="glyphicon glyphicon-info-sign"></i>
+                                <!-- <a href="#" class="article"><i class="glyphicon glyphicon-info-sign"></i> How-to</a> -->
+                            </button>            
+                    </div>       
+                </div>
+                
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">                                    
+                    <div>
+                        <ul class="nav nav-pills nav-justified custom" >
+                            <li class="color-by-text">Color Nodes:</li>
+                            <li class="active"><a class='view-pill'  data-toggle="tab" href="#1" onclick="recolorGraph('group')">by Task</a></li>
+                            <li><a class='view-pill'  data-toggle="tab" href="#2" onclick="recolorGraph('quality')">by Quality</a></li>
+                            <li><a class='view-pill'  data-toggle="tab" href="#3" onclick="recolorGraph('gain')">by Gain</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="container">
+
+                </div>
+            </div>
+        </div>
+        
+        <div  class="container-fluid">
+            <div class='row '>                
+                <div id='maindiv' class="noselect col-xs-9">
+
+                </div>
+                <div id='loading-spinner' class="noselect" style='margin-left:60px;visibility:hidden;'>                    
+                    <div class="item-loader-container">
+                        <div class="la-ball-grid-pulse la-3x">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <br>
+                        <div><h3 style="margin-top:-10px;">Computing...</h3></div>
+                    </div>
+                </div>
+                <div id='video-sidebar' class="extend-bottom col-xs-3" style="margin-left:-30px">
+                    <div class="row no-pad" >
+                        <div class="col-xs-12 no-pad">
+                            <h3 style="color:#222">Transfer Results</h3>
+                            
+                            <HR WIDTH="60%">
+
+                        </div>                       
+                    </div>                       
+                    <div class="row no-pad" style="margin-left:-40px">
+                        <div id="source-title" class="col-xs-2 no-pad">
+                        </div>
+                        <div id="source-vid-1" class="col-xs-3 no-pad">
+                        </div>
+                        <div id="source-vid-2" class="col-xs-3 no-pad">
+                        </div>
+                        <div id="source-vid-3" class="col-xs-3 no-pad">
+                        </div>
+                    </div>
+                    <div id="insert-hline"></div>
+                    <div class="row no-pad" style="margin-left:-40px">
+                        <div class="col-xs-2 no-pad">
+                        </div>
+                        <div class="col-xs-3 no-pad">
+                            <div class='video-titles'>
+                                <h4 class="method-title" style="color:#fff">Ours</h4>
+                            </div>                           
+                        </div>
+                        <div class="col-xs-3 no-pad">
+                            <div class='video-titles'>
+                                <h4 class="method-title" style="color:#fff">ImageNet</h4>
+                            </div>
+                        </div>
+                        <div class="col-xs-3 no-pad">
+                            <div class='video-titles'>
+                                <h4 class="method-title" style="color:#fff">No Transfer</h4>
+                            </div>                                                   
+                        </div>
+                    </div>                    
+                    <div class="row" id='video-scroll' class="extend-bottom"  style="margin-left:-40px">
+                        <div id="vid-titles" class="col-xs-2 no-pad">                                    
+                        </div>
+                        <div id="our-vids" class="col-xs-3 no-pad">
+                        </div>
+                        <div id="alex-vids" class="col-xs-3 no-pad">
+                        </div>
+                        <div id="scratch-vids" class="col-xs-3 no-pad">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <h2>Collapsible Sidebar Using Bootstrap 3</h2> -->
+        <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> -->
+
+        <!-- <div class="line"></div>
+
+        <h2>Lorem Ipsum Dolor</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+        <div class="line"></div>
+
+        <h2>Lorem Ipsum Dolor</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+        <div class="line"></div>
+
+        <h3>Lorem Ipsum Dolor</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> -->
+    </div>
+</div>
+
+</div>
+
+
+
+
+<!-- jQuery CDN -->
+<!-- <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+<!-- Bootstrap Js CDN -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+
+
+<script type="text/javascript">
+    // $(document).ready(function () {
+    //     $('#sidebarCollapse').on('click', function () {
+    //         $('#sidebar').toggleClass('active');
+    //     });
+    // });
+    $(document).ready(function () {
+        $('#sidebar').on('mouseover', function () {
+            $('#sidebar').removeClass('active');
+        });
+    });
+    $(document).ready(function () {
+        $('#sidebar').on('mouseleave', function () {
+            $('#sidebar').addClass('active');
+        });
+    });
+
+    // $(document).ready(function () {
+    //     $('#howto').on('mouseover', function () {
+    //         console.log('Select options')
+    //     });
+    // });
+
+    $(document).ready(function () {
+        //can also be wrapped with:
+        //1. $(function () {...});
+        //2. $(window).load(function () {...});
+        //3. Or your own custom named function block.
+        //It's better to wrap it.
+
+        //Tooltip, activated by hover event
+        $("body").popover({   
+            trigger: "hover",
+            selector: "[data-toggle='tooltip']",
+            // container: "body",
+            html: true
+
+        })
+        $("#howto").popover({           
+            selector: "[data-toggle='tooltip']",
+            // container: "body",
+            html: true
+        });
+        //They can be chained like the example above (when using the same selector).
+        
+    });
+</script>
+
+<script type="text/Javascript">
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    function load_draggable(){
+        var script = document.createElement("script"); // Make a script DOM node
+        script.src = '../js/draggable.js'; // Set it's src to the provided URL
+        document.body.appendChild(script);
+    }
+   
+            
+    function updateMaxBudget(){
+        var budget = document.getElementById('targets').children.length + document.getElementById('src_only_tasks').children.length + document.getElementById('target_only_tasks').children.length;
+        var budgetElem = document.getElementById('supervisionBudgetValue');
+        budgetElem.setAttribute("max", budget);
+        if (parseInt(budgetElem.value) > budget){
+            // console.log(budgetElem.value, budget);
+            budgetElem.value = budget;
+        }
+
+        // Max order is at most the number of non-root tasks
+        var orderElem = document.getElementById('maxOrderValue');
+        orderElem.setAttribute("max", budget);
+        if (parseInt(orderElem.value) > budget){
+            orderElem.value = budget;
+        }
+
+
+    }
+
+    function setBudget(budget){
+        var budgetElem = document.getElementById('supervisionBudgetValue');
+        budgetElem.setAttribute("value", budget);
+    }
+
+    function setOrder(budget){
+        var orderElem = document.getElementById('maxOrderValue');
+        orderElem.setAttribute("value", budget);
+    }
+
+    function setTransferData(val){
+        document.getElementById('transferData1k').checked = false;
+        document.getElementById('transferData16k').checked = false;
+        document.getElementById('transferData' + val).checked = true;
+    }
+
+    function set_defaults(){
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "https://api.taskonomy.vision:8887/defaults", false);
+        xhttp.send();
+        document.getElementById('src_only_tasks').innerHTML = "";
+        document.getElementById('target_only_tasks').innerHTML = "";
+        document.getElementById('targets').innerHTML = "";
+        document.getElementById('unused').innerHTML = "";
+        // var res = response.content.data["text/plain"].replace(/'/g, "");
+        var parsed_res = JSON.parse(xhttp.responseText);
+
+        var task_to_id = parsed_res['task_id_to_set'];
+        var map_to_display_name = parsed_res['task_id_to_display_name'];
+
+        var relativeTaskValueSubmenu = document.getElementById('relativeTaskValueSubmenu');
+        var fullTaskSupervisionSubmenu = document.getElementById('fullTaskSupervisionSubmenu');
+        var transferTaskSupervisionSubmenu = document.getElementById('transferTaskSupervisionSubmenu');
+        var relativeLabelCostSubmenu = document.getElementById('relativeLabelCostSubmenu');
+
+        // Allow configs to be set via url
+        if(getParameterByName('budget')) {
+            setBudget(getParameterByName('budget'));
+        }
+        if(getParameterByName('order')) {
+            setOrder(getParameterByName('order'));
+        }
+        if(getParameterByName('transfer_data')) {
+            setTransferData(getParameterByName('transfer_data'));
+        }
+
+        for (var task in task_to_id){
+            if(getParameterByName(task)) { // Set default group by url
+                task_to_id[task] = getParameterByName(task);
+            }
+
+            var list_for_tasks = document.getElementById(task_to_id[task])
+            var entry = document.createElement('li');
+            entry.setAttribute('data-draggable', 'item');
+            entry.innerHTML = map_to_display_name[task];
+            entry.id = task;
+            //entry.appendChild(document.createTextNode(task));
+            list_for_tasks.appendChild(entry);
+
+
+            var entry = document.createElement('li');
+            // entry.setAttribute('style', 'float:left;');
+            entry.innerHTML = "<a href='#'>" + map_to_display_name[task] + "<input style='float:right;width:5em;color:#222;' id='" + task + "' type=number' value=1></a>";
+            // entry.innerHTML = map_to_display_name[task];
+            relativeTaskValueSubmenu.appendChild(entry);
+            
+            var entry = document.createElement('li');
+            entry.innerHTML = "<a href='#'>" + map_to_display_name[task] + "<input style='float:right;width:5em;color:#222;' id='" + task + "' type=number' value=1></a>";
+            fullTaskSupervisionSubmenu.appendChild(entry);
+        
+            var entry = document.createElement('li');
+            entry.innerHTML = "<a href='#'>" + map_to_display_name[task] + "<input style='float:right;width:5em;color:#222;' id='" + task + "' type=number' value=0.0></a>";
+            transferTaskSupervisionSubmenu.appendChild(entry);
+
+            var entry = document.createElement('li');
+            entry.innerHTML = "<a href='#'>" + map_to_display_name[task] + "<input style='float:right;width:5em;color:#222;' id='" + task + "' type=number' value=1.0></a>";
+            relativeLabelCostSubmenu.appendChild(entry);
+        }
+        
+        // IMPLEMENTMaxBudget);
+        
+        document.getElementById('src_only_tasks').addEventListener("mouseout", updateMaxBudget);
+        document.getElementById('target_only_tasks').addEventListener("mouseout", updateMaxBudget);
+        document.getElementById('targets').addEventListener("mouseout", updateMaxBudget);
+        document.getElementById('unused').addEventListener("mouseout", updateMaxBudget);
+        
+        if(getParameterByName('clean_url')) {
+            window.history.pushState("object or string", "Title", "/api");
+        }
+        updateMaxBudget();
+        if(!getParameterByName('nosolve')) {
+            callApi();
+        }
+    }
+
+    var color = d3.scale.category20();
+    // var weightcolor = d3.interpolateRgb("white", "blue");
+    var weightcolor = d3.scale.linear()
+        .domain([0, 0.5, 1])
+        .range(["red", "white", "blue"]);
+
+    var affinitycolor = d3.scale.linear()
+        .domain([0, 1])
+        .range(["white", "green"]);
+
+    function color_by(type, node){
+        if (type == 'group'){
+            return color(node.group)
+        }
+        if (type == 'affinity'){
+            return affinitycolor(node.affinity)
+        }
+        if (type == 'quality'){
+            return weightcolor(node.quality)
+        }
+        if (type == 'gain'){
+            return weightcolor(node.gain)
+        }
+        else {
+            return weightcolor(node.nweight)
+        }
+    }
+
+    function stroke_color(type, node){
+        if (type == 'group'){
+            return color(node.group)
+        }
+        if (type == 'affinity'){
+            return affinitycolor(node.affinity + 0.3)
+        }
+        if (type == 'quality'){
+            return weightcolor(node.quality < 0.5 ? node.quality - 0.3 : node.quality + 0.3)
+        }
+        if (type == 'gain'){
+            return weightcolor(node.gain < 0.5 ? node.gain - 0.3 : node.gain + 0.3)
+        }
+        else {
+            return weightcolor(node.nweight)
+        }
+    }
+
+    function make_name(type, node){
+        if (node.in_targets == 'false'){
+            return node.name;
+        }
+        if (type == 'group'){
+            return node.name + ' (' + node.affinity.toFixed(2) + ')'
+        }
+        if (type == 'affinity'){
+            return node.name + ' (' + node.affinity.toFixed(2) + ')'
+        }
+        if (type == 'quality'){
+            return node.name + ' (' + node.quality.toFixed(2) + ')'
+        }
+        if (type == 'gain'){
+            return node.name + ' (' + node.gain.toFixed(2) + ')'
+        }
+        else {
+            return weightcolor(node.nweight)
+        }
+    }
+        
+    var download_graph = function () {
+        var textFile = null,
+        makeTextFile = function (text) {
+            var data = new Blob([text], {type: 'text/plain'});
+
+            // If we are replacing a previously generated file we need to
+            // manually revoke the object URL to avoid memory leaks.
+            if (textFile !== null) {
+            window.URL.revokeObjectURL(textFile);
+            }
+
+            textFile = window.URL.createObjectURL(data);
+
+            return textFile;
+            
+        };
+
+
+        // var create = document.getElementById('create'),
+        var textbox = document.getElementById('graph_data');
+
+        // create.addEventListener('click', function () {
+        var link = document.getElementById('download');
+        link.href = makeTextFile(textbox.innerHTML);
+
+        link.click();
+            // link.style.display = 'block';
+        // }, false);
+    };
+
+    document.getElementById('download_button').addEventListener('click', function () {
+        download_graph();
+    }, false);
+    
+    var recolorGraph = function(color_scheme) {
+        var svg = d3.select("#maindiv").selectAll("svg")
+        var gnodes = svg.selectAll('g.gnode')
+        var node = gnodes.selectAll("circle")
+            .style("fill", function(d) { return color_by(color_scheme, d); })
+            .style("stroke", function(d) { return stroke_color(color_scheme, d); })  
+            .style("stroke-width", function(d) { return 1; })  
+
+        // Append the labels to each group
+        var labels = gnodes.selectAll("text")
+            .text(function(d) { return make_name(color_scheme, d); })
+        
+
+
+        /************************************************************
+         *                       COLORBAR                           *
+         ************************************************************/
+        var width = document.getElementById("maindiv").clientWidth,
+                        height = window.innerHeight - document.getElementById("maindiv").offsetTop;
+
+        //position scale
+        var labelwidth = 500,
+        labelheight = 13;
+        d3.selectAll('.colorbar').remove();
+    
+        if (color_scheme != 'group'){
+            var colorbardata = [
+                {offset: "0%", color: "red"},
+                {offset: "50%", color: "white"},
+                {offset: "100%", color: "blue"} ];
+            
+
+            var data = [{
+                color: 'red',
+                label: '0%'
+                }, {
+                color: 'white',
+                label: '50%'
+                }, {
+                color: 'blue',
+                label: '100%'
+                }];
+            
+            if (color_scheme == 'affinity') {
+                colorbardata = [
+                    {offset: "0%", color: "white"},
+                    {offset: "100%", color: "green"} ];
+
+                var data = [{
+                    color: 'white',
+                    label: '0%'
+                    }, {
+                    color: 'green',
+                    label: '100%'
+                    }]
+            }
+
+            var colorbar2 = svg.append("defs")
+                .append("linearGradient")
+                .attr("id", "legendGradientMulti")
+                .attr("x1", "0%").attr("y1", "0%")
+                .attr("x2", "100%").attr("y2", "0%")
+                .selectAll("stop")
+                .data(colorbardata)
+                .enter().append("stop")
+                .attr("offset", function(d) { return d.offset; })
+                .attr("stop-color", function(d) { return d.color; });
+                // .attr("class", "colorbar");
+
+            var colorbar = svg.append("rect")
+                .attr("x", (width - labelwidth) / 2).attr("y", height - 4 * labelheight)
+                .attr("width", labelwidth).attr("height", labelheight)
+                .style("fill", "url(#legendGradientMulti)")
+                .attr("class", "colorbar");
+
+            // var g = svg.append('g')
+            //     .selectAll('.label')  
+            //     .data(data)
+            //     .enter();
+
+            // g.append('text')
+            //     .text(function(d){
+            //         return d.label;
+            //     })
+            //     .attr("class", "colorbar")
+            //     .attr("text-anchor", "middle")    
+            //     .attr("font-size", "15px")    
+            //     .attr("font-family", "Poppins, sans-serif")    
+            //     .style("fill", 'RGBA(255, 255, 255, 1.0)')
+            //     .attr('transform',function(d,i){
+            //         return 'translate(' + (((width - labelwidth) / 2) + xPos(d, i) + 2) + ',' + ((height - 2 * labelheight) + 12) + ')';
+            //     });
+
+            // function xPos(d, i){
+            //     return ((labelwidth - 25) / (data.length - 1)) * i + 8;
+            // }
+
+            
+        }
+
+        { // Draw the green colorbar for affinity
+            colorbardata = [
+                {offset: "0%", color: "white"},
+                {offset: "100%", color: "green"} ];
+
+            var data = [{
+                color: 'white',
+                label: '0%'
+                }, {
+                color: 'green',
+                label: '100%'
+                }]
+
+            var colorbar2 = svg.append("defs")
+                .append("linearGradient")
+                .attr("id", "affinityColorBar")
+                .attr("x1", "0%").attr("y1", "0%")
+                .attr("x2", "100%").attr("y2", "0%")
+                .selectAll("stop")
+                .data(colorbardata)
+                .enter().append("stop")
+                .attr("offset", function(d) { return d.offset; })
+                .attr("stop-color", function(d) { return d.color; });
+                // .attr("class", "colorbar");
+
+            var colorbar = svg.append("rect")
+                .attr("x", (width - labelwidth) / 2).attr("y", height - 3 * labelheight)
+                .attr("width", labelwidth).attr("height", labelheight)
+                .style("fill", "url(#affinityColorBar)")
+                .attr("class", "affinity-colorbar");
+
+            var g = svg.append('g')
+                .selectAll('.label')  
+                .data(data)
+                .enter();
+
+            g.append('text')
+                .text(function(d){
+                    return d.label;
+                })
+                .attr("class", "affinity-colorbar")
+                .attr("text-anchor", "middle")    
+                .attr("font-size", "15px")    
+                .attr("font-family", "Poppins, sans-serif")    
+                .style("fill", 'RGBA(255, 255, 255, 1.0)')
+                .attr('transform',function(d,i){
+                    return 'translate(' + (((width - labelwidth) / 2) + xPos(d, i) + 2) + ',' + ((height - 2 * labelheight) + 12) + ')';
+                });
+
+            function xPos(d, i){
+                return ((labelwidth - 25) / (data.length - 1)) * i + 8;
+            }
+        }
+    }
+
+    set_defaults();
+    load_draggable();
+
+    // Collapse menu when not in use
+    $(document).ready(function () {
+        $(document).click(function (event) {
+            var clickover = $(event.target);
+            var _closed = $(".panel-default").hasClass("collapsed");
+            if (_closed === false && (clickover.id != 'collapse1')) {
+               $('#collapse1').collapse("hide");
+            }
+        });
+        // callApi();
+    });
+</script>
+

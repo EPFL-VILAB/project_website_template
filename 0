@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<link rel="shortcut icon" type="image/x-icon" href="triangle.ico">
+	<title>X-TAC | EPFL</title>
+	<meta name="keywords" content="consistency, robust-learning, multitask, computer vision, vision, stanford, tasks, berkeley, EPFL">
+	<meta name="description" content="Robust Learning Through Cross-Task Consistency Stanford, UC Berkeley. We propose a flexible and fully computational framework for learning, while respecting consistency across an arbitrary dictionary of tasks.">
+	<meta name="google-site-verification" content="tBb4aimY-zxYS_s_z86g6faxMX2G_I_Wp_kzbF3U_RM" />
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round" rel="stylesheet">
+	
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+
+	<!-- Owl Carousel -->
+	<link type="text/css" rel="stylesheet" href="css/owl.carousel.css" />
+	<link type="text/css" rel="stylesheet" href="css/owl.theme.default.css" />
+
+	<!-- Magnific Popup -->
+	<link type="text/css" rel="stylesheet" href="css/magnific-popup.css" />
+
+	<!-- Icons -->
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+	
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="css/style.css" />
+	<link type="text/css" rel="stylesheet" href="css/index.css" />
+
+	<link type="text/css" rel="stylesheet" href="css/cvpr-video.css"/>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
+
+
+	
+	<link rel="shortcut icon" type="image/x-icon" href="triangle.ico">
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-89674082-5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-89674082-5');
+</script>
+
+
+</head>
+
+<body>
+	<!-- Header -->
+	<header id="home">
+		<!-- Background Image -->
+		<div style="" class="bg-img home-particles" id='particles'>
+			<div class="overlay"></div>
+		</div>
+		<!-- /Background Image -->
+
+		<!-- Nav -->
+		<nav id="nav" class="navbar nav-transparent">
+			<div class="container">
+
+				<div class="navbar-header">
+					<!-- Logo -->
+					<div class="navbar-brand">
+						<a class="logo-text" href="//consistency.epfl.ch">X-TAC</a>
+						<a href="http://svl.stanford.edu/">
+								<img class="logo" src="./img/stanford-logo.png" alt="logo">
+								<img class="logo-alt" src="./img/stanford-logo-white.png" alt="logo">
+						</a>
+						<a href="http://bair.berkeley.edu/">							
+								<img class="logo" src="./img/berkeley-logo.png" alt="logo">
+								<img class="logo-alt" src="./img/berkeley-logo-white.png" alt="logo">
+								<!-- <img class="logo-alt" src="./img/logo-alt.png" alt="logo"> -->
+						</a>
+					</div>
+					<!-- /Logo -->
+
+					<!-- Collapse nav button -->
+					<div class="nav-collapse">
+						<span></span>
+					</div>
+					<!-- /Collapse nav button -->
+				</div>
+
+				<!--  Main navigation  -->
+				<ul class="main-nav nav navbar-nav navbar-right">
+					<li><a href="#home">Home</a></li>
+					<li><a href="tasks/">Live Demo</a></li>
+					<li><a href="#models">Pretrained Models</a></li>
+					<li><a href="#paper">Paper</a></li>					
+					<li><a href="#team">Team</a></li>
+					<!-- <li class="has-dropdown"><a href="#blog">Blog</a> -->
+						<!-- <ul class="dropdown"> -->
+							<!-- <li><a href="blog-single.html">blog post</a></li> -->
+						<!-- </ul> -->
+					<!-- </li> -->
+					<!-- <li><a href="#contact">Contact</a></li> -->
+				</ul>
+				<!-- /Main navigation -->
+
+			</div>
+		</nav>
+		<!-- /Nav -->
+
+		<!-- home wrapper -->
+		<div class="home-wrapper">
+			<div class="container">
+				<div class="row">
+
+					<!-- home content -->
+					<div class="col-md-10 col-md-offset-1">
+						<div class="home-content">
+							<h1 class="white-text">X-TAC</h1>
+							<h3 class="white-text">Robust Learning Through Cross-Task Consistency</h3>	
+
+
+							<a class="white-text" href="http://www.cs.stanford.edu/~amirz/">Authors.</a><span style="opacity:0.7">..</span>
+							
+							<br>							
+							<button id="learnmore" class="outline-btn roundedbutton">Learn more</button>
+							<!--<a class="fa fa-github fa-2x" href="https://github.com/StanfordVL/taskonomy/tree/master/taskbank"></a>-->
+						</div>
+					</div>
+					<!-- /home content -->
+
+				</div>
+			</div>
+		</div>
+		<!-- /home wrapper -->
+
+	</header>
+	<!-- /Header -->
+
+
+	<!-- Teaser -->
+	<div id="teaser" class="section bg-grey">
+			
+		<!-- Container -->
+		<div class="container">
+			<div class="row" style="margin: 0px">
+
+				
+
+				<!-- service -->
+				<div class="col-md-12 col-sm-6">
+					<div class="service" href="./" onclick="window.location.href='./'">
+						<div class="service-content service-row-2">																		
+							<i class="fa fa-flask"></i>
+						<h3>Live Demo of Consistency</h3>
+						<p>Upload an image and see live results of consistency training for different vision tasks, all output from our networks.</p>
+						<a href="./">Live Demo</a>						
+						</div>
+					</div>
+				</div>
+				<!-- /service -->				
+				
+			</div>
+			
+			<!-- Row -->
+			<div class="row" style="margin: 0px">
+				
+				<!-- service -->
+				<div class="col-md-3 col-sm-6">
+					<div class="service smoothscroll" href="#paper">
+						<div class="service-content service-row-1">																		
+							<i class="fa fa-file-text-o"></i>
+							<h3>Paper</h3>
+							<p>The paper and supplementary material describing the methodology and evaluation.</p>
+							<a href="#api">PDF</a>																					
+						</div>
+					</div>
+				</div>
+				<!-- /service -->
+
+				<!-- service -->
+				<div class="col-md-3 col-sm-6">
+					<div class="service smoothscroll" href="#transfers"  onclick="window.location.href='/visuals'">
+						<div class="service-content  service-row-1">																		
+							<i class="fa fa-video-camera"></i>
+							<h3>Visualization</h3>
+							<p>Examine the result of consistency training for different task domains via sample videos.</p>
+							<a href="/visuals">Visualization Page</a>							
+						</div>
+					</div>
+				</div>
+				<!-- /service -->
+
+				<!-- service -->
+				<div class="col-md-3 col-sm-6">
+					<div class="service smoothscroll" href="#models">
+							<div class="service-content service-row-1">																		
+							<i class="fa fa-cogs"></i>
+							<h3>Models</h3>
+							<p>Download pretrained models with and without enforcing consistency.</p>
+							<a href="#models">Pretrained Models</a>							
+
+						</div>
+					</div>
+				</div>
+				<!-- /service -->
+
+				<!-- service -->
+				<div class="col-md-3 col-sm-6">
+					<div class="service smoothscroll" href="https://github.com/ConsistencyPaper">
+							<div class="service-content service-row-1">																		
+							<i class="fa fa-keyboard-o"></i>
+							<h3>Code</h3>
+							<p>View code, train consistency models, and run experiments for several vision tasks</p>
+							<a href="https://github.com/ConsistencyPaper">Get started</a>							
+
+						</div>
+					</div>
+				</div>
+				<!-- /service -->
+
+			
+			</div>
+			<!-- /Row -->
+
+			<!-- /Row -->			
+
+		</div>
+		<!-- /Container -->
+	</div>	
+	<!-- /Teaser -->
+
+
+
+
+
+	<!-- Abstract -->
+	<div id="abstract" class="section md-padding">
+
+		<!-- Container -->
+		<div class="container">
+
+			<!-- Row -->
+			<div class="row">
+
+				<!-- Section header -->
+				<div class="section-header text-center">
+					<h2 class="title">Summary</h2>
+				</div>
+				
+				<!-- /Section header -->
+				<div class="abstract-body col-md-12">
+					<p> 
+
+						<div class="figure">
+						<img width="80%" src="./img_consistency/motiv10_all-eps-converted-to.png" alt="" class="center">
+						<p><strong>Consistency overview.</strong> The upper and lower rows show the results of consistency-based learning and the baseline (individual learning). The consistency-based model yields higher quality (especially at hard-to-predict fine-grained details) and more consistent predictions.</p>
+						</div>
+						<br>
+
+						<strong>1) What is consistency? </strong>
+						<br>
+						Suppose an object detector detects a chair in a particular region of an image, while a depth estimator returns a flat surface for the same region. This presents an issue -- at least one of them has to be wrong, because they are <strong>inconsistent</strong>. More concretely, the first prediction domain (objects), and the second prediction domain (depth) are not independent and consequently enforce restraints on each other, often referred to as <strong>consistency</strong> constraints.
+						<br>
+						<br>
+						<strong>2) Why is it important to consider consistency in learning? </strong>
+						<br>
+						First, desired tasks in machine learning are usually predictions of <strong>different aspects of one shared reality</strong> (e.g., the scene that underlies an image). Hence inconsistencies among predictions imply contradictions, and therefore, inconsistency is inherently undesirable for downstream uses of the predictions, casting doubt on their validity. Second, consistency-based constraints are informative and can be used in learning to better fit the data or lower the sample complexity required. Also, they may reduce the tendency of neural networks towards learning surface statistics (superficial cues), by enforcing strong and specific constraints rooted in different geometric or physical aspects of one observation.
+						<br>
+						<br>
+						<strong>3) How can we design a learning system that makes consistent predictions? </strong>
+						<br>
+						This paper proposes a fully computational method that, given an arbitrary dictionary of desired tasks to solve, augments the learning objective in such a way that the predictions are explicitly encouraged to be cross-task consistent. The consistency constraints are completely learned from the data, rather than from human supervision or known analytic relationships (e.g., it is not necessary to encode that surface normals are the 3D derivative of depth, though such derivations could be used if available). Please see the figure below.
+						<br>
+						<br>
+
+						
+					</p>
+
+					<div class="figure">
+						<img width="80%" src="./img_consistency/graph_4.png" alt=""  class="center">
+						<p><strong>Enforcing cross-task consistency.</strong> <strong>(a)</strong> shows the typical multitask setup where predictors between domains are trained independently. <strong>(b)</strong> demonstrates the <i><strong>consistency constraint</strong></i>. <strong>(c)</strong> shows how the triangle unit from (b) can be an element of a larger system of domains. Finally, <strong>(d)</strong> illustrates the generalized case where in such a larger system of domains, consistency can be enforced along any paths of arbitrary length, as long as their beginning and end are the same. When two different paths with same endpoints yield similar results, that implies none of the middle domains introduced conflicting information, as far as the prediction job from the input to output is concerned. This is the general concept behind <strong>path-independence</strong> or <strong>conservativeness</strong>. The triangle in (b) is the smallest unit of such paths.</p>
+					</div>
+				<br>
+				<br>
+					<div class="figure">
+						<img width="80%" src="./img_consistency/method_qualitative_2-eps-converted-to.png" alt="" class="center">
+						<p><strong>Enforcing cross-task consistency using perceptual losses illustrated with an example.</strong>
+<br>
+<strong>Top row</strong> shows the results of standard training (MSE loss). When the predicted normals after converged training are projected onto other domains various inaccuracies transpire.
+<br>
+<strong>Middle row</strong> shows the results of training enforcing consistency with the other domains. The results are notably improved, <strong>especially in hard to predict fine-grained details</strong>.
+<br>
+<strong>Bottom row</strong> shows the ground truth. (The convention for visualizing normals: redder is righter, greener is more downwards, bluer is more towards the camera).
+</p>
+					</div>
+				<br>
+				<br>
+
+					
+
+
+					
+					
+
+				<!-- Second row of figures (Fc graph of weights and atlas force video)  -->
+				
+				<!-- Second row of figures (Fc graph of weights and atlas force video)  -->
+
+                
+	
+				</div>			
+
+
+			</div>
+			<!-- /Row -->
+
+		</div>
+		<!-- /Container -->
+
+	</div>
+	<!-- /Abstract -->
+
+
+
+	<!-- Energy -->
+	<div id="energy" class="section md-padding">
+
+		<!-- Container -->
+		<div class="container">
+
+			<!-- Row -->
+			<div class="row">
+
+				<!-- Section header -->
+				<div class="section-header text-center">
+					<h2 class="title">Consistency Energy</h2>
+				</div>
+				
+				<!-- /Section header -->
+				<div class="abstract-body col-md-12">
+					<p> 
+						We quantify the amount of inconsistency in a prediction made for a query using an energy-based quantity called <strong>Consistency Energy</strong>. It is defined to be the sum of squared <strong>pairwise inconsistencies<strong>. This is also equivalent to the <strong>sample variance<strong> of the predictions. The consistency energy is an <strong>intrinsic quantity of the system</strong>, as it requires no ground truth and can be computed without any supervision. As shown below, it strongly correlates with estimation error and sample distributions.
+
+						
+					</p>
+
+					<div class="figure">
+
+						<img width="80%" src="./img_consistency/svg/all.svg" alt="" class="center">
+
+						<p><strong>Analysis of consistency energy.</strong> <strong>Left:</strong> The consistency energy shown over the course of training, demonstrating a successful optimization to achieve more consistent results, ending significantly lower than that of independent predictions and multi-task baselines. <strong>Middle:</strong> Energy is predictive of estimation error, with a Pearson correlation coefficient of 0.67. <strong>Right:</strong> Out-of-domain samples (blue, red) have an energy distribution significantly higher than in-distribution samples (grey), hence energy can be used as a strong unsupervised method for detecting domain shifts in the data (AUC=0.99).</p>
+					</div>
+				
+		
+
+
+			</div>
+			<!-- /Row -->
+
+		</div>
+		<!-- /Container -->
+
+	</div>
+	<!-- /Abstract -->
+
+	
+			
+
+	<!-- Transfers -->
+	<div id="transfers" class="section md-padding">
+		<div class="container">
+			<div class="row">
+				<div class="row">
+					<div class="section-header text-center">
+						<h2 class="title">Consistency Visualization</h2>
+					</div>
+					<p>In order to evaluate the quality of the consistency training, we ran the consistency networks on a random youtube video. Visit the Consistency Visualization page to analyze the performance. You can compare the results to several baselines.</p>
+					<div class="figure">
+						<video width="100%" height="464" playsinline autoplay center loop muted class="video-bg" id="video-bg" poster="./loading.gif">
+							<source src="./assets/videos/consistency.mp4" type="video/mp4" alt="HTML5 background video">
+						</video>					
+					</div>
+					<br>
+					<button class="main-btn centering" onclick="window.location.href='/visuals';"><strong>View results</strong></button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- /Transfers -->
+			
+	<!-- Pretrained -->
+	<div id="models" class="section md-padding">
+
+		<!-- Container -->
+		<div class="container">
+
+			<!-- Row -->
+			<div class="row">
+
+				<!-- Section header -->
+				<div class="section-header text-center">
+					<h2 class="title">Pretrained Visual Estimators with and without Enforcing Consistency</h2>
+				</div>
+				
+				<!-- /Section header -->
+				<div class="col-sm-6">
+				<div class="col-lg-6 col-md-2 col-sm-4 col-xs-4 work">
+
+				<!-- Section header -->
+
+					<img class="img-responsive" src="./img_consistency/GitHub-Mark.png" alt="" class="center">
+					<div class="overlay"></div>
+					<div class="work-content">
+						<h4>Download pretrained models.</h4>
+						<div class="work-link">
+							<a href="https://github.com/ConsistencyPaper"><i class="fa fa-cloud-download"></i></a>
+							
+						</div>
+					</div>
+
+				
+				<!-- /Section header -->
+				
+				</div>	
+				</div>			
+				
+				<div class="col-sm-6">
+				<div class="col-lg-6 col-md-4 col-sm-4 col-xs-12 work">
+
+				<!-- Section header -->
+
+				
+
+					<img class="img-responsive" src="./img_consistency/live_demo.png" alt="">
+					<div class="overlay"></div>
+					<div class="work-content">
+						<h4>Try the live demo on your query image.</h4>
+						<div class="work-link">
+							<a href="./"><i class="fa fa-play-circle"></i></a>
+							
+						</div>
+					</div>	
+				<!-- /Section header -->			
+				</div>	
+				</div>		
+
+				
+
+
+			</div>
+			<!-- /Row -->
+
+		</div>
+		<!-- /Container -->
+
+	</div>
+	
+
+	
+
+	<!-- Paper -->
+	<div id="paper" class="section sm-padding bg-grey">
+			
+		<!-- Container -->
+		<div class="container">
+
+			<!-- Row -->
+			<div class="row">	
+				<!-- Section header -->
+				<div class="row">
+					<div class="section-header text-center">
+						<h2 class="title">Paper</h2>
+					</div>
+					<div class="row">
+						<div class="col-sm-6 col-xs-6">
+							<a href="./Arxiv20_consistency.pdf">
+								<img style="width:80%" class="paper-img layered-paper-big" src=./img_consistency/paper_consistency_blank.png>
+							</a>
+						</div>
+						<div class="col-sm-6 col-xs-6">
+							<p>Robust Learning Through Cross-Task Consistency.<br>
+								Authors.<br><br>
+								Arxiv 2020, 
+							</p>						
+							
+							<div class="bibtex">
+								<button class="outline-btn" onclick="window.location.href='./Arxiv20_consistency.pdf'"><p>Paper<p></button>						
+								<button class="outline-btn" onclick="window.location.href='https://github.com/ConsistencyPaper'"><p>Github<p></button>												
+																		
+								<button href="#bibtex-popup"  class="outline-btn open-popup-link"><p>Bibtex<p></button>		
+								<button class="outline-btn" onclick="window.location.href=''"><p>Slides<p></button>		
+								<div id="bibtex-popup" class="white-popup mfp-hide">		
+										@inproceedings{consistency2020,<br>
+										  &emsp;title={Robust Learning Through Cross-Task Consistency},<br>
+										  &emsp;author={Authors},<br>
+										  &emsp;journal={arXiv preprint},<br>
+										  &emsp;year={2020},<br>
+										}							
+								</div>
+
+							</div>
+						</div>
+						<!--<button class="outline-btn" onclick="window.location.href='https://storage.googleapis.com/taskonomy_slides/taskonomy_slides.html'"><p>Slides<p></button>-->					
+					</div>
+
+			</div>
+			<!-- /Row -->
+
+		</div>
+		<!-- /Container -->
+
+	</div>
+	<!-- /Paper -->
+
+	<!-- Methods -/-/>
+	<div id="methods" class="section md-padding">
+		<div class="container">
+			<div class="row">
+				<div class="section-header text-center">
+					<h2 class="title">Methods</h2>
+				</div>
+				<div class="abstract-body col-md-12">
+					<p> 
+						We create our taxonomy in a three-step process:
+						<ul>
+							<li><strong>Train tasks:</strong> Train each task using fully supervised learning on a large amount of data.</li>
+							<li><strong>Train transfers:</strong> Train all possible pairwise transfers. A transfer takes the learned representation for one task, and then uses this to predict the output for another task. For example, we trained a network to use the intermediate representation of the normals prediction network to then use these features to do scene classification. We trained all possible pairwise transfers. We also trained higher-order transfers which used more than one source task (e.g. normals AND curvature).</li>
+							<li><strong>Normalize results:</strong> Comparing transfers is nontrivial. For example, how do we determine if normals transfers to scene classification better than edges detection transfers to depth estimation? Scene classification uses cross-entropy loss while depth estimation uses mean L1 loss. The two average losses of the task-specific networks even have different orders of magnitude! We use a tournament graph of all transfers to a task to determine each pairwise win-rate, or how often one transfer achieved a lower loss than another. We come up with a total-ordering based on this pairwise tournament matrix via the Analytic Hierarchy Process. The resulting ordering gives us a priority value for each source, valued between 0 and 1. These values can then be compared across tasks. When computing our taxonomy, we will maximize the total priority.</li>
+						</ul>
+					</p>
+					<p> 						
+						Then we can solve for the taxonomy using a Boolean Integer Program (BIP).<br><br>
+						Page under construction. More details coming soon.
+					</p>
+				</div>			
+				<div class="col-md-12 figure">
+					<img width="100%" class="center" src="./img/svg/taxonomy_significance_transparent.svg">
+					<p><strong>Taxonomy significance.</strong> The green line is our taxonomy, and the grey lines show the performance of a random feasible solution (error bars show standard deviation).</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	</!-/- /Methods -->
+
+
+    
+	<!--  Results -/-!/>
+	<div id="significance" class="section md-padding bg-grey">
+		<div class="container">
+			<div class="row">
+				<div class="section-header text-center">
+					<h2 class="title">Evaluation</h2>
+				</div>
+				<div class="abstract-body col-md-12">
+					<p> 
+						We measure the effectiveness of our networks using two different metrics.
+						<ul>
+							<li><strong>Gain:</strong> The win rate of a network versus standard supervised learning on the same number of data points.</li>
+							<li><strong>Quality:</strong> The win rate of a network versus the task-specific networks trained on 120k images.</li>
+							<br>Page under construction. More details coming soon.
+						</ul>
+
+					</p>
+				</div>			
+				<div class="col-md-12 figure">
+					<img width="100%" class="center" src="./img/svg/taxonomy_significance_transparent.svg">
+					<p><strong>Taxonomy significance.</strong> The green line is our taxonomy, and the grey lines show the performance of a random feasible solution (error bars show standard deviation).</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	</!-/- /Results -->
+
+
+
+	<div id="team" class="section md-padding">
+		
+				<!-- Container -->
+				<div class="container">
+		
+					<!-- Row -->
+					<div class="row">
+		
+						<!-- Section header -->
+						<div class="section-header text-center">
+							<h2 class="title">Authors</h2>
+						</div>
+						<!-- /Section header -->
+		
+					
+		
+					
+
+					</div>					
+					
+		
+				</div>
+				<!-- /Container -->
+		
+			</div>
+			<!-- /Team -->
+	<!-- Footer -->
+	<footer id="footer" class="sm-padding bg-dark">
+
+		<!-- Container -->
+		<div class="container">
+
+			<!-- Row -->
+			<div class="row">
+
+				<div class="col-md-12">
+
+					<!-- footer logo -->
+					<!-- <div class="footer-logo">
+							<img width="10%" style="margin-right:25px" class="logo-alt" src="./img/svg/SVLLogo_white.svg" alt="logo">
+							<img width="10%" class="logo-alt" src="./img/svg/bair_white.svg" alt="logo">
+					</div> -->
+					<!-- /footer logo -->
+
+					<!-- footer follow -->
+					<ul class="footer-follow">
+						<li><a href="https://github.com/ConsistencyPaper"><i class="fa fa-github"></i></a></li>
+						<!--<li><a href="https://svl.stanford.edu/home"><i class="fa fa-globe"></i></a></li>-->
+						<!--<li><a href="https://twitter.com/StanfordCVGL"><i class="fa fa-twitter"></i></a></li>-->
+						<!-- <li><a href="#"><i class="ai ai-google-scholar big-icon"></i></a></li> -->
+						<!-- <li><a href="#"><i class="fa fa-instagram"></i></a></li> -->
+						<!-- <li><a href="#"><i class="fa fa-linkedin"></i></a></li> -->
+					</ul>
+					<!-- /footer follow -->
+
+					<!-- footer copyright -->
+					<div class="footer-copyright">
+						<p>Copyright © 2020. EPFL. All Rights Reserved.</p>
+					</div>
+					<!-- /footer copyright -->
+
+				</div>
+
+			</div>
+			<!-- /Row -->
+
+		</div>
+		<!-- /Container -->
+
+	</footer>
+	<!-- /Footer -->
+
+	<!-- Back to top -->
+	<div id="back-to-top"></div>
+	<!-- /Back to top -->
+
+	<!-- Preloader -->
+	<!-- <div id="preloader">
+		<div class="preloader">
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div> -->
+	<!-- /Preloader -->
+
+	<!-- jQuery Plugins -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="js/plugins.js"></script>
+	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<script src="js/waypoints.min.js"></script>
+	<script src="js/jquery.counterup.min.js"></script>
+	
+	<!-- <script type="text/javascript" src="js/jquery.min.js"></script> -->
+	<!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
+
+	<script type="text/javascript" src="js/owl.carousel.min.js"></script>
+	<script type="text/javascript" src="js/jquery.magnific-popup.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script src="js/index.js"></script>
+	
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=11618266; 
+var sc_invisible=1; 
+var sc_security="2b47cce8"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="//c.statcounter.com/11618266/0/2b47cce8/1/" alt="Web
+Analytics"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+</body>
+
+</html>
