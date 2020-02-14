@@ -168,13 +168,14 @@
             ' height=100%' + 
             ' style="background-color:#ddd" class=' + cls + 
             ' loop >' +
-            '<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/video_short/' + vid_name + '" type="video/webm">' +
-            '<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/video_short_mp4/' + vid_name.replace('webm', 'mp4') + '" type="video/mp4">' +
+          
+            '<source src="https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal_method_comparison/rgb2normal_consist.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project"' + '" type="video/mp4">' +
             'Video not found.</video>';
         if(vid.innerHTML.includes("og_")){
             vid.innerHTML = vid.innerHTML.replace('video_short_mp4', 'video_test')
             vid.innerHTML = vid.innerHTML.replace('video_short', 'video_test')
         }
+        alert(vid.innerHTML);
         videoHolder.appendChild(titleElem);
         videoHolder.appendChild(vid);
         return [videoHolder, vid];
@@ -258,8 +259,17 @@
     $('#submitDemo').on("click",function() {
         var selected_target = $("#targetpicker").val();
         var selected_source = $("#sourcepicker").val();
-        
+
+        alert(selected_target);
+        alert(selected_source);
+        var selected_source = "Reshading";
+        alert(selected_source);
+                
+        //var vid_name = transfers_to_videos[selected_target][selected_source]
         var vid_name = transfers_to_videos[selected_target][selected_source]
+        alert(selected_target);
+        alert(selected_source);
+        alert(vid_name);
 
         // Now add all the videos to the video sidebar on the right, one row at a time
         // vid_name = videos[node];
