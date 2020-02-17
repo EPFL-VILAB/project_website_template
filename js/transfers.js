@@ -304,7 +304,7 @@
         var vid_name = transfers_to_videos[selected_target][selected_source]
         //alert(selected_target);
         //alert(selected_source);
-        //alert(vid_name);
+        alert(vid_name);
 
         // Now add all the videos to the video sidebar on the right, one row at a time
         // vid_name = videos[node];
