@@ -295,7 +295,7 @@
         var selected_target = $("#targetpicker").val();
         var selected_source = $("#sourcepicker").val();
 
-        //alert(selected_target);
+        alert(selected_target);
         //alert(selected_source);
         var selected_source = "Reshading";
         //alert(selected_source);
