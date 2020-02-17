@@ -41,6 +41,61 @@
       "source5": "3D Keypoints", 
       "source6": "2D Edges",
       "source7": "Occlusion Edges"
+    },
+
+    "Others": {
+      "cycle": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal_method_comparison/rgb2normal_cycle_consist.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project",
+      "geonet": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal_method_comparison/rgb2normal_geonet.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project",
+      "multitask": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal_method_comparison/rgb2normal_multitask.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project"
+
+    }
+
+  },
+
+  "Reshading": {
+    "Z-Depth": {
+      "ours": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal2x/consistency_rgb2normal2depth_zbuffer.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project",
+      "baseline": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal2x/baseline_rgb2normal2depth_zbuffer.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project"
+    },
+    "Occlusion Edges": {
+      "ours": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal2x/consistency_rgb2normal2edge_occlusion.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project",
+      "baseline": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal2x/baseline_rgb2normal2edge_occlusion.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project"
+    },
+    "Normals": {
+      "ours": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal2x/consistency_rgb2normal2reshading.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project",
+      "baseline": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal2x/baseline_rgb2normal2reshading.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project"
+    },
+    "Curvature": {
+      "ours": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal2x/consistency_rgb2normal2principal_curvature.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project",
+      "baseline": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal2x/baseline_rgb2normal2principal_curvature.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project"
+    },
+    "2D Keypoints": {
+      "ours": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal2x/consistency_rgb2normal2keypoints2d.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project",
+      "baseline": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal2x/baseline_rgb2normal2keypoints2d.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project"
+    },
+    "3D Keypoints": {
+      "ours": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal2x/consistency_rgb2normal2keypoints3d.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project",
+      "baseline": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal2x/baseline_rgb2normal2keypoints3d.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project"
+    },
+    "2D Edges": {
+      "ours": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal2x/consistency_rgb2normal2sobel_edges.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project",
+      "baseline": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal2x/baseline_rgb2normal2sobel_edges.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project"
+    },
+    "target": {
+      "ours": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal_method_comparison/rgb2normal_consist.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project",
+      "baseline": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal_method_comparison/rgb2normal_baseline.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project"
+    },
+    "All": {
+      "source1": "Z-Depth",
+      "source2": "Normals",
+      "source3": "Curvature",
+      "source4": "2D Keypoints",
+      "source5": "3D Keypoints",
+      "source6": "2D Edges",
+      "source7": "Occlusion Edges"
     }
   }
+
+
+
 }

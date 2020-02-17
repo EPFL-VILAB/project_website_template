@@ -162,7 +162,7 @@
         var titleElem = document.createElement("div");
         titleElem.innerHTML = "<p class='vidtitle'>" + title + "</p>";
 
-        alert(vid_name);
+        //alert(vid_name);
         var cls = "hi";
         var vid = document.createElement("div");
         vid.innerHTML = '<video muted playsinline preload="metadata" width=100%' + 
@@ -263,13 +263,17 @@
     $('#submitDemo').on("click",function() {
         var selected_target = $("#targetpicker").val();
         var selected_source = $("#sourcepicker").val();
+        var other_baselines = $("#otherpicker").val();
+        
 
-        alert(selected_target);
-        alert(selected_source);        
-        alert(transfers_to_videos);
-        alert(transfers_to_videos["Normals"]["Z-Depth"]);
+
+        if (selected_target==selected_source) {alert("Please choose a different target/perceptual combination."); return;}
+        //alert(selected_target);
+        //alert(selected_source);        
+        //alert(transfers_to_videos);
+        //alert(transfers_to_videos["Normals"]["Z-Depth"]);
         var vid_name = transfers_to_videos[selected_target][selected_source]
-        alert(vid_name);
+        //alert(vid_name);
 
         // Now add all the videos to the video sidebar on the right, one row at a time
         // vid_name = videos[node];
@@ -279,7 +283,7 @@
 
         var cls = 'wait-to-start';
 
-        alert(!source_exists.includes(selected_target));
+        //alert(!source_exists.includes(selected_target));
         if(!source_exists.includes(selected_target)) {
             var titleElem = makeRowTitle(selected_target);
             document.getElementById(vidTitleElementForTarget(selected_target)).appendChild(titleElem);
@@ -301,6 +305,21 @@
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
+            if ((other_baselines == "Yes") && (selected_target=="Normals")){
+            // Consistency
+            source = makeVideoFrame("Cycle Target", transfers_to_videos[selected_target]["Others"]['cycle']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+               
+
+            source = makeVideoFrame("Geonet Target", transfers_to_videos[selected_target]["Others"]['geonet']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+            source = makeVideoFrame("Multitask Target", transfers_to_videos[selected_target]["Others"]['multitask']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+            }
 
 
             // Add perceps
@@ -326,8 +345,10 @@
 
           
             if (selected_source != "All") {
+            //alert(selected_source);
             // Add perceps
             // Baseline
+                      
             source = makeVideoFrame('Baseline Perceptual ' + selected_source, transfers_to_videos[selected_target][selected_source]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
@@ -339,7 +360,7 @@
             }
 
             if (selected_source == "All") {
-
+            //alert("Source is all!");
             var selected_source_now = transfers_to_videos[selected_target]["All"]["source1"];
               source = makeVideoFrame('Baseline Perceptual ' + selected_source_now, transfers_to_videos[selected_target][selected_source_now]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
@@ -390,7 +411,7 @@
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
-            }
+            
 
             var selected_source_now = transfers_to_videos[selected_target]["All"]["source6"];
               source = makeVideoFrame('Baseline Perceptual ' + selected_source_now, transfers_to_videos[selected_target][selected_source_now]['baseline']);
@@ -413,6 +434,7 @@
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
+        }
         syncAllVideos(all_videos);
         // all_videos = all_videos.concat([source, ours]);
 
@@ -431,7 +453,7 @@
 
     $.get('../assets/transfers_to_videos.json', function(data) {
         transfers_to_videos = data;
-        alert("Hey");
+        //alert("Hey");
         var transfers_targets = Array.from(Object.keys(transfers_to_videos));
         transfers_targets.sort();
         

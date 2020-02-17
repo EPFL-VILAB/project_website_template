@@ -1,7 +1,7 @@
 
 /*------------------------------------*/
 .home-particles {
-	background: #780e0e;
+	background: #6e4141;
 	overflow: hidden;
 }
 .home-particles .pg-canvas {
@@ -33,7 +33,7 @@
     width:100%;
     height:100%;
     z-index:0;
-    background-color: #630c12;
+    background-color: #6e4141;
 }
 
 
