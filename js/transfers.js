@@ -150,6 +150,7 @@
 
     var makeVideoFrame = function(title, vid_name) {
         alert(vid_name);
+        alert(vid_name=="Normal");
         var folderName = "video_short";
         // title = title.includes("To:") ? title : '← ' + transferToTitleElement[title];
         var videoHolder = document.createElement("div");
@@ -316,17 +317,11 @@
             all_videos.push(source[1]);
             source_exists.push(selected_target);
 
-            // Add the three baselines
-            // Fully supervised
-            source = makeVideoFrame('Predictions', selected_target);
-            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
-            all_videos.push(source[1]);
 
 
             document.getElementById(vidElementForTarget(selected_target)).style = "margin-bottom:105px";
         }
-        var title = "From: " + transferToTitleElement[selected_source.replace(/\//g, " + ")];
-        var ours = makeVideoFrame(title, vid_name['ours']);
+        var ours = makeVideoFrame('Predictions', selected_target);
         document.getElementById(vidElementForTarget(selected_target)).appendChild(ours[0]);
         all_videos.push(ours[1]);
 
