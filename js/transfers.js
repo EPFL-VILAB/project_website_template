@@ -150,7 +150,7 @@
 
     var makeVideoFrame = function(title, vid_name) {
         alert(vid_name);
-        alert(vid_name=="Normal");
+        alert(vid_name=="Normals");
         var folderName = "video_short";
         // title = title.includes("To:") ? title : '← ' + transferToTitleElement[title];
         var videoHolder = document.createElement("div");
@@ -167,7 +167,7 @@
         var cls = "hi";
         var vid = document.createElement("div");
         
-        if (vid_name == "Normal") {
+        if (vid_name == "Normals") {
             vid.innerHTML = '<video muted playsinline preload="metadata" width=100%' + 
             ' height=100%' + 
             ' style="background-color:#ddd" class=' + cls + 
@@ -200,8 +200,15 @@
   
         
         if(vid.innerHTML.includes("og_")){
-            vid.innerHTML = vid.innerHTML.replace('video_short_mp4', 'video_test')
-            vid.innerHTML = vid.innerHTML.replace('video_short', 'video_test')
+            vid.innerHTML = '<video muted playsinline preload="metadata" width=100%' + 
+            ' height=100%' + 
+            ' style="background-color:#ddd" class=' + cls + 
+            ' loop >' +
+          
+            '<source src="https://console.cloud.google.com/storage/browser/_details/taskonomy-shared/assets/source_final.mp4?project=chaos-theory-201106&authuser=0&folder=true&organizationId=true&supportedpurview=project"' + '" type="video/mp4">' +
+            'Video not found.</video>';
+        } 
+
         }
         alert(vid.innerHTML);
         videoHolder.appendChild(titleElem);
