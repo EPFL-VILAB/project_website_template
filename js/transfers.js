@@ -149,6 +149,7 @@
 
 
     var makeVideoFrame = function(title, vid_name) {
+        alert(vid_name);
         var folderName = "video_short";
         // title = title.includes("To:") ? title : '← ' + transferToTitleElement[title];
         var videoHolder = document.createElement("div");
@@ -164,13 +165,39 @@
 
         var cls = "hi";
         var vid = document.createElement("div");
-        vid.innerHTML = '<video muted playsinline preload="metadata" width=100%' + 
+        
+        if (vid_name == "Normal") {
+            vid.innerHTML = '<video muted playsinline preload="metadata" width=100%' + 
             ' height=100%' + 
             ' style="background-color:#ddd" class=' + cls + 
             ' loop >' +
           
-            '<source src="https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal_method_comparison/rgb2normal_consist.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project"' + '" type="video/mp4">' +
+            '<source src="https://console.cloud.google.com/storage/browser/_details/taskonomy-shared/assets/reduced_flicker/merged_videos/normals_target.mp4?project=chaos-theory-201106&authuser=0&folder=true&organizationId=true&supportedpurview=project"' + '" type="video/mp4">' +
             'Video not found.</video>';
+        }    
+
+        if (vid_name == "Reshading") {
+            vid.innerHTML = '<video muted playsinline preload="metadata" width=100%' + 
+            ' height=100%' + 
+            ' style="background-color:#ddd" class=' + cls + 
+            ' loop >' +
+          
+            '<source src="https://console.cloud.google.com/storage/browser/_details/taskonomy-shared/assets/reduced_flicker/merged_videos/reshading_target.mp4?project=chaos-theory-201106&authuser=0&folder=true&organizationId=true&supportedpurview=project"' + '" type="video/mp4">' +
+            'Video not found.</video>';
+        }    
+
+        if (vid_name == "Z-Depth") {
+            vid.innerHTML = '<video muted playsinline preload="metadata" width=100%' + 
+            ' height=100%' + 
+            ' style="background-color:#ddd" class=' + cls + 
+            ' loop >' +
+          
+            '<source src="https://console.cloud.google.com/storage/browser/_details/taskonomy-shared/assets/reduced_flicker/merged_videos/depth_target.mp4?project=chaos-theory-201106&authuser=0&folder=true&organizationId=true&supportedpurview=project"' + '" type="video/mp4">' +
+            'Video not found.</video>';
+        } 
+
+  
+        
         if(vid.innerHTML.includes("og_")){
             vid.innerHTML = vid.innerHTML.replace('video_short_mp4', 'video_test')
             vid.innerHTML = vid.innerHTML.replace('video_short', 'video_test')
@@ -291,19 +318,10 @@
 
             // Add the three baselines
             // Fully supervised
-            source = makeVideoFrame('Task-Specific Network', transfers_to_videos[selected_target]['Task-Specific']['ours']);
+            source = makeVideoFrame('Predictions', selected_target);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
-            // ImageNet
-            source = makeVideoFrame("From: ImageNet", transfers_to_videos[selected_target]['Task-Specific']['alex']);
-            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
-            all_videos.push(source[1]);
-
-            // No Transfer
-            source = makeVideoFrame('No Transfer (16k data)', transfers_to_videos[selected_target]['Task-Specific']['scratch']);
-            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
-            all_videos.push(source[1]);
 
             document.getElementById(vidElementForTarget(selected_target)).style = "margin-bottom:105px";
         }
