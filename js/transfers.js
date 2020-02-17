@@ -287,16 +287,16 @@
         var selected_target = $("#targetpicker").val();
         var selected_source = $("#sourcepicker").val();
 
-        alert(selected_target);
-        alert(selected_source);
+        //alert(selected_target);
+        //alert(selected_source);
         var selected_source = "Reshading";
-        alert(selected_source);
+        //alert(selected_source);
                 
         //var vid_name = transfers_to_videos[selected_target][selected_source]
         var vid_name = transfers_to_videos[selected_target][selected_source]
-        alert(selected_target);
-        alert(selected_source);
-        alert(vid_name);
+        //alert(selected_target);
+        //alert(selected_source);
+        //alert(vid_name);
 
         // Now add all the videos to the video sidebar on the right, one row at a time
         // vid_name = videos[node];
