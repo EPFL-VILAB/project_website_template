@@ -21,30 +21,45 @@ Gem::Specification.new do |s|
   s.post_install_message = "-------------------------------------------------------------------------------------\nJekyll 4.0 comes with some major changes, notably:\n\n  * Our `link` tag now comes with the `relative_url` filter incorporated into it.\n    You should no longer prepend `{{ site.baseurl }}` to `{% link foo.md %}`\n    For further details: https://github.com/jekyll/jekyll/pull/6727\n\n  * Our `post_url` tag now comes with the `relative_url` filter incorporated into it.\n    You shouldn't prepend `{{ site.baseurl }}` to `{% post_url 2019-03-27-hello %}`\n    For further details: https://github.com/jekyll/jekyll/pull/7589\n\n  * Support for deprecated configuration options has been removed. We will no longer\n    output a warning and gracefully assign their values to the newer counterparts\n    internally.\n-------------------------------------------------------------------------------------\n".freeze
   s.rdoc_options = ["--charset=UTF-8".freeze]
   s.required_ruby_version = Gem::Requirement.new(">= 2.4.0".freeze)
-  s.rubygems_version = "3.1.2".freeze
+  s.rubygems_version = "3.0.3".freeze
   s.summary = "A simple, blog aware, static site generator.".freeze
 
-  s.installed_by_version = "3.1.2" if s.respond_to? :installed_by_version
+  s.installed_by_version = "3.0.3" if s.respond_to? :installed_by_version
 
   if s.respond_to? :specification_version then
     s.specification_version = 4
-  end
 
-  if s.respond_to? :add_runtime_dependency then
-    s.add_runtime_dependency(%q<addressable>.freeze, ["~> 2.4"])
-    s.add_runtime_dependency(%q<colorator>.freeze, ["~> 1.0"])
-    s.add_runtime_dependency(%q<em-websocket>.freeze, ["~> 0.5"])
-    s.add_runtime_dependency(%q<i18n>.freeze, [">= 0.9.5", "< 2"])
-    s.add_runtime_dependency(%q<jekyll-sass-converter>.freeze, ["~> 2.0"])
-    s.add_runtime_dependency(%q<jekyll-watch>.freeze, ["~> 2.0"])
-    s.add_runtime_dependency(%q<kramdown>.freeze, ["~> 2.1"])
-    s.add_runtime_dependency(%q<kramdown-parser-gfm>.freeze, ["~> 1.0"])
-    s.add_runtime_dependency(%q<liquid>.freeze, ["~> 4.0"])
-    s.add_runtime_dependency(%q<mercenary>.freeze, ["~> 0.3.3"])
-    s.add_runtime_dependency(%q<pathutil>.freeze, ["~> 0.9"])
-    s.add_runtime_dependency(%q<rouge>.freeze, ["~> 3.0"])
-    s.add_runtime_dependency(%q<safe_yaml>.freeze, ["~> 1.0"])
-    s.add_runtime_dependency(%q<terminal-table>.freeze, ["~> 1.8"])
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<addressable>.freeze, ["~> 2.4"])
+      s.add_runtime_dependency(%q<colorator>.freeze, ["~> 1.0"])
+      s.add_runtime_dependency(%q<em-websocket>.freeze, ["~> 0.5"])
+      s.add_runtime_dependency(%q<i18n>.freeze, [">= 0.9.5", "< 2"])
+      s.add_runtime_dependency(%q<jekyll-sass-converter>.freeze, ["~> 2.0"])
+      s.add_runtime_dependency(%q<jekyll-watch>.freeze, ["~> 2.0"])
+      s.add_runtime_dependency(%q<kramdown>.freeze, ["~> 2.1"])
+      s.add_runtime_dependency(%q<kramdown-parser-gfm>.freeze, ["~> 1.0"])
+      s.add_runtime_dependency(%q<liquid>.freeze, ["~> 4.0"])
+      s.add_runtime_dependency(%q<mercenary>.freeze, ["~> 0.3.3"])
+      s.add_runtime_dependency(%q<pathutil>.freeze, ["~> 0.9"])
+      s.add_runtime_dependency(%q<rouge>.freeze, ["~> 3.0"])
+      s.add_runtime_dependency(%q<safe_yaml>.freeze, ["~> 1.0"])
+      s.add_runtime_dependency(%q<terminal-table>.freeze, ["~> 1.8"])
+    else
+      s.add_dependency(%q<addressable>.freeze, ["~> 2.4"])
+      s.add_dependency(%q<colorator>.freeze, ["~> 1.0"])
+      s.add_dependency(%q<em-websocket>.freeze, ["~> 0.5"])
+      s.add_dependency(%q<i18n>.freeze, [">= 0.9.5", "< 2"])
+      s.add_dependency(%q<jekyll-sass-converter>.freeze, ["~> 2.0"])
+      s.add_dependency(%q<jekyll-watch>.freeze, ["~> 2.0"])
+      s.add_dependency(%q<kramdown>.freeze, ["~> 2.1"])
+      s.add_dependency(%q<kramdown-parser-gfm>.freeze, ["~> 1.0"])
+      s.add_dependency(%q<liquid>.freeze, ["~> 4.0"])
+      s.add_dependency(%q<mercenary>.freeze, ["~> 0.3.3"])
+      s.add_dependency(%q<pathutil>.freeze, ["~> 0.9"])
+      s.add_dependency(%q<rouge>.freeze, ["~> 3.0"])
+      s.add_dependency(%q<safe_yaml>.freeze, ["~> 1.0"])
+      s.add_dependency(%q<terminal-table>.freeze, ["~> 1.8"])
+    end
   else
     s.add_dependency(%q<addressable>.freeze, ["~> 2.4"])
     s.add_dependency(%q<colorator>.freeze, ["~> 1.0"])

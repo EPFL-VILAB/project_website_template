@@ -149,8 +149,6 @@
 
 
     var makeVideoFrame = function(title, vid_name) {
-        alert(vid_name);
-        alert(vid_name=="Normals");
         var folderName = "video_short";
         // title = title.includes("To:") ? title : '← ' + transferToTitleElement[title];
         var videoHolder = document.createElement("div");
@@ -164,53 +162,24 @@
         var titleElem = document.createElement("div");
         titleElem.innerHTML = "<p class='vidtitle'>" + title + "</p>";
 
+        alert(vid_name);
         var cls = "hi";
         var vid = document.createElement("div");
-        
-        if (vid_name == "Normals") {
-            vid.innerHTML = '<video muted playsinline preload="metadata" width=100%' + 
+        vid.innerHTML = '<video muted playsinline preload="metadata" width=100%' + 
             ' height=100%' + 
             ' style="background-color:#ddd" class=' + cls + 
             ' loop >' +
-          
-            '<source src="https://console.cloud.google.com/storage/browser/_details/taskonomy-shared/assets/reduced_flicker/merged_videos/normals_target.mp4?project=chaos-theory-201106&authuser=0&folder=true&organizationId=true&supportedpurview=project"' + '" type="video/mp4">' +
+            '<source src="' + vid_name + '" type="video/mp4">' +
+            //'<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/video_short/' + vid_name + '" type="video/webm">' +
+            //'<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/video_short_mp4/' + vid_name.replace('webm', 'mp4') + '" type="video/mp4">' +
             'Video not found.</video>';
-        }    
 
-        if (vid_name == "Reshading") {
-            vid.innerHTML = '<video muted playsinline preload="metadata" width=100%' + 
-            ' height=100%' + 
-            ' style="background-color:#ddd" class=' + cls + 
-            ' loop >' +
-          
-            '<source src="https://console.cloud.google.com/storage/browser/_details/taskonomy-shared/assets/reduced_flicker/merged_videos/reshading_target.mp4?project=chaos-theory-201106&authuser=0&folder=true&organizationId=true&supportedpurview=project"' + '" type="video/mp4">' +
-            'Video not found.</video>';
-        }    
-
-        if (vid_name == "Z-Depth") {
-            vid.innerHTML = '<video muted playsinline preload="metadata" width=100%' + 
-            ' height=100%' + 
-            ' style="background-color:#ddd" class=' + cls + 
-            ' loop >' +
-          
-            '<source src="https://console.cloud.google.com/storage/browser/_details/taskonomy-shared/assets/reduced_flicker/merged_videos/depth_target.mp4?project=chaos-theory-201106&authuser=0&folder=true&organizationId=true&supportedpurview=project"' + '" type="video/mp4">' +
-            'Video not found.</video>';
-        } 
-
-  
         
         if(vid.innerHTML.includes("og_")){
-            vid.innerHTML = '<video muted playsinline preload="metadata" width=100%' + 
-            ' height=100%' + 
-            ' style="background-color:#ddd" class=' + cls + 
-            ' loop >' +
-          
-            '<source src="https://console.cloud.google.com/storage/browser/_details/taskonomy-shared/assets/source_final.mp4?project=chaos-theory-201106&authuser=0&folder=true&organizationId=true&supportedpurview=project"' + '" type="video/mp4">' +
-            'Video not found.</video>';
-        } 
-
+            vid.innerHTML = vid.innerHTML.replace('video_short_mp4', 'video_test')
+            vid.innerHTML = vid.innerHTML.replace('video_short', 'video_test')
         }
-        alert(vid.innerHTML);
+        
         videoHolder.appendChild(titleElem);
         videoHolder.appendChild(vid);
         return [videoHolder, vid];
@@ -245,7 +214,7 @@
     var syncAllVideos = function(all_videos){
         var d = new Date();
         var start_time =  d.getTime()
-        var timeout_length = 10000; // in millis
+        var timeout_length = 100000; // in millis
         var is_vid_load_timeout = function(vids) {
             return (d.getTime() - start_time > timeout_length)
         }
@@ -296,41 +265,153 @@
         var selected_source = $("#sourcepicker").val();
 
         alert(selected_target);
-        //alert(selected_source);
-        var selected_source = "Reshading";
-        //alert(selected_source);
-                
-        //var vid_name = transfers_to_videos[selected_target][selected_source]
+        alert(selected_source);        
+        alert(transfers_to_videos);
+        alert(transfers_to_videos["Normals"]["Z-Depth"]);
         var vid_name = transfers_to_videos[selected_target][selected_source]
-        //alert(selected_target);
-        //alert(selected_source);
         alert(vid_name);
 
         // Now add all the videos to the video sidebar on the right, one row at a time
         // vid_name = videos[node];
-        if (vid_name == undefined || vid_name['ours'].includes("NONE")) { // Some nodes do not have videos
-            return;
-        }
+        //if (vid_name == undefined || vid_name['ours'].includes("NONE")) { // Some nodes do not have videos
+            //return;
+        //}
 
         var cls = 'wait-to-start';
 
+        alert(!source_exists.includes(selected_target));
         if(!source_exists.includes(selected_target)) {
             var titleElem = makeRowTitle(selected_target);
             document.getElementById(vidTitleElementForTarget(selected_target)).appendChild(titleElem);
 
             // document.getElementById(vidElementForTarget(selected_target)).appendChild(makeRowTitle(selected_target));
-            var source = makeVideoFrame("Input video", "og_4.webm");
+            var source = makeVideoFrame("Input video", "https://storage.cloud.google.com/taskonomy-shared/assets/source_final.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
             source_exists.push(selected_target);
 
+            // Add targets
+            // Baseline
+            source = makeVideoFrame('Baseline Target', transfers_to_videos[selected_target]["target"]['baseline']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
 
+            // Consistency
+            source = makeVideoFrame("Consistency Target", transfers_to_videos[selected_target]["target"]['ours']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+
+
+            // Add perceps
+            // Baseline
+            //source = makeVideoFrame('Baseline', transfers_to_videos[selected_target][selected_source]['baseline']);
+            //document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            //all_videos.push(source[1]);
+
+            // Consistency
+            //source = makeVideoFrame("Consistency", transfers_to_videos[selected_target][selected_source]['ours']);
+            //document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            //all_videos.push(source[1]);
+
+           
 
             document.getElementById(vidElementForTarget(selected_target)).style = "margin-bottom:105px";
+           
         }
-        var ours = makeVideoFrame('Predictions', selected_target);
-        document.getElementById(vidElementForTarget(selected_target)).appendChild(ours[0]);
-        all_videos.push(ours[1]);
+        //var title = "From: " + transferToTitleElement[selected_source.replace(/\//g, " + ")];
+        //var ours = makeVideoFrame(title, vid_name['ours']);
+        //document.getElementById(vidElementForTarget(selected_target)).appendChild(ours[0]);
+        //all_videos.push(ours[1]);
+
+          
+            if (selected_source != "All") {
+            // Add perceps
+            // Baseline
+            source = makeVideoFrame('Baseline Perceptual ' + selected_source, transfers_to_videos[selected_target][selected_source]['baseline']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+            // Consistency
+            source = makeVideoFrame("Consistency Perceptual " + selected_source, transfers_to_videos[selected_target][selected_source]['ours']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+            }
+
+            if (selected_source == "All") {
+
+            var selected_source_now = transfers_to_videos[selected_target]["All"]["source1"];
+              source = makeVideoFrame('Baseline Perceptual ' + selected_source_now, transfers_to_videos[selected_target][selected_source_now]['baseline']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+            // Consistency
+            source = makeVideoFrame("Consistency Perceptual " + selected_source_now, transfers_to_videos[selected_target][selected_source_now]['ours']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+            var selected_source_now = transfers_to_videos[selected_target]["All"]["source2"];
+              source = makeVideoFrame('Baseline Perceptual ' + selected_source_now, transfers_to_videos[selected_target][selected_source_now]['baseline']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+            // Consistency
+            source = makeVideoFrame("Consistency Perceptual " + selected_source_now, transfers_to_videos[selected_target][selected_source_now]['ours']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+            var selected_source_now = transfers_to_videos[selected_target]["All"]["source3"];
+              source = makeVideoFrame('Baseline Perceptual ' + selected_source_now, transfers_to_videos[selected_target][selected_source_now]['baseline']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+            // Consistency
+            source = makeVideoFrame("Consistency Perceptual " + selected_source_now, transfers_to_videos[selected_target][selected_source_now]['ours']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+            var selected_source_now = transfers_to_videos[selected_target]["All"]["source4"];
+              source = makeVideoFrame('Baseline Perceptual ' + selected_source_now, transfers_to_videos[selected_target][selected_source_now]['baseline']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+            // Consistency
+            source = makeVideoFrame("Consistency Perceptual " + selected_source_now, transfers_to_videos[selected_target][selected_source_now]['ours']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+            var selected_source_now = transfers_to_videos[selected_target]["All"]["source5"];
+              source = makeVideoFrame('Baseline Perceptual ' + selected_source_now, transfers_to_videos[selected_target][selected_source_now]['baseline']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+            // Consistency
+            source = makeVideoFrame("Consistency Perceptual " + selected_source_now, transfers_to_videos[selected_target][selected_source_now]['ours']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+            }
+
+            var selected_source_now = transfers_to_videos[selected_target]["All"]["source6"];
+              source = makeVideoFrame('Baseline Perceptual ' + selected_source_now, transfers_to_videos[selected_target][selected_source_now]['baseline']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+            // Consistency
+            source = makeVideoFrame("Consistency Perceptual " + selected_source_now, transfers_to_videos[selected_target][selected_source_now]['ours']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+
+            var selected_source_now = transfers_to_videos[selected_target]["All"]["source7"];
+              source = makeVideoFrame('Baseline Perceptual ' + selected_source_now, transfers_to_videos[selected_target][selected_source_now]['baseline']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+            // Consistency
+            source = makeVideoFrame("Consistency Perceptual " + selected_source_now, transfers_to_videos[selected_target][selected_source_now]['ours']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
 
         syncAllVideos(all_videos);
         // all_videos = all_videos.concat([source, ours]);
@@ -350,6 +431,7 @@
 
     $.get('../assets/transfers_to_videos.json', function(data) {
         transfers_to_videos = data;
+        alert("Hey");
         var transfers_targets = Array.from(Object.keys(transfers_to_videos));
         transfers_targets.sort();
         
@@ -357,7 +439,7 @@
         // var innerHTML = "";
         for (var i in transfers_targets) {
             var key = transfers_targets[i];
-            if (transfers_to_videos[key]['Task-Specific']['ours'] == "NONE") { // These can't be vized
+            if (transfers_to_videos[key]["Z-Depth"]['ours'] == "NONE") { // These can't be vized
                 continue;
             }
             valid_targets.push(key);

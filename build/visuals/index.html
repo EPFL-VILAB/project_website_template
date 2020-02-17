@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <link rel="shortcut icon" type="image/x-icon" href="../triangle.ico">
-	<title>X-TAC</title>
+	<title>X-TaC</title>
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 
 	<!-- Google font -->
@@ -60,7 +60,7 @@
 				<div class="navbar-header">
 					<!-- Logo -->
 					<div class="navbar-brand">
-						<a class="logo-text" href="//consistency.epfl.ch">X-TAC</a>						
+						<a class="logo-text" href="//consistency.epfl.ch">X-TaC</a>						
 						<a href="http://svl.stanford.edu/">
 								<img class="logo" src="../img/stanford-logo.png" alt="logo">
 								<img class="logo-alt" src="../img/stanford-logo-white.png" alt="logo">
@@ -133,7 +133,22 @@
                                 <option value="Z-Depth">Z-Depth</option>
 							</select>
 						</div>
-
+                                   
+                                                <div style="float:left;" id="sourcecolumn">
+							<p>Perceptual</p>								
+							<select name="source" class="selectpicker selector" id="sourcepicker">
+								<option value="Z-Depth">Z-Depth</option>
+                                                                <option value="Normals">Normals</option>
+                                                                <option value="Reshading">Reshading</option>
+                                                                <option value="Curvature">Curvature</option>
+                                                                <option value="2D Keypoints">2D Keypoints</option>
+                                                                <option value="3D Keypoints">3D Keypoints</option>
+                                                                <option value="2D Edges">2D Edges</option>
+                                                                <option value="Occlusion Edges">Occlusion Edges</option>
+                                                                <option value="All">All</option>
+							</select>
+						</div>
+                                                
 						<div>
 							<input style="margin-top: 35px" id="submitDemo" type="submit" class="btn btn-info" value="See Results">
 							<input style="margin-top: 35px" id="clearDemo" type="submit" class="btn btn-secondary" value="Clear">

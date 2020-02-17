@@ -12,18 +12,21 @@ Gem::Specification.new do |s|
   s.description = "EventMachine based WebSocket server".freeze
   s.email = ["ilya@igvita.com".freeze, "me@mloughran.com".freeze]
   s.homepage = "http://github.com/igrigorik/em-websocket".freeze
-  s.rubygems_version = "3.1.2".freeze
+  s.rubygems_version = "3.0.3".freeze
   s.summary = "EventMachine based WebSocket server".freeze
 
-  s.installed_by_version = "3.1.2" if s.respond_to? :installed_by_version
+  s.installed_by_version = "3.0.3" if s.respond_to? :installed_by_version
 
   if s.respond_to? :specification_version then
     s.specification_version = 4
-  end
 
-  if s.respond_to? :add_runtime_dependency then
-    s.add_runtime_dependency(%q<eventmachine>.freeze, [">= 0.12.9"])
-    s.add_runtime_dependency(%q<http_parser.rb>.freeze, ["~> 0.6.0"])
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<eventmachine>.freeze, [">= 0.12.9"])
+      s.add_runtime_dependency(%q<http_parser.rb>.freeze, ["~> 0.6.0"])
+    else
+      s.add_dependency(%q<eventmachine>.freeze, [">= 0.12.9"])
+      s.add_dependency(%q<http_parser.rb>.freeze, ["~> 0.6.0"])
+    end
   else
     s.add_dependency(%q<eventmachine>.freeze, [">= 0.12.9"])
     s.add_dependency(%q<http_parser.rb>.freeze, ["~> 0.6.0"])

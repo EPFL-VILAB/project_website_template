@@ -16,22 +16,29 @@ Gem::Specification.new do |s|
   s.files = ["ext/ruby_http_parser/extconf.rb".freeze]
   s.homepage = "http://github.com/tmm1/http_parser.rb".freeze
   s.licenses = ["MIT".freeze]
-  s.rubygems_version = "3.1.2".freeze
+  s.rubygems_version = "3.0.3".freeze
   s.summary = "Simple callback-based HTTP request/response parser".freeze
 
-  s.installed_by_version = "3.1.2" if s.respond_to? :installed_by_version
+  s.installed_by_version = "3.0.3" if s.respond_to? :installed_by_version
 
   if s.respond_to? :specification_version then
     s.specification_version = 4
-  end
 
-  if s.respond_to? :add_runtime_dependency then
-    s.add_development_dependency(%q<rake-compiler>.freeze, [">= 0.7.9"])
-    s.add_development_dependency(%q<rspec>.freeze, [">= 2.0.1"])
-    s.add_development_dependency(%q<json>.freeze, [">= 1.4.6"])
-    s.add_development_dependency(%q<benchmark_suite>.freeze, [">= 0"])
-    s.add_development_dependency(%q<ffi>.freeze, [">= 0"])
-    s.add_development_dependency(%q<yajl-ruby>.freeze, [">= 0.8.1"])
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_development_dependency(%q<rake-compiler>.freeze, [">= 0.7.9"])
+      s.add_development_dependency(%q<rspec>.freeze, [">= 2.0.1"])
+      s.add_development_dependency(%q<json>.freeze, [">= 1.4.6"])
+      s.add_development_dependency(%q<benchmark_suite>.freeze, [">= 0"])
+      s.add_development_dependency(%q<ffi>.freeze, [">= 0"])
+      s.add_development_dependency(%q<yajl-ruby>.freeze, [">= 0.8.1"])
+    else
+      s.add_dependency(%q<rake-compiler>.freeze, [">= 0.7.9"])
+      s.add_dependency(%q<rspec>.freeze, [">= 2.0.1"])
+      s.add_dependency(%q<json>.freeze, [">= 1.4.6"])
+      s.add_dependency(%q<benchmark_suite>.freeze, [">= 0"])
+      s.add_dependency(%q<ffi>.freeze, [">= 0"])
+      s.add_dependency(%q<yajl-ruby>.freeze, [">= 0.8.1"])
+    end
   else
     s.add_dependency(%q<rake-compiler>.freeze, [">= 0.7.9"])
     s.add_dependency(%q<rspec>.freeze, [">= 2.0.1"])
