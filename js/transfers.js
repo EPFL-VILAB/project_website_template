@@ -153,7 +153,7 @@
         // title = title.includes("To:") ? title : '← ' + transferToTitleElement[title];
         var videoHolder = document.createElement("div");
         videoHolder.classList.add('col-xs-3');
-        videoHolder.classList.add('no-pad');
+        //videoHolder.classList.add('no-pad');
         //videoHolder.classList.add('scrollable');
 
         if (vid_name.includes('self__')){
@@ -169,10 +169,10 @@
         var vid = document.createElement("div");
 
         if (vid_name=="empty"){
-           vid.innerHTML = '<video muted playsinline preload="metadata" width=300' +
-            ' height=292.5' +
-            ' style="background-color:#FAFAFA" class=' + cls +
-            ' loop >' +
+           vid.innerHTML = '<video width=320' +
+            ' height=320' +
+            ' style="background-color:#FAFAFA" ' +
+            ' >' +
             
             //'<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/video_short/' + vid_name + '" type="video/webm">' +
             //'<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/video_short_mp4/' + vid_name.replace('webm', 'mp4') + '" type="video/mp4">' +
