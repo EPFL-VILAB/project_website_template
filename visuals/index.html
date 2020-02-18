@@ -125,7 +125,7 @@
 					<!-- transfer selectors -->
                 	<form action="#" onsubmit="return false;">
 						<div style="float:left;">
-							<p >Target Task</p>
+							<br> <p >Prediction Task</p>
 							<select name="target" class="selectpicker selector" id="targetpicker">
 								
                                 <option value="Normals">Normals</option>               
@@ -135,7 +135,7 @@
 						</div>
                                    
                                                 <div style="float:left;" id="sourcecolumn">
-							<p>Perceptual</p>								
+							<p>Consistency (Perceptual) <br>Readout Task</p>								
 							<select name="source" class="selectpicker selector" id="sourcepicker">
                                                                 <option value="--">--</option>
 								<option value="Z-Depth">Z-Depth</option>
@@ -151,14 +151,14 @@
 						</div>
 
                                                 <div style="float:left;">
-                                                        <p >Other Baselines?</p>
+                                                        <br><p>Show External Baselines</p>
                                                         <select name="others" class="selectpicker selector" id="otherpicker">
 
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
                                                         </select>
                                                 </div>
-                                                                                                
+                                                <br>                                                
 						<div>
 							<input style="margin-top: 35px" id="submitDemo" type="submit" class="btn btn-info" value="See Results">
 							<input style="margin-top: 35px" id="clearDemo" type="submit" class="btn btn-secondary" value="Clear">

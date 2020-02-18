@@ -159,12 +159,30 @@
         if (vid_name.includes('self__')){
             vid_name = vid_name.replace('self__', '').replace('__8__unlocked', '');
         }
+
+      
         var titleElem = document.createElement("div");
         titleElem.innerHTML = "<p class='vidtitle'>" + title + "</p>";
 
         //alert(vid_name);
         var cls = "hi";
         var vid = document.createElement("div");
+
+        if (vid_name=="empty"){
+           vid.innerHTML = '<video muted playsinline preload="metadata" width=300' +
+            ' height=292.5' +
+            ' style="background-color:#FAFAFA" class=' + cls +
+            ' loop >' +
+            
+            //'<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/video_short/' + vid_name + '" type="video/webm">' +
+            //'<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/video_short_mp4/' + vid_name.replace('webm', 'mp4') + '" type="video/mp4">' +
+            '</video>';
+           videoHolder.appendChild(titleElem);
+           videoHolder.appendChild(vid);
+           return [videoHolder, vid];
+        
+        }
+
         vid.innerHTML = '<video muted playsinline preload="metadata" width=100%' + 
             ' height=100%' + 
             ' style="background-color:#ddd" class=' + cls + 
@@ -267,7 +285,7 @@
         
 
 
-        if (selected_target==selected_source) {alert("Please choose a different target/perceptual combination."); return;}
+        if (selected_target==selected_source) {alert("The prediction task and consistency (perceptual) readout cannot be the same. Please choose a different combination."); return;}
         //alert(selected_target);
         //alert(selected_source);        
         //alert(transfers_to_videos);
@@ -296,32 +314,32 @@
 
             // Add targets
             // Baseline
-            source = makeVideoFrame('Baseline Target', transfers_to_videos[selected_target]["target"]['baseline']);
+            source = makeVideoFrame('Baseline Prediction', transfers_to_videos[selected_target]["target"]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
             // Consistency
-            source = makeVideoFrame("Consistency Target", transfers_to_videos[selected_target]["target"]['ours']);
+            source = makeVideoFrame("Consistency Prediction", transfers_to_videos[selected_target]["target"]['ours']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
             //Additional baselines for Normals
             if ((other_baselines == "Yes") && (selected_target=="Normals")){
            
-            source = makeVideoFrame("Cycle Target", transfers_to_videos[selected_target]["Others"]['cycle']);
+            source = makeVideoFrame("Cycle Prediction", transfers_to_videos[selected_target]["Others"]['cycle']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
                
 
-            source = makeVideoFrame("Geonet Target", transfers_to_videos[selected_target]["Others"]['geonet']);
+            source = makeVideoFrame("Geonet Prediction", transfers_to_videos[selected_target]["Others"]['geonet']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
-            source = makeVideoFrame("Multitask Target", transfers_to_videos[selected_target]["Others"]['multitask']);
+            source = makeVideoFrame("Multitask Prediction", transfers_to_videos[selected_target]["Others"]['multitask']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
-            source = makeVideoFrame("Taskonomy Target", transfers_to_videos[selected_target]["Others"]['taskonomy']);
+            source = makeVideoFrame("Taskonomy Prediction", transfers_to_videos[selected_target]["Others"]['taskonomy']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
             }
@@ -329,11 +347,11 @@
             //Additional baselines for Reshading
             if ((other_baselines == "Yes") && (selected_target=="Reshading")){
 
-            source = makeVideoFrame("Multitask Target", transfers_to_videos[selected_target]["Others"]['multitask']);
+            source = makeVideoFrame("Multitask Prediction", transfers_to_videos[selected_target]["Others"]['multitask']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
-            source = makeVideoFrame("Taskonomy Target", transfers_to_videos[selected_target]["Others"]['taskonomy']);
+            source = makeVideoFrame("Taskonomy Prediction", transfers_to_videos[selected_target]["Others"]['taskonomy']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
             }
@@ -342,15 +360,15 @@
             //Additional baselines for Z-Depth
             if ((other_baselines == "Yes") && (selected_target=="Z-Depth")){
 
-            source = makeVideoFrame("Geonet Target", transfers_to_videos[selected_target]["Others"]['geonet']);
+            source = makeVideoFrame("Geonet Prediction", transfers_to_videos[selected_target]["Others"]['geonet']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
-            source = makeVideoFrame("Multitask Target", transfers_to_videos[selected_target]["Others"]['multitask']);
+            source = makeVideoFrame("Multitask Prediction", transfers_to_videos[selected_target]["Others"]['multitask']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
-            source = makeVideoFrame("Taskonomy Target", transfers_to_videos[selected_target]["Others"]['taskonomy']);
+            source = makeVideoFrame("Taskonomy Prediction", transfers_to_videos[selected_target]["Others"]['taskonomy']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
             }
@@ -381,6 +399,16 @@
             //alert(selected_source);
             // Add perceps
             // Baseline
+                
+            source = makeVideoFrame('', "empty");
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            //all_videos.push(source[1]);
+
+            source = makeVideoFrame('', "empty");
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            //all_videos.push(source[1]);
+            
+
                       
             source = makeVideoFrame('Baseline Perceptual ' + selected_source, transfers_to_videos[selected_target][selected_source]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
@@ -394,6 +422,14 @@
 
             if (selected_source == "All") {
             //alert("Source is all!");
+            source = makeVideoFrame('', "empty");
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            //all_videos.push(source[1]);
+
+            source = makeVideoFrame('', "empty");
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            //all_videos.push(source[1]);
+
             var selected_source_now = transfers_to_videos[selected_target]["All"]["source1"];
               source = makeVideoFrame('Baseline Perceptual ' + selected_source_now, transfers_to_videos[selected_target][selected_source_now]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
@@ -403,6 +439,14 @@
             source = makeVideoFrame("Consistency Perceptual " + selected_source_now, transfers_to_videos[selected_target][selected_source_now]['ours']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
+
+            source = makeVideoFrame('', "empty");
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            //all_videos.push(source[1]);
+
+            source = makeVideoFrame('', "empty");
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            //all_videos.push(source[1]);
 
             var selected_source_now = transfers_to_videos[selected_target]["All"]["source2"];
               source = makeVideoFrame('Baseline Perceptual ' + selected_source_now, transfers_to_videos[selected_target][selected_source_now]['baseline']);
@@ -414,6 +458,15 @@
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
+            source = makeVideoFrame('', "empty");
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            //all_videos.push(source[1]);
+
+            source = makeVideoFrame('', "empty");
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            //all_videos.push(source[1]);
+          
+
             var selected_source_now = transfers_to_videos[selected_target]["All"]["source3"];
               source = makeVideoFrame('Baseline Perceptual ' + selected_source_now, transfers_to_videos[selected_target][selected_source_now]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
@@ -423,6 +476,14 @@
             source = makeVideoFrame("Consistency Perceptual " + selected_source_now, transfers_to_videos[selected_target][selected_source_now]['ours']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
+
+            source = makeVideoFrame('', "empty");
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            //all_videos.push(source[1]);
+
+            source = makeVideoFrame('', "empty");
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            //all_videos.push(source[1]);
 
             var selected_source_now = transfers_to_videos[selected_target]["All"]["source4"];
               source = makeVideoFrame('Baseline Perceptual ' + selected_source_now, transfers_to_videos[selected_target][selected_source_now]['baseline']);
@@ -434,6 +495,15 @@
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
+            source = makeVideoFrame('', "empty");
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            //all_videos.push(source[1]);
+
+            source = makeVideoFrame('', "empty");
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            //all_videos.push(source[1]);
+           
+
             var selected_source_now = transfers_to_videos[selected_target]["All"]["source5"];
               source = makeVideoFrame('Baseline Perceptual ' + selected_source_now, transfers_to_videos[selected_target][selected_source_now]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
@@ -444,7 +514,13 @@
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
-            
+            source = makeVideoFrame('', "empty");
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            //all_videos.push(source[1]);
+
+            source = makeVideoFrame('', "empty");
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            //all_videos.push(source[1]);
 
             var selected_source_now = transfers_to_videos[selected_target]["All"]["source6"];
               source = makeVideoFrame('Baseline Perceptual ' + selected_source_now, transfers_to_videos[selected_target][selected_source_now]['baseline']);
@@ -456,6 +532,13 @@
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
+            source = makeVideoFrame('', "empty");
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            //all_videos.push(source[1]);
+
+            source = makeVideoFrame('', "empty");
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            //all_videos.push(source[1]);
 
             var selected_source_now = transfers_to_videos[selected_target]["All"]["source7"];
               source = makeVideoFrame('Baseline Perceptual ' + selected_source_now, transfers_to_videos[selected_target][selected_source_now]['baseline']);
