@@ -647,6 +647,12 @@ img.center {
     margin-right: auto;
 }
 
+video.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .figure {
     margin-top: 25px;        
 }
