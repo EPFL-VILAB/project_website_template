@@ -154,7 +154,7 @@
         var videoHolder = document.createElement("div");
         videoHolder.classList.add('col-xs-3');
         videoHolder.classList.add('no-pad');
-        videoHolder.classList.add('scrollable');
+        //videoHolder.classList.add('scrollable');
 
         if (vid_name.includes('self__')){
             vid_name = vid_name.replace('self__', '').replace('__8__unlocked', '');
@@ -376,8 +376,7 @@
         //var ours = makeVideoFrame(title, vid_name['ours']);
         //document.getElementById(vidElementForTarget(selected_target)).appendChild(ours[0]);
         //all_videos.push(ours[1]);
-
-            document.getElementById(vidElementForTarget(selected_target)).style = "margin-bottom:105px";          
+              
             if ((selected_source != "All") && (selected_source!= "--")) {
             //alert(selected_source);
             // Add perceps
