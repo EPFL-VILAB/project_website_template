@@ -214,7 +214,7 @@
     var syncAllVideos = function(all_videos){
         var d = new Date();
         var start_time =  d.getTime()
-        var timeout_length = 100000; // in millis
+        var timeout_length = 15000; // in millis
         var is_vid_load_timeout = function(vids) {
             return (d.getTime() - start_time > timeout_length)
         }
@@ -305,8 +305,9 @@
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
+            //Additional baselines for Normals
             if ((other_baselines == "Yes") && (selected_target=="Normals")){
-            // Consistency
+           
             source = makeVideoFrame("Cycle Target", transfers_to_videos[selected_target]["Others"]['cycle']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
@@ -317,6 +318,39 @@
             all_videos.push(source[1]);
 
             source = makeVideoFrame("Multitask Target", transfers_to_videos[selected_target]["Others"]['multitask']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+            source = makeVideoFrame("Taskonomy Target", transfers_to_videos[selected_target]["Others"]['taskonomy']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+            }
+
+            //Additional baselines for Reshading
+            if ((other_baselines == "Yes") && (selected_target=="Reshading")){
+
+            source = makeVideoFrame("Multitask Target", transfers_to_videos[selected_target]["Others"]['multitask']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+            source = makeVideoFrame("Taskonomy Target", transfers_to_videos[selected_target]["Others"]['taskonomy']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+            }
+
+
+            //Additional baselines for Z-Depth
+            if ((other_baselines == "Yes") && (selected_target=="Z-Depth")){
+
+            source = makeVideoFrame("Geonet Target", transfers_to_videos[selected_target]["Others"]['geonet']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+            source = makeVideoFrame("Multitask Target", transfers_to_videos[selected_target]["Others"]['multitask']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+            source = makeVideoFrame("Taskonomy Target", transfers_to_videos[selected_target]["Others"]['taskonomy']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
             }
@@ -343,8 +377,8 @@
         //document.getElementById(vidElementForTarget(selected_target)).appendChild(ours[0]);
         //all_videos.push(ours[1]);
 
-          
-            if (selected_source != "All") {
+            document.getElementById(vidElementForTarget(selected_target)).style = "margin-bottom:105px";          
+            if ((selected_source != "All") && (selected_source!= "--")) {
             //alert(selected_source);
             // Add perceps
             // Baseline
@@ -461,7 +495,7 @@
         // var innerHTML = "";
         for (var i in transfers_targets) {
             var key = transfers_targets[i];
-            if (transfers_to_videos[key]["Z-Depth"]['ours'] == "NONE") { // These can't be vized
+            if (transfers_to_videos[key]["target"]['ours'] == "NONE") { // These can't be vized
                 continue;
             }
             valid_targets.push(key);
