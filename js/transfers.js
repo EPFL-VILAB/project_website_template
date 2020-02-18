@@ -354,6 +354,15 @@
             source = makeVideoFrame("Taskonomy Prediction", transfers_to_videos[selected_target]["Others"]['taskonomy']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
+ 
+            source = makeVideoFrame('', "empty");
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            //all_videos.push(source[1]);
+
+            source = makeVideoFrame('', "empty");
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            //all_videos.push(source[1]);
+
             }
 
 
@@ -371,6 +380,10 @@
             source = makeVideoFrame("Taskonomy Prediction", transfers_to_videos[selected_target]["Others"]['taskonomy']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
+
+            source = makeVideoFrame('', "empty");
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            //all_videos.push(source[1]);
             }
 
 
