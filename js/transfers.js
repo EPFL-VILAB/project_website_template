@@ -330,8 +330,44 @@
 
          if(!other_exists.includes(selected_target)) {
 
+
+
             //Additional baselines for Normals
             if ((other_baselines == "Yes") && (selected_target=="Normals")){
+            // First clear everything and add input + targets
+            document.getElementById("video-section").innerHTML = "";
+               all_videos = [];
+               source_exists = [];
+               other_exists = [];
+               createVideoPlaceholders();
+               
+               if(!source_exists.includes(selected_target)) {
+            var titleElem = makeRowTitle(selected_target);
+            document.getElementById(vidTitleElementForTarget(selected_target)).appendChild(titleElem);
+
+            // document.getElementById(vidElementForTarget(selected_target)).appendChild(makeRowTitle(selected_target));
+            var source = makeVideoFrame("Input video", "https://storage.cloud.google.com/taskonomy-shared/assets/source_final.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+            source_exists.push(selected_target);
+
+            // Add targets
+            // Baseline
+            source = makeVideoFrame('Baseline Prediction', transfers_to_videos[selected_target]["target"]['baseline']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+            // Consistency
+            source = makeVideoFrame("Consistency Prediction", transfers_to_videos[selected_target]["target"]['ours']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+            document.getElementById(vidElementForTarget(selected_target)).style = "margin-bottom:105px";
+            }
+                
+            
+
+            // Then add the other baselines
            
             source = makeVideoFrame("Cycle Prediction", transfers_to_videos[selected_target]["Others"]['cycle']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
@@ -356,6 +392,39 @@
             //Additional baselines for Reshading
             if ((other_baselines == "Yes") && (selected_target=="Reshading")){
 
+            // First clear everything and add input + targets
+            document.getElementById("video-section").innerHTML = "";
+               all_videos = [];
+               source_exists = [];
+               other_exists = [];
+               createVideoPlaceholders();
+
+               if(!source_exists.includes(selected_target)) {
+            var titleElem = makeRowTitle(selected_target);
+            document.getElementById(vidTitleElementForTarget(selected_target)).appendChild(titleElem);
+
+            // document.getElementById(vidElementForTarget(selected_target)).appendChild(makeRowTitle(selected_target));
+            var source = makeVideoFrame("Input video", "https://storage.cloud.google.com/taskonomy-shared/assets/source_final.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+            source_exists.push(selected_target);
+
+            // Add targets
+            // Baseline
+            source = makeVideoFrame('Baseline Prediction', transfers_to_videos[selected_target]["target"]['baseline']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+            // Consistency
+            source = makeVideoFrame("Consistency Prediction", transfers_to_videos[selected_target]["target"]['ours']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+            document.getElementById(vidElementForTarget(selected_target)).style = "margin-bottom:105px";
+            }
+
+
+
             source = makeVideoFrame("Multitask Prediction", transfers_to_videos[selected_target]["Others"]['multitask']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
@@ -379,6 +448,38 @@
 
             //Additional baselines for Z-Depth
             if ((other_baselines == "Yes") && (selected_target=="Z-Depth")){
+
+            // First clear everything and add input + targets
+            document.getElementById("video-section").innerHTML = "";
+               all_videos = [];
+               source_exists = [];
+               other_exists = [];
+               createVideoPlaceholders();
+
+               if(!source_exists.includes(selected_target)) {
+            var titleElem = makeRowTitle(selected_target);
+            document.getElementById(vidTitleElementForTarget(selected_target)).appendChild(titleElem);
+
+            // document.getElementById(vidElementForTarget(selected_target)).appendChild(makeRowTitle(selected_target));
+            var source = makeVideoFrame("Input video", "https://storage.cloud.google.com/taskonomy-shared/assets/source_final.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+            source_exists.push(selected_target);
+
+            // Add targets
+            // Baseline
+            source = makeVideoFrame('Baseline Prediction', transfers_to_videos[selected_target]["target"]['baseline']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+            // Consistency
+            source = makeVideoFrame("Consistency Prediction", transfers_to_videos[selected_target]["target"]['ours']);
+            document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
+            all_videos.push(source[1]);
+
+            document.getElementById(vidElementForTarget(selected_target)).style = "margin-bottom:105px";
+            }
+
 
             source = makeVideoFrame("Geonet Prediction", transfers_to_videos[selected_target]["Others"]['geonet']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
