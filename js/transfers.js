@@ -136,6 +136,7 @@
 
     var source_exists = [];
     var all_videos = [];
+    var other_exists = [];
 
     $('#clearDemo').on("click", function() {
         document.getElementById("video-section").innerHTML = "";        
@@ -144,6 +145,7 @@
         // document.getElementById("scratch-vids").innerHTML = "";
         all_videos = [];
         source_exists = [];
+        other_exists = [];
         createVideoPlaceholders();
     });
 
@@ -323,6 +325,11 @@
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
+            document.getElementById(vidElementForTarget(selected_target)).style = "margin-bottom:105px";
+            }
+
+         if(!other_exists.includes(selected_target)) {
+
             //Additional baselines for Normals
             if ((other_baselines == "Yes") && (selected_target=="Normals")){
            
@@ -342,6 +349,8 @@
             source = makeVideoFrame("Taskonomy Prediction", transfers_to_videos[selected_target]["Others"]['taskonomy']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
+
+            other_exists.push(selected_target);
             }
 
             //Additional baselines for Reshading
@@ -363,6 +372,8 @@
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             //all_videos.push(source[1]);
 
+
+            other_exists.push(selected_target);
             }
 
 
@@ -384,6 +395,8 @@
             source = makeVideoFrame('', "empty");
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             //all_videos.push(source[1]);
+
+            other_exists.push(selected_target);
             }
 
 
@@ -400,9 +413,11 @@
 
            
 
-            document.getElementById(vidElementForTarget(selected_target)).style = "margin-bottom:105px";
+            
            
-        }
+             }
+
+
         //var title = "From: " + transferToTitleElement[selected_source.replace(/\//g, " + ")];
         //var ours = makeVideoFrame(title, vid_name['ours']);
         //document.getElementById(vidElementForTarget(selected_target)).appendChild(ours[0]);
