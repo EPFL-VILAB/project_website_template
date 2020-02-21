@@ -362,7 +362,7 @@
             document.getElementById(vidTitleElementForTarget(selected_target)).appendChild(titleElem);
 
             // document.getElementById(vidElementForTarget(selected_target)).appendChild(makeRowTitle(selected_target));
-            var source = makeVideoFrame("Input video", "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal_method_comparison/rgb2reshading_taskonomy.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
+            var source = makeVideoFrame("Input video", "https://storage.cloud.google.com/taskonomy-shared/assets/source_final_down.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
             source_exists.push(selected_target);
@@ -399,7 +399,7 @@
             document.getElementById(vidTitleElementForTarget(selected_target)).appendChild(titleElem);
 
             // document.getElementById(vidElementForTarget(selected_target)).appendChild(makeRowTitle(selected_target));
-            var source = makeVideoFrame("Input video", "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal_method_comparison/rgb2reshading_taskonomy.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
+            var source = makeVideoFrame("Input video", "https://storage.cloud.google.com/taskonomy-shared/assets/source_final_down.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
             source_exists.push(selected_target);
@@ -457,7 +457,7 @@
             document.getElementById(vidTitleElementForTarget(selected_target)).appendChild(titleElem);
 
             // document.getElementById(vidElementForTarget(selected_target)).appendChild(makeRowTitle(selected_target));
-            var source = makeVideoFrame("Input video", "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal_method_comparison/rgb2reshading_taskonomy.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
+            var source = makeVideoFrame("Input video", "https://storage.cloud.google.com/taskonomy-shared/assets/source_final_down.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
             source_exists.push(selected_target);
@@ -514,7 +514,7 @@
             document.getElementById(vidTitleElementForTarget(selected_target)).appendChild(titleElem);
 
             // document.getElementById(vidElementForTarget(selected_target)).appendChild(makeRowTitle(selected_target));
-            var source = makeVideoFrame("Input video", "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal_method_comparison/rgb2reshading_taskonomy.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
+            var source = makeVideoFrame("Input video", "https://storage.cloud.google.com/taskonomy-shared/assets/source_final_down.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
             source_exists.push(selected_target);
