@@ -234,7 +234,7 @@
     var syncAllVideos = function(all_videos){
         var d = new Date();
         var start_time =  d.getTime()
-        var timeout_length = 15000; // in millis
+        var timeout_length = 10000; // in millis
         var is_vid_load_timeout = function(vids) {
             return (d.getTime() - start_time > timeout_length)
         }
@@ -248,19 +248,27 @@
                     n_loaded += 1;
                 }
             });
-            // console.log(n_loaded, vids.length)
+            console.log(n_loaded, vids.length)
             return (n_loaded == vids.length);
         };
 
+
         var play_all = function(vids) {
+
+       
+
             vids.forEach( function(vid) {
                 vid = vid.children[0];
                 vid.play();
             });
+            
         };                    
 
 
+      
         // Pause all videos until loaded
+      
+                
         all_videos.forEach( function(vid) {
             vid = vid.children[0];
             vid.pause();
@@ -268,16 +276,61 @@
             vid.onloadeddata = function() {
                 // if(is_vid_load_timeout(all_videos)) {
                 if(is_all_loaded(all_videos) && !is_vid_load_timeout(all_videos)) {
-                    play_all(all_videos);
+                     
+                      play_all(all_videos);
                 }
                 else {
-                    // vid.pause();
+                      //vid.pause();
                 }
             };
         });
+        
+        
 
-        setTimeout(function() { play_all(all_videos); }, timeout_length);
+        //alert("timeout");
+        //setTimeout(function() { play_all(all_videos); }, timeout_length);
     }
+
+
+    var play_all = function(vids) {
+
+
+
+            vids.forEach( function(vid) {
+                vid = vid.children[0];
+                vid.play();
+            });
+
+        };
+
+
+    var pause_all = function(vids) {
+
+
+
+            vids.forEach( function(vid) {
+                vid = vid.children[0];
+                vid.pause();
+            });
+
+        };
+
+    $('#pauseDemo').on("click",function() {
+
+     var bttn = document.getElementById("pauseDemo");
+     if (all_videos[0].children[0].paused) { 
+        play_all(all_videos);
+        bttn.value = "Pause";
+
+     }
+
+     else {
+        pause_all(all_videos);
+        bttn.value = "Play";
+     }
+
+     //alert(all_videos[0].children[0].paused);
+    });
 
 
     $('#submitDemo').on("click",function() {
@@ -309,7 +362,7 @@
             document.getElementById(vidTitleElementForTarget(selected_target)).appendChild(titleElem);
 
             // document.getElementById(vidElementForTarget(selected_target)).appendChild(makeRowTitle(selected_target));
-            var source = makeVideoFrame("Input video", "https://storage.cloud.google.com/taskonomy-shared/assets/source_final.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
+            var source = makeVideoFrame("Input video", "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal_method_comparison/rgb2reshading_taskonomy.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
             source_exists.push(selected_target);
@@ -346,7 +399,7 @@
             document.getElementById(vidTitleElementForTarget(selected_target)).appendChild(titleElem);
 
             // document.getElementById(vidElementForTarget(selected_target)).appendChild(makeRowTitle(selected_target));
-            var source = makeVideoFrame("Input video", "https://storage.cloud.google.com/taskonomy-shared/assets/source_final.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
+            var source = makeVideoFrame("Input video", "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal_method_comparison/rgb2reshading_taskonomy.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
             source_exists.push(selected_target);
@@ -404,7 +457,7 @@
             document.getElementById(vidTitleElementForTarget(selected_target)).appendChild(titleElem);
 
             // document.getElementById(vidElementForTarget(selected_target)).appendChild(makeRowTitle(selected_target));
-            var source = makeVideoFrame("Input video", "https://storage.cloud.google.com/taskonomy-shared/assets/source_final.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
+            var source = makeVideoFrame("Input video", "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal_method_comparison/rgb2reshading_taskonomy.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
             source_exists.push(selected_target);
@@ -461,7 +514,7 @@
             document.getElementById(vidTitleElementForTarget(selected_target)).appendChild(titleElem);
 
             // document.getElementById(vidElementForTarget(selected_target)).appendChild(makeRowTitle(selected_target));
-            var source = makeVideoFrame("Input video", "https://storage.cloud.google.com/taskonomy-shared/assets/source_final.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
+            var source = makeVideoFrame("Input video", "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/rgb2normal_method_comparison/rgb2reshading_taskonomy.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
             source_exists.push(selected_target);
