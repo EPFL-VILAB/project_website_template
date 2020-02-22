@@ -171,8 +171,8 @@
         var vid = document.createElement("div");
 
         if (vid_name=="empty"){
-           vid.innerHTML = '<video width=256' +
-            ' height=256' +
+           vid.innerHTML = '<video width=300' +
+            ' height=300' +
             ' style="background-color:#FAFAFA" ' +
             ' >' +
             
@@ -281,7 +281,7 @@
                 }
                 else {
                       //vid.pause();
-                }i
+                }
             };
         var bttn = document.getElementById("pauseDemo");
         bttn.value = "Pause";
