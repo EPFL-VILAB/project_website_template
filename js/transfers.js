@@ -171,8 +171,8 @@
         var vid = document.createElement("div");
 
         if (vid_name=="empty"){
-           vid.innerHTML = '<video width=320' +
-            ' height=320' +
+           vid.innerHTML = '<video width=256' +
+            ' height=256' +
             ' style="background-color:#FAFAFA" ' +
             ' >' +
             
@@ -243,7 +243,7 @@
             var n_loaded = 0;
             vids.forEach( function(vid) {
                 vid = vid.children[0];
-                // console.log(vid.readyState);
+                console.log(vid.readyState);
                 if(vid.readyState === 4 || vid.readyState === 1) {
                     n_loaded += 1;
                 }
@@ -281,8 +281,11 @@
                 }
                 else {
                       //vid.pause();
-                }
+                }i
             };
+        var bttn = document.getElementById("pauseDemo");
+        bttn.value = "Pause";
+         
         });
         
         
