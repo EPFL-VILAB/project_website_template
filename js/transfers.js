@@ -147,6 +147,8 @@
         source_exists = [];
         other_exists = [];
         createVideoPlaceholders();
+        var bttn = document.getElementById("pauseDemo");
+        bttn.value = "Play";
     });
 
 
