@@ -267,7 +267,8 @@
 
       
         // Pause all videos until loaded
-      
+        var bttn = document.getElementById("pauseDemo");
+        bttn.value = "Play";
                 
         all_videos.forEach( function(vid) {
             vid = vid.children[0];
@@ -283,7 +284,7 @@
                       //vid.pause();
                 }
             };
-        var bttn = document.getElementById("pauseDemo");
+        
         bttn.value = "Pause";
          
         });
