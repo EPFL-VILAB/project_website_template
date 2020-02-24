@@ -268,7 +268,7 @@
       
         // Pause all videos until loaded
         var bttn = document.getElementById("pauseDemo");
-        bttn.value = "Play";
+        
                 
         all_videos.forEach( function(vid) {
             vid = vid.children[0];
@@ -737,6 +737,8 @@
             all_videos.push(source[1]);
 
         }
+        var bttn = document.getElementById("pauseDemo");
+        bttn.value = "Play";
         syncAllVideos(all_videos);
         // all_videos = all_videos.concat([source, ours]);
 
