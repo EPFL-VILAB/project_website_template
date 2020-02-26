@@ -45,25 +45,6 @@
     // ]
     var sortOrder = [
         'rgb2sfnorm',
-        'reshade',
-        'edge2d',
-        'vanishing_point_well_defined',
-        'segment25d',
-        'room_layout',
-        'class_places', 
-        'keypoint3d',
-        'edge3d',
-        'autoencoder',
-        'rgb2mist',
-        'segmentsemantic_rb',
-        'segment2d', 
-        'curvature',
-        'keypoint2d', 
-        'class_1000',
-        'rgb2depth',
-        'denoise',
-        'colorization',
-        'impainting_whole'
         ];
 
     for (var i in sortOrder){
@@ -246,23 +227,24 @@
             var xhr = new XMLHttpRequest();
         
             var imageUri = encodeURI(
-                "//s3-us-west-2.amazonaws.com/task-demo-results/" + uploadtoken + "__" + display_names_to_task[task] + ".png");
+                "//storage.cloud.google.com/taskonomy-shared/assets/task-demo-results/" + uploadtoken + "__" + display_names_to_task[task] + ".png?authuser=0&folder=true&organizationId=true&supportedpurview=project");
 
-            // xhr.onload = function () {
-            //     // Request finished. Do processing here.
-            //     var rawResponse = xhr.responseText; // truncated for example
+           
+            //xhr.onload = function () {
+            //    // Request finished. Do processing here.
+            //    var rawResponse = xhr.responseText; // truncated for example
     
             //     // convert to Base64
             //     var b64Response = btoa(unescape(encodeURIComponent(rawResponse)));
                 
             //     // create an image
-            //     // outputImg.src = 'data:image/png;base64,'+b64Response;
+            //      outputImg.src = 'data:image/png;base64,'+b64Response;
                 
             //     // append it to your page
-            //     // document.body.appendChild(outputImg);
+            //     document.body.appendChild(outputImg);
             //     console.log(imageUri);
             //     callback(task, imFrame, imageUri);   
-            //     // console.log("response", xhr.responseText);         
+            //     console.log("response", xhr.responseText);         
             //     clearInterval(checkTaskIntervalId);                
             // };
             
@@ -274,7 +256,7 @@
                 if(xhr.readyState == 4 && xhr.status == 200) {
                     // console.log(imageUri);
                     callback(task, imFrame, imageUri);   
-                    // console.log("response", xhr.responseText);         
+                    // console.log("response", xhr.responseText);  
                     clearInterval(checkTaskIntervalId);
                     intervals.pop(intervals.indexOf(checkTaskIntervalId), 1); //Remove
                 } 
@@ -285,13 +267,15 @@
             xhr.open(
                 'HEAD', 
                 encodeURI(
-                    "//s3-us-west-2.amazonaws.com/task-demo-results/" + uploadtoken + "__" + display_names_to_task[task] + ".png"),
+                    "//storage.cloud.google.com/taskonomy-shared/assets/task-demo-results/" + uploadtoken + "__" + display_names_to_task[task] + ".png?authuser=0&folder=true&organizationId=true&supportedpurview=project"),
                 true);
             xhr.timeout = 3000;
             xhr.send();
+
+          
         };
         console.log(encodeURI(
-            "//s3-us-west-2.amazonaws.com/task-demo-results/" + uploadtoken + "__" + display_names_to_task[task] + ".png"));
+            "//storage.cloud.google.com/taskonomy-shared/assets/task-demo-results/" + uploadtoken + "__" + display_names_to_task[task] + ".png?authuser=0&folder=true&organizationId=true&supportedpurview=project"));
         // checkTask();
         checkTaskIntervalId = setInterval(checkTask, 3000);
         intervals.push(checkTaskIntervalId);
@@ -350,6 +334,7 @@
         document.getElementById("imageUploadInput").style = "display:none";;        
         document.getElementById("imageUploadInputLabel").style = "display:none";;        
         
+      
         document.getElementById("submitDemo").disabled=true;
         document.getElementById("submitDemo").value="refresh to upload new image";
     });

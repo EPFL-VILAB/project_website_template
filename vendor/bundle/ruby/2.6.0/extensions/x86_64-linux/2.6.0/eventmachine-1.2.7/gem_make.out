@@ -1,5 +1,5 @@
 current directory: /workspace/consistency/vendor/bundle/ruby/2.6.0/gems/eventmachine-1.2.7/ext/fastfilereader
-/home/kar/.rvm/rubies/ruby-2.6.3/bin/ruby -I /home/kar/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0 -r ./siteconf20200217-5309-q4aae6.rb extconf.rb
+/home/kar/.rvm/rubies/ruby-2.6.3/bin/ruby -I /home/kar/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0 -r ./siteconf20200224-10912-1lyk6bc.rb extconf.rb
 creating Makefile
 
 current directory: /workspace/consistency/vendor/bundle/ruby/2.6.0/gems/eventmachine-1.2.7/ext/fastfilereader
@@ -29,4 +29,4 @@ linking shared-object fastfilereaderext.so
 
 current directory: /workspace/consistency/vendor/bundle/ruby/2.6.0/gems/eventmachine-1.2.7/ext/fastfilereader
 make "DESTDIR=" install
-/usr/bin/install -m 0755 fastfilereaderext.so ./.gem.20200217-5309-1a29sxw
+/usr/bin/install -m 0755 fastfilereaderext.so ./.gem.20200224-10912-15jari9
