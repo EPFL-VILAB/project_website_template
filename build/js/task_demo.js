@@ -227,7 +227,7 @@
             var xhr = new XMLHttpRequest();
         
             var imageUri = encodeURI(
-                "//storage.cloud.google.com/taskonomy-shared/assets/task-demo-results/" + uploadtoken + "__" + display_names_to_task[task] + ".png?authuser=0&folder=true&organizationId=true&supportedpurview=project");
+                "//localhost:4000/demo/task-demo-results/" + uploadtoken + "__" + display_names_to_task[task] + ".png");
 
            
             //xhr.onload = function () {
@@ -267,7 +267,7 @@
             xhr.open(
                 'HEAD', 
                 encodeURI(
-                    "//storage.cloud.google.com/taskonomy-shared/assets/task-demo-results/" + uploadtoken + "__" + display_names_to_task[task] + ".png?authuser=0&folder=true&organizationId=true&supportedpurview=project"),
+                    "//localhost:4000/demo/task-demo-results/" + uploadtoken + "__" + display_names_to_task[task] + ".png"),
                 true);
             xhr.timeout = 3000;
             xhr.send();
@@ -275,7 +275,7 @@
           
         };
         console.log(encodeURI(
-            "//storage.cloud.google.com/taskonomy-shared/assets/task-demo-results/" + uploadtoken + "__" + display_names_to_task[task] + ".png?authuser=0&folder=true&organizationId=true&supportedpurview=project"));
+            "//localhost:4000/demo/task-demo-results/" + uploadtoken + "__" + display_names_to_task[task] + ".png"));
         // checkTask();
         checkTaskIntervalId = setInterval(checkTask, 3000);
         intervals.push(checkTaskIntervalId);

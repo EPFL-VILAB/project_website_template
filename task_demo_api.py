@@ -36,7 +36,7 @@ VALID_UPLOADTOKEN_PREFIX = "aa"
 UPLOAD_TOKENS_FOR_SAMPLES = ['sample1', 'sample2', 'sample3']
 
 cors = CORS(app, resources={
-    r"/runmodels": {"origins": "*"},
+    r"/": {"origins": "*"},
     r"/getresults": {"origins": "*"},
 })
 hashing = Hashing(app)
@@ -148,20 +148,24 @@ def process_input_file(src, unique_dir, fpath, filename, task, uploadToken):
 
     tmpdir = '/tmp/' + unique_dir
     call("mkdir " + tmpdir, shell=True)
+    call("mkdir " + fpath, shell=True)
+
     src = convert_to_png(src)
-    # call("sudo cp {} {}".format(
-    #     src, 
-    # ))
+    #pdb.set_trace()
+
+    call("cp {} {}".format(
+         src, tmpdir
+     ), shell=True)
     #pdb.set_trace()
     cmd = "python {} --config_to_run {} --frame_dir {} --output_dir {}".format(
          app.config['PROCESSING_SCRIPT_LOCATION'],
          'rgb2normal',
-         '/tmp',
+         tmpdir,
          tmpdir
      )
     call(cmd, shell=True)
     
-    call("sudo cp {} {} && rm {}".format(
+    call("cp {} {} && rm {}".format(
          os.path.join(tmpdir, cleaned_task + ext),
          os.path.join(fpath, cleaned_task + ext),
          os.path.join(tmpdir, cleaned_task + ext)
@@ -174,7 +178,14 @@ def process_input_file(src, unique_dir, fpath, filename, task, uploadToken):
     + "__" + display_name_to_task[task] + ".png")
 
    
-    call(cmd_gsutil, shell=True)
+    #call(cmd_gsutil, shell=True)
+
+    cmd_cplocal = "cp {} {}".format(
+    os.path.join(fpath, cleaned_task + ext),
+    "./demo/task-demo-results/" + uploadToken
+    + "__" + display_name_to_task[task] + ".png")
+
+    call(cmd_cplocal, shell=True)
 
     # # /home/ubuntu/anaconda3/bin/python /home/ubuntu/task-taxonomy-331b/tools/run_img_task.py --task reshade --img /home/ubuntu/s3/demo_images/92ba9602b8339d47df10be880c1d773a8e6b74465eb6a0bc5e7ec9391574aa64/download.png --store /home/ubuntu/s3/demo_images/92ba9602b8339d47df10be880c1d773a8e6b74465eb6a0bc5e7ec9391574aa64/2D_Edges.png
 
@@ -219,7 +230,7 @@ def validate_captcha(request):
 
     return r.json()['success']
 
-@app.route('/runmodels', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def upload():
     try:
         if request.method == 'POST' and 'photo' in request.files:

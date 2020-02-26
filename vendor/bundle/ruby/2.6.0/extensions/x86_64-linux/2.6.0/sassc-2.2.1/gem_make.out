@@ -1,5 +1,5 @@
 current directory: /workspace/consistency/vendor/bundle/ruby/2.6.0/gems/sassc-2.2.1/ext
-/home/kar/.rvm/rubies/ruby-2.6.3/bin/ruby -I /home/kar/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0 -r ./siteconf20200224-10912-19h8cw2.rb extconf.rb
+/home/kar/.rvm/rubies/ruby-2.6.3/bin/ruby -I /home/kar/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0 -r ./siteconf20200226-21708-10pob0f.rb extconf.rb
 creating Makefile
 
 current directory: /workspace/consistency/vendor/bundle/ruby/2.6.0/gems/sassc-2.2.1/ext
@@ -72,4 +72,4 @@ linking shared-object sassc/libsass.so
 
 current directory: /workspace/consistency/vendor/bundle/ruby/2.6.0/gems/sassc-2.2.1/ext
 make "DESTDIR=" install
-/usr/bin/install -m 0755 libsass.so ./.gem.20200224-10912-sbpakv/sassc
+/usr/bin/install -m 0755 libsass.so ./.gem.20200226-21708-157e9kr/sassc
