@@ -45,6 +45,8 @@
     // ]
     var sortOrder = [
         'rgb2sfnorm',
+        'reshade',
+        'rgb2depth'
         ];
 
     for (var i in sortOrder){

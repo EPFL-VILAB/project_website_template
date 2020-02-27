@@ -47,10 +47,12 @@ salt = "jitendra"
 
 map_to_display_names = {
     'rgb2sfnorm': 'Normals',
+    'reshade': 'Reshading',
+    'rgb2depth': 'Z-Depth',
 }
 
 display_name_to_task = {v: k for k, v in map_to_display_names.items()}
-list_of_tasks = 'rgb2sfnorm'
+list_of_tasks = 'rgb2sfnorm reshade rgb2depth'
 list_of_tasks = list_of_tasks.split()
 
 ports = [ 8080 + i for i in range(len(list_of_tasks))]
@@ -159,16 +161,16 @@ def process_input_file(src, unique_dir, fpath, filename, task, uploadToken):
     #pdb.set_trace()
     cmd = "python {} --config_to_run {} --frame_dir {} --output_dir {}".format(
          app.config['PROCESSING_SCRIPT_LOCATION'],
-         'rgb2normal',
+         display_name_to_task[task],
          tmpdir,
          tmpdir
      )
     call(cmd, shell=True)
     
     call("cp {} {} && rm {}".format(
-         os.path.join(tmpdir, cleaned_task + ext),
+         os.path.join(tmpdir, display_name_to_task[task] + ext),
          os.path.join(fpath, cleaned_task + ext),
-         os.path.join(tmpdir, cleaned_task + ext)
+         os.path.join(tmpdir, display_name_to_task[task] + ext)
      ), shell=True)
 
 
@@ -207,7 +209,9 @@ def secureFileName(uploadToken, ext):
 #     ]
 
 sortOrder = [
-        'rgb2sfnorm'
+        'rgb2sfnorm',
+        'reshade',
+        'rgb2depth'
         ];
 
 TARGET_TASKS = [map_to_display_names[t] for t in sortOrder]
