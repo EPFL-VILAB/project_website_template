@@ -29,7 +29,7 @@
 	<!-- Custom stlylesheet -->
 	<link type="text/css" rel="stylesheet" href="../css/style.css" />
 	<link type="text/css" rel="stylesheet" href="../css/transfers.css" />
-	
+	<link type="text/css" rel="stylesheet" href="../css/tasks.css" />  	
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -83,7 +83,7 @@
 				<!--  Main navigation  -->
 				<ul class="main-nav nav navbar-nav navbar-right">
 					<li><a href="/consistency/index.html#home">Home</a></li>
-					<li><a href="/consistency/tasks">Live Demo</a></li>
+					<li><a href="/consistency/demo">Live Demo</a></li>
 					<li><a href="/consistency/index.html#models">Pretrained Models</a></li>
 					<li><a href="/consistency/index.html#paper">Paper</a></li>					
 					<li><a href="/consistency/index.html#team">Team</a></li>
@@ -129,7 +129,7 @@
 					<!-- transfer selectors -->
                 	<form action="#" onsubmit="return false;">
 						<div style="float:left;">
-							<br> <p >Prediction Task (<b><i>X</i><sub>2</sub> </b>)</p>
+							<br> <p >Prediction Task<br> (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)</p>
 							<select name="target" class="selectpicker selector" id="targetpicker">
 								
                                 <option value="Normals">Normals</option>               
@@ -139,7 +139,7 @@
 						</div>
                                    
                                                 <div style="float:left;" id="sourcecolumn">
-							<br> <p>Consistency Readout Task (<b><i>X</i><sub>3</sub></b>)</p>								
+							<br> <p>Consistency Readout Task<br> (<b><i>X</i><sub>2</sub>→<i>X</i><sub>3</sub> </b>)</p>								
 							<select name="source" class="selectpicker selector" id="sourcepicker">
                                                                 <option value="--">--</option>
 								<option value="Z-Depth">Z-Depth</option>
@@ -155,19 +155,20 @@
 						</div>
 
                                                 <div style="float:left;">
-                                                        <br><p>  Show External Baselines</p>
+                                                        <br><p>Show External Baselines</p><br>
+                                                        <p hidden>|</p>
                                                         <select name="others" class="selectpicker selector" id="otherpicker">
 
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
                                                         </select>
                                                 </div>
-                                                <br>                                                
+                                                <br> <br>                                                
 						<div>
 							<input style="margin-top: 35px" id="submitDemo" type="submit" class="btn btn-info" value="See Results">
 							<input style="margin-top: 35px" id="clearDemo" type="submit" class="btn btn-secondary" value="Clear">
 
-                                                        <input style="margin-top: 35px" id="pauseDemo" type="button" class="btn btn-secondary" value="Pause">
+                                                        <input style="margin-top: 35px" id="pauseDemo" type="button" class="btn btn-secondary" value="Play/Pause">
 						</div>
                     </form>
 					<!-- /transfer selectors -->

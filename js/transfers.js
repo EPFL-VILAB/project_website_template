@@ -38,6 +38,7 @@
             newRow.className = 'row horiz-scroll';
             newRow.id = vidElementForTarget(target);
             document.getElementById("video-section").appendChild(newRow);
+
             
         }
     }
@@ -147,8 +148,8 @@
         source_exists = [];
         other_exists = [];
         createVideoPlaceholders();
-        var bttn = document.getElementById("pauseDemo");
-        bttn.value = "Play";
+        //var bttn = document.getElementById("pauseDemo");
+        //bttn.value = "Play";
     });
 
 
@@ -159,6 +160,13 @@
         videoHolder.classList.add('col-xs-3');
         //videoHolder.classList.add('no-pad');
         //videoHolder.classList.add('scrollable');
+
+        //if (title=="Input video (<b><i>X</i><sub>1</sub> </b>)"){
+        //videoHolder.setAttribute("data-spy", "affix");
+        //videoHolder.setAttribute("data-offset-top", "01");
+        //videoHolder.classList.add('affix-top');
+        //videoHolder.setAttribute('class', 'affix');
+        //}
 
         if (vid_name.includes('self__')){
             vid_name = vid_name.replace('self__', '').replace('__8__unlocked', '');
@@ -172,6 +180,7 @@
         var cls = "hi";
         var vid = document.createElement("div");
 
+
         if (vid_name=="empty"){
            vid.innerHTML = '<video width=300' +
             ' height=300' +
@@ -183,6 +192,8 @@
             '</video>';
            videoHolder.appendChild(titleElem);
            videoHolder.appendChild(vid);
+
+
            return [videoHolder, vid];
         
         }
@@ -201,9 +212,21 @@
             vid.innerHTML = vid.innerHTML.replace('video_short_mp4', 'video_test')
             vid.innerHTML = vid.innerHTML.replace('video_short', 'video_test')
         }
-        
+
+   
+        //if ( (title=="Input video (<b><i>X</i><sub>1</sub> </b>)") || (title=='Baseline Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)') || (title=='Consistency Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)')) {
+          
+        //   videoHolder.classList.add('affix');
+           //videoHolder.setAttribute('class', 'affix');
+       //    videoHolder.setAttribute('data-spy', 'affix');
+           //videoHolder.setAttribute('data-offset-bottom', '0');
+           //videoHolder.setAttribute('id', 'source-section');
+   
+      //     }
+
         videoHolder.appendChild(titleElem);
         videoHolder.appendChild(vid);
+       
         return [videoHolder, vid];
     }
 
@@ -269,7 +292,7 @@
 
       
         // Pause all videos until loaded
-        var bttn = document.getElementById("pauseDemo");
+        //var bttn = document.getElementById("pauseDemo");
         
                 
         all_videos.forEach( function(vid) {
@@ -287,7 +310,7 @@
                 }
             };
         
-        bttn.value = "Pause";
+        //bttn.value = "Pause";
          
         });
         
@@ -323,16 +346,16 @@
 
     $('#pauseDemo').on("click",function() {
 
-     var bttn = document.getElementById("pauseDemo");
+     //var bttn = document.getElementById("pauseDemo");
      if (all_videos[0].children[0].paused) { 
         play_all(all_videos);
-        bttn.value = "Pause";
+        //bttn.value = "Pause";
 
      }
 
      else {
         pause_all(all_videos);
-        bttn.value = "Play";
+        //bttn.value = "Play";
      }
 
      //alert(all_videos[0].children[0].paused);
@@ -369,18 +392,20 @@
 
             // document.getElementById(vidElementForTarget(selected_target)).appendChild(makeRowTitle(selected_target));
             var source = makeVideoFrame("Input video (<b><i>X</i><sub>1</sub> </b>)", "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/cropped_trimmed/source_final_down.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
+            //document.getElementById(vidBaselineElementForTarget(selected_target)).setAttribute("data-spy", "affix");
+            //document.getElementById(vidBaselineElementForTarget(selected_target)).setAttribute("data-offset-top", "01");
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
             source_exists.push(selected_target);
 
             // Add targets
             // Baseline
-            source = makeVideoFrame('Baseline Prediction (<b><i>X</i><sub>2</sub> </b>)', transfers_to_videos[selected_target]["target"]['baseline']);
+            source = makeVideoFrame('Baseline Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)', transfers_to_videos[selected_target]["target"]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
             // Consistency
-            source = makeVideoFrame("Consistency Prediction (<b><i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["target"]['ours']);
+            source = makeVideoFrame("Consistency Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["target"]['ours']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
@@ -412,12 +437,12 @@
 
             // Add targets
             // Baseline
-            source = makeVideoFrame('Baseline Prediction (<b><i>X</i><sub>2</sub> </b>)', transfers_to_videos[selected_target]["target"]['baseline']);
+            source = makeVideoFrame('Baseline Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)', transfers_to_videos[selected_target]["target"]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
             // Consistency
-            source = makeVideoFrame("Consistency Prediction (<b><i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["target"]['ours']);
+            source = makeVideoFrame("Consistency Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["target"]['ours']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
@@ -428,20 +453,20 @@
 
             // Then add the other baselines
            
-            source = makeVideoFrame("Cycle Prediction (<b><i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['cycle']);
+            source = makeVideoFrame("Cycle Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['cycle']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
                
 
-            source = makeVideoFrame("Geonet Prediction (<b><i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['geonet']);
+            source = makeVideoFrame("Geonet Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['geonet']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
-            source = makeVideoFrame("Multitask Prediction (<b><i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['multitask']);
+            source = makeVideoFrame("Multitask Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['multitask']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
-            source = makeVideoFrame("Taskonomy Prediction (<b><i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['taskonomy']);
+            source = makeVideoFrame("Taskonomy Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['taskonomy']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
@@ -470,12 +495,12 @@
 
             // Add targets
             // Baseline
-            source = makeVideoFrame('Baseline Prediction (<b><i>X</i><sub>2</sub> </b>)', transfers_to_videos[selected_target]["target"]['baseline']);
+            source = makeVideoFrame('Baseline Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)', transfers_to_videos[selected_target]["target"]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
             // Consistency
-            source = makeVideoFrame("Consistency Prediction (<b><i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["target"]['ours']);
+            source = makeVideoFrame("Consistency Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["target"]['ours']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
@@ -484,11 +509,11 @@
 
 
 
-            source = makeVideoFrame("Multitask Prediction (<b><i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['multitask']);
+            source = makeVideoFrame("Multitask Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['multitask']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
-            source = makeVideoFrame("Taskonomy Prediction (<b><i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['taskonomy']);
+            source = makeVideoFrame("Taskonomy Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['taskonomy']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
  
@@ -527,12 +552,12 @@
 
             // Add targets
             // Baseline
-            source = makeVideoFrame('Baseline Prediction (<b><i>X</i><sub>2</sub> </b>)', transfers_to_videos[selected_target]["target"]['baseline']);
+            source = makeVideoFrame('Baseline Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)', transfers_to_videos[selected_target]["target"]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
             // Consistency
-            source = makeVideoFrame("Consistency Prediction (<b><i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["target"]['ours']);
+            source = makeVideoFrame("Consistency Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["target"]['ours']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
@@ -540,15 +565,15 @@
             }
 
 
-            source = makeVideoFrame("Geonet Prediction (<b><i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['geonet']);
+            source = makeVideoFrame("Geonet Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['geonet']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
-            source = makeVideoFrame("Multitask Prediction (<b><i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['multitask']);
+            source = makeVideoFrame("Multitask Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['multitask']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
-            source = makeVideoFrame("Taskonomy Prediction (<b><i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['taskonomy']);
+            source = makeVideoFrame("Taskonomy Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['taskonomy']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
@@ -598,12 +623,12 @@
             
 
                       
-            source = makeVideoFrame('Baseline Perceptual ' + selected_source + " (<b><i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source]['baseline']);
+            source = makeVideoFrame('Baseline Readout ' + selected_source + " (<b><i>X</i><sub>2</sub>→<i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
             // Consistency
-            source = makeVideoFrame("Consistency Perceptual " + selected_source + " (<b><i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source]['ours']);
+            source = makeVideoFrame("Consistency Readout " + selected_source + " (<b><i>X</i><sub>2</sub>→<i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source]['ours']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
             }
@@ -619,12 +644,12 @@
             //all_videos.push(source[1]);
 
             var selected_source_now = transfers_to_videos[selected_target]["All"]["source1"];
-              source = makeVideoFrame('Baseline Perceptual ' + selected_source_now + " (<b><i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['baseline']);
+              source = makeVideoFrame('Baseline Readout ' + selected_source_now + " (<b><i>X</i><sub>2</sub>→<i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
             // Consistency
-            source = makeVideoFrame("Consistency Perceptual " + selected_source_now + " (<b><i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['ours']);
+            source = makeVideoFrame("Consistency Readout " + selected_source_now + " (<b><i>X</i><sub>2</sub>→<i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['ours']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
@@ -637,12 +662,12 @@
             //all_videos.push(source[1]);
 
             var selected_source_now = transfers_to_videos[selected_target]["All"]["source2"];
-              source = makeVideoFrame('Baseline Perceptual ' + selected_source_now + " (<b><i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['baseline']);
+              source = makeVideoFrame('Baseline Readout ' + selected_source_now + " (<b><i>X</i><sub>2</sub>→<i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
             // Consistency
-            source = makeVideoFrame("Consistency Perceptual " + selected_source_now + " (<b><i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['ours']);
+            source = makeVideoFrame("Consistency Readout " + selected_source_now + " (<b><i>X</i><sub>2</sub>→<i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['ours']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
@@ -656,12 +681,12 @@
           
 
             var selected_source_now = transfers_to_videos[selected_target]["All"]["source3"];
-              source = makeVideoFrame('Baseline Perceptual ' + selected_source_now + " (<b><i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['baseline']);
+              source = makeVideoFrame('Baseline Readout ' + selected_source_now + " (<b><i>X</i><sub>2</sub>→<i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
             // Consistency
-            source = makeVideoFrame("Consistency Perceptual " + selected_source_now + " (<b><i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['ours']);
+            source = makeVideoFrame("Consistency Readout " + selected_source_now + " (<b><i>X</i><sub>2</sub>→<i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['ours']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
@@ -674,12 +699,12 @@
             //all_videos.push(source[1]);
 
             var selected_source_now = transfers_to_videos[selected_target]["All"]["source4"];
-              source = makeVideoFrame('Baseline Perceptual ' + selected_source_now + " (<b><i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['baseline']);
+              source = makeVideoFrame('Baseline Readout ' + selected_source_now + " (<b><i>X</i><sub>2</sub>→<i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
             // Consistency
-            source = makeVideoFrame("Consistency Perceptual " + selected_source_now + " (<b><i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['ours']);
+            source = makeVideoFrame("Consistency Readout " + selected_source_now + " (<b><i>X</i><sub>2</sub>→<i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['ours']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
@@ -693,12 +718,12 @@
            
 
             var selected_source_now = transfers_to_videos[selected_target]["All"]["source5"];
-              source = makeVideoFrame('Baseline Perceptual ' + selected_source_now + " (<b><i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['baseline']);
+              source = makeVideoFrame('Baseline Readout ' + selected_source_now + " (<b><i>X</i><sub>2</sub>→<i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
             // Consistency
-            source = makeVideoFrame("Consistency Perceptual " + selected_source_now + " (<b><i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['ours']);
+            source = makeVideoFrame("Consistency Readout " + selected_source_now + " (<b><i>X</i><sub>2</sub>→<i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['ours']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
@@ -711,12 +736,12 @@
             //all_videos.push(source[1]);
 
             var selected_source_now = transfers_to_videos[selected_target]["All"]["source6"];
-              source = makeVideoFrame('Baseline Perceptual ' + selected_source_now + " (<b><i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['baseline']);
+              source = makeVideoFrame('Baseline Readout ' + selected_source_now + " (<b><i>X</i><sub>2</sub>→<i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
             // Consistency
-            source = makeVideoFrame("Consistency Perceptual " + selected_source_now + " (<b><i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['ours']);
+            source = makeVideoFrame("Consistency Readout " + selected_source_now + " (<b><i>X</i><sub>2</sub>→<i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['ours']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
@@ -729,24 +754,24 @@
             //all_videos.push(source[1]);
 
             var selected_source_now = transfers_to_videos[selected_target]["All"]["source7"];
-              source = makeVideoFrame('Baseline Perceptual ' + selected_source_now + " (<b><i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['baseline']);
+              source = makeVideoFrame('Baseline Readout ' + selected_source_now + " (<b><i>X</i><sub>2</sub>→<i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
             // Consistency
-            source = makeVideoFrame("Consistency Perceptual " + selected_source_now + " (<b><i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['ours']);
+            source = makeVideoFrame("Consistency Readout " + selected_source_now + " (<b><i>X</i><sub>2</sub>→<i>X</i><sub>3</sub> </b>)", transfers_to_videos[selected_target][selected_source_now]['ours']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
         }
-        var bttn = document.getElementById("pauseDemo");
-        bttn.value = "Play";
+        //var bttn = document.getElementById("pauseDemo");
+        //bttn.value = "Play";
         syncAllVideos(all_videos);
         // all_videos = all_videos.concat([source, ours]);
 
     });     
     
-    $(document).ready(function () {
+    $(document).ready(function () { 
         $("body").tooltip({   
             trigger: "hover",
             selector: "[data-toggle='tooltip']",
