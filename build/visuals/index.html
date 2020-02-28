@@ -113,7 +113,7 @@
 
 				<!-- Section header -->
 				<div class="section-header text-center">
-					<h2 class="title">Consistency Visualization</h2>
+					<h2 class="title">Visualization of Consistency-Based Prediction</h2>
 				</div>
 
                                 <div class="figure">
@@ -123,7 +123,7 @@
 				<!-- /Section header -->
 				<div class="content-body col-md-12">
 					<p> 
-						We visualized the result of evaluating various models with and without consistency on the same (non-cherry-picked) YouTube video. Below you can select different target tasks to see how well the consistency works. You can also visualize the perceptual domain predictions originated from the target. <u>The prediction is done frame-by-frame.</u>
+						We visualized the result of evaluating various models with and without consistency on the same (non-cherry-picked) YouTube video. Below you can select different target tasks to see how well the consistency works. You can also visualize the perceptual domain predictions originated from the target. <u>The prediction is done frame-by-frame without any temporal smoothing.</u>
                     </p>
 
 					<!-- transfer selectors -->
@@ -139,7 +139,7 @@
 						</div>
                                    
                                                 <div style="float:left;" id="sourcecolumn">
-							<p>Consistency (Perceptual) <br>Readout Task (<b><i>X</i><sub>3</sub></b>)</p>								
+							<br> <p>Consistency Readout Task (<b><i>X</i><sub>3</sub></b>)</p>								
 							<select name="source" class="selectpicker selector" id="sourcepicker">
                                                                 <option value="--">--</option>
 								<option value="Z-Depth">Z-Depth</option>
@@ -155,7 +155,7 @@
 						</div>
 
                                                 <div style="float:left;">
-                                                        <br><p>Show External Baselines</p>
+                                                        <br><p>  Show External Baselines</p>
                                                         <select name="others" class="selectpicker selector" id="otherpicker">
 
                                 <option value="No">No</option>

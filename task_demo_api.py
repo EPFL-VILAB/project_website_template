@@ -1,9 +1,9 @@
 from   flask import Flask, request, current_app, send_from_directory
-from   flask.ext.cors import CORS, cross_origin
-from   flask.ext.hashing import Hashing # pip install Flask-Hashing
+from   flask_cors import CORS, cross_origin
+from   flask_hashing import Hashing # pip install Flask-Hashing
 
 from flask import Flask, render_template, request
-from flask.ext.uploads import UploadSet, configure_uploads, IMAGES # pip install Flask-Uploads
+from flask_uploads import UploadSet, configure_uploads, IMAGES # pip install Flask-Uploads
 
 # from   flask.ext.API import status
 import json
@@ -18,24 +18,25 @@ import traceback as tb
 import requests
 import boto3
 import botocore
-
+import pdb
+#pdb.set_trace()
 s3 = boto3.resource('s3')
 
 
 app = Flask(__name__, static_url_path='', static_folder="/")
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['UPLOADED_PHOTOS_DEST'] = '/tmp/'
-app.config['INPUT_PHOTOS_DEST'] = '/home/ubuntu/s3/demo_images'
-app.config['PROCESSED_PHOTOS_DEST'] = 'task-demo-results'
-app.config['PROCESSING_SCRIPT_LOCATION'] = '/home/ubuntu/task-taxonomy-331b/tools/run_img_task.py'
-# PROCESSOR_SERVER = 'localhost' #'taskonomy-task-demo-797030650.us-west-2.elb.amazonaws.com'
-PROCESSOR_SERVER = 'taskonomy-task-demo-797030650.us-west-2.elb.amazonaws.com'
+app.config['INPUT_PHOTOS_DEST'] = '/workspace/demo_images'
+app.config['PROCESSED_PHOTOS_DEST'] = '/workspace/task-demo-results'
+app.config['PROCESSING_SCRIPT_LOCATION'] = '/workspace/scaling-geonet/make_videos.py'
+PROCESSOR_SERVER = 'localhost' #'taskonomy-task-demo-797030650.us-west-2.elb.amazonaws.com'
+#PROCESSOR_SERVER = 'taskonomy-task-demo-797030650.us-west-2.elb.amazonaws.com'
 VALID_UPLOADTOKEN_PREFIX = "aa"
 
 UPLOAD_TOKENS_FOR_SAMPLES = ['sample1', 'sample2', 'sample3']
 
 cors = CORS(app, resources={
-    r"/runmodels": {"origins": "*"},
+    r"/": {"origins": "*"},
     r"/getresults": {"origins": "*"},
 })
 hashing = Hashing(app)
@@ -45,43 +46,13 @@ configure_uploads(app, photos)
 salt = "jitendra"
 
 map_to_display_names = {
-    'autoencoder': 'Autoencoding',
-    'curvature': 'Curvature',
-    'class_places': 'Scene Class.',
-    'denoise': 'Denoising',
-    'edge2d': '2D Edges',
-    'edge3d': 'Occlusion Edges',
-    'ego_motion': 'Egomotion',
-    'fix_pose': 'Cam. Pose (fix)',
-    'keypoint2d': '2D Keypoints',
-    'keypoint3d': '3D Keypoints',
-    'non_fixated_pose': 'Cam. Pose (nonfix)',
-    'point_match': 'Matching',
+    'rgb2sfnorm': 'Normals',
     'reshade': 'Reshading',
     'rgb2depth': 'Z-Depth',
-    'rgb2mist': 'Distance',
-    'rgb2sfnorm': 'Normals',
-    'room_layout': 'Layout',
-    'segment25d': '2.5D Segm.',
-    'segment2d': '2D Segm.',
-    'vanishing_point_well_defined': 'Vanishing Pts.',
-    'segmentsemantic_rb': 'Semantic Segm.',
-    'class_selected': 'Object Class. (100)',
-    'class_1000': 'Object Class. (1000)',
-    'random': 'Random Proj.',
-    'self': 'Task-Specific',
-    'pixels': 'Only Image',
-    'impainting_whole': 'In-painting',
-    'colorization': 'Colorization',
-    'jigsaw': 'Jigsaw', 
 }
 
 display_name_to_task = {v: k for k, v in map_to_display_names.items()}
-list_of_tasks = 'autoencoder curvature denoise edge2d edge3d \
-keypoint2d keypoint3d colorization jigsaw \
-reshade rgb2depth rgb2mist rgb2sfnorm \
-room_layout segment25d segment2d vanishing_point_well_defined \
-segmentsemantic_rb class_1000 class_places impainting_whole'
+list_of_tasks = 'rgb2sfnorm reshade rgb2depth'
 list_of_tasks = list_of_tasks.split()
 
 ports = [ 8080 + i for i in range(len(list_of_tasks))]
@@ -100,7 +71,7 @@ def clean_task_name(task):
     return task
 
 
-def convert_to_png(src, dst):
+def convert_to_png(src):
     ''' Convert all images to PNG to save us a headache '''
     _, ext = os.path.splitext(src)
     dst = src.replace(ext, ".png")
@@ -151,48 +122,73 @@ def fix_orientation(filename):
 
     img.save(filename)
 
-def process_input_file(raw_file_name, task):
-    print("Requesting:", raw_file_name, task)
-    # dir_for_token = uploadDirForToken(request.args['uploadtoken'])
-    # fname = secureFileName(request.args['uploadtoken'], "__") + display_name_to_task[request.args['task']] + ".png"
-    try:
-        print(task, task_to_port[display_name_to_task[task]])
-        s3.Object(app.config['PROCESSED_PHOTOS_DEST'], raw_file_name.replace(".png", "__" + display_name_to_task[task] + ".png")).delete()
-        r = requests.get(
-            'http://{}:{}/process?key={}'.format(
-                PROCESSOR_SERVER,
-                task_to_port[display_name_to_task[task]],
-                raw_file_name),
-            timeout=0.000001
-            )
-    except:
-        # tb.print_exc()
-        pass
-    # head, ext = os.path.splitext(filename)
-    # ext = ".png"
+def process_input_file(src, unique_dir, fpath, filename, task, uploadToken):
+#def process_input_file(raw_file_name, task):
+    #print("Requesting:", raw_file_name, task)
+    ## dir_for_token = uploadDirForToken(request.args['uploadtoken'])
+    ## fname = secureFileName(request.args['uploadtoken'], "__") + display_name_to_task[request.args['task']] + ".png"
+    #pdb.set_trace()
+    #try:
+    #    print(task, task_to_port[display_name_to_task[task]])
+    #    s3.Object(app.config['PROCESSED_PHOTOS_DEST'], raw_file_name.replace(".png", "__" + display_name_to_task[task] + ".png")).delete()
+    #    r = requests.get(
+    #        'http://{}:{}/process?key={}'.format(
+    #            PROCESSOR_SERVER,
+    #            task_to_port[display_name_to_task[task]],
+    #            raw_file_name),
+    #        timeout=0.000001
+    #        )
+    #except:
+    #    # tb.print_exc()
+    #    pass
+
+    head, ext = os.path.splitext(filename)
+    ext = ".png"
     # # task = task.replace(" ", "_")
-    # cleaned_task = clean_task_name(task)
+    cleaned_task = clean_task_name(task)
     # # cmd = "sudo cp " + os.path.join(fpath, filename) + " " + os.path.join(fpath, task + ext)
 
-    # tmpdir = '/tmp/' + unique_dir
-    # call("mkdir " + tmpdir, shell=True)
-    # src = convert_to_png(src)
-    # call("sudo cp {} {}".format(
-    #     src, 
-    # ))
-    # cmd = "python {} --task {} --img {} --store {}".format(
-    #     app.config['PROCESSING_SCRIPT_LOCATION'],
-    #     display_name_to_task[task],
-    #     src,
-    #     os.path.join(tmpdir, cleaned_task + ext)
-    # )
-    # call(cmd, shell=True)
+    tmpdir = '/tmp/' + unique_dir
+    call("mkdir " + tmpdir, shell=True)
+    call("mkdir " + fpath, shell=True)
+
+    src = convert_to_png(src)
+    #pdb.set_trace()
+
+    call("cp {} {}".format(
+         src, tmpdir
+     ), shell=True)
+    #pdb.set_trace()
+    cmd = "python {} --config_to_run {} --frame_dir {} --output_dir {}".format(
+         app.config['PROCESSING_SCRIPT_LOCATION'],
+         display_name_to_task[task],
+         tmpdir,
+         tmpdir
+     )
+    call(cmd, shell=True)
     
-    # call("sudo cp {} {} && rm {}".format(
-    #     os.path.join(tmpdir, cleaned_task + ext),
-    #     os.path.join(fpath, cleaned_task + ext),
-    #     os.path.join(tmpdir, cleaned_task + ext)
-    # ), shell=True)
+    call("cp {} {} && rm {}".format(
+         os.path.join(tmpdir, display_name_to_task[task] + ext),
+         os.path.join(fpath, cleaned_task + ext),
+         os.path.join(tmpdir, display_name_to_task[task] + ext)
+     ), shell=True)
+
+
+    cmd_gsutil = "gsutil cp {} {}".format(
+    os.path.join(fpath, cleaned_task + ext),
+    "gs://taskonomy-shared/assets/task-demo-results/" + uploadToken
+    + "__" + display_name_to_task[task] + ".png")
+
+   
+    #call(cmd_gsutil, shell=True)
+
+    cmd_cplocal = "cp {} {}".format(
+    os.path.join(fpath, cleaned_task + ext),
+    "./demo/task-demo-results/" + uploadToken
+    + "__" + display_name_to_task[task] + ".png")
+
+    call(cmd_cplocal, shell=True)
+
     # # /home/ubuntu/anaconda3/bin/python /home/ubuntu/task-taxonomy-331b/tools/run_img_task.py --task reshade --img /home/ubuntu/s3/demo_images/92ba9602b8339d47df10be880c1d773a8e6b74465eb6a0bc5e7ec9391574aa64/download.png --store /home/ubuntu/s3/demo_images/92ba9602b8339d47df10be880c1d773a8e6b74465eb6a0bc5e7ec9391574aa64/2D_Edges.png
 
     # # call(cmd, shell=True)
@@ -215,24 +211,7 @@ def secureFileName(uploadToken, ext):
 sortOrder = [
         'rgb2sfnorm',
         'reshade',
-        'edge2d',
-        'segmentsemantic_rb',
-        'vanishing_point_well_defined',
-        'segment25d',
-        'rgb2depth',
-        'room_layout',
-        'class_places', 
-        'keypoint3d',
-        'edge3d',
-        'autoencoder',
-        'rgb2mist',
-        'segment2d', 
-        'curvature',
-        'keypoint2d', 
-        'class_1000',
-        'denoise',
-        'colorization',
-        'impainting_whole'
+        'rgb2depth'
         ];
 
 TARGET_TASKS = [map_to_display_names[t] for t in sortOrder]
@@ -255,7 +234,7 @@ def validate_captcha(request):
 
     return r.json()['success']
 
-@app.route('/runmodels', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def upload():
     try:
         if request.method == 'POST' and 'photo' in request.files:
@@ -272,6 +251,12 @@ def upload():
             rawFileName = secureFileName(uploadToken, '.png')
             filename = photos.save(request.files['photo'])
 
+            dir_for_token = app.config['PROCESSED_PHOTOS_DEST'] + "/" + uploadDirForToken(uploadToken)
+            call("sudo mkdir " + dir_for_token, shell=True)
+
+            src = app.config['UPLOADED_PHOTOS_DEST'] + filename
+            
+
             #### HERE #####
             fix_orientation(os.path.join(app.config['UPLOADED_PHOTOS_DEST'], filename))
 
@@ -283,7 +268,8 @@ def upload():
             call(cmd, shell=True)
 
             for task in TARGET_TASKS:
-                process_input_file(rawFileName, task)
+                process_input_file(src, uploadDirForToken(uploadToken), dir_for_token, filename, task, uploadToken)
+            #pdb.set_trace()
             return filename, 200
         else:
             print("what")    # else:
@@ -322,6 +308,7 @@ def get_results():
         # except:
             # tb.print_exc()
         for i in range(5 * 60 * 4):
+            #pdb.set_trace()
             if s3_file_exists(app.config['PROCESSED_PHOTOS_DEST'], fname):
                 return "//s3-us-west-2.amazonaws.com/task-demo-results/" + fname, 200
             # print("waiting", os.path.join(app.config['PROCESSED_PHOTOS_DEST'], fname))

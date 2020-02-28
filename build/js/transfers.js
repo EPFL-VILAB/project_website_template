@@ -147,6 +147,8 @@
         source_exists = [];
         other_exists = [];
         createVideoPlaceholders();
+        var bttn = document.getElementById("pauseDemo");
+        bttn.value = "Play";
     });
 
 
@@ -171,8 +173,8 @@
         var vid = document.createElement("div");
 
         if (vid_name=="empty"){
-           vid.innerHTML = '<video width=320' +
-            ' height=320' +
+           vid.innerHTML = '<video width=300' +
+            ' height=300' +
             ' style="background-color:#FAFAFA" ' +
             ' >' +
             
@@ -243,7 +245,7 @@
             var n_loaded = 0;
             vids.forEach( function(vid) {
                 vid = vid.children[0];
-                // console.log(vid.readyState);
+                console.log(vid.readyState);
                 if(vid.readyState === 4 || vid.readyState === 1) {
                     n_loaded += 1;
                 }
@@ -267,7 +269,8 @@
 
       
         // Pause all videos until loaded
-      
+        var bttn = document.getElementById("pauseDemo");
+        
                 
         all_videos.forEach( function(vid) {
             vid = vid.children[0];
@@ -283,6 +286,9 @@
                       //vid.pause();
                 }
             };
+        
+        bttn.value = "Pause";
+         
         });
         
         
@@ -362,7 +368,7 @@
             document.getElementById(vidTitleElementForTarget(selected_target)).appendChild(titleElem);
 
             // document.getElementById(vidElementForTarget(selected_target)).appendChild(makeRowTitle(selected_target));
-            var source = makeVideoFrame("Input video (<b><i>X</i><sub>1</sub> </b>)", "https://storage.cloud.google.com/taskonomy-shared/assets/source_final_down.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
+            var source = makeVideoFrame("Input video (<b><i>X</i><sub>1</sub> </b>)", "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/cropped_trimmed/source_final_down.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
             source_exists.push(selected_target);
@@ -399,7 +405,7 @@
             document.getElementById(vidTitleElementForTarget(selected_target)).appendChild(titleElem);
 
             // document.getElementById(vidElementForTarget(selected_target)).appendChild(makeRowTitle(selected_target));
-            var source = makeVideoFrame("Input video (<b><i>X</i><sub>1</sub> </b>)", "https://storage.cloud.google.com/taskonomy-shared/assets/source_final_down.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
+            var source = makeVideoFrame("Input video (<b><i>X</i><sub>1</sub> </b>)", "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/cropped_trimmed/source_final_down.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
             source_exists.push(selected_target);
@@ -457,7 +463,7 @@
             document.getElementById(vidTitleElementForTarget(selected_target)).appendChild(titleElem);
 
             // document.getElementById(vidElementForTarget(selected_target)).appendChild(makeRowTitle(selected_target));
-            var source = makeVideoFrame("Input video (<b><i>X</i><sub>1</sub> </b>)", "https://storage.cloud.google.com/taskonomy-shared/assets/source_final_down.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
+            var source = makeVideoFrame("Input video (<b><i>X</i><sub>1</sub> </b>)", "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/cropped_trimmed/source_final_down.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
             source_exists.push(selected_target);
@@ -514,7 +520,7 @@
             document.getElementById(vidTitleElementForTarget(selected_target)).appendChild(titleElem);
 
             // document.getElementById(vidElementForTarget(selected_target)).appendChild(makeRowTitle(selected_target));
-            var source = makeVideoFrame("Input video (<b><i>X</i><sub>1</sub> </b>)", "https://storage.cloud.google.com/taskonomy-shared/assets/source_final_down.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
+            var source = makeVideoFrame("Input video (<b><i>X</i><sub>1</sub> </b>)", "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/cropped_trimmed/source_final_down.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
             source_exists.push(selected_target);
@@ -733,6 +739,8 @@
             all_videos.push(source[1]);
 
         }
+        var bttn = document.getElementById("pauseDemo");
+        bttn.value = "Play";
         syncAllVideos(all_videos);
         // all_videos = all_videos.concat([source, ours]);
 
