@@ -781,6 +781,70 @@
         })
     });
 
+   
+    
+            $('#targetpicker').on('change',function(){
+        if($('#targetpicker option:selected').val()=='Normals'){
+          
+            $('#sourcepicker option').remove();
+            //$('#sourcepicker select').append($('<option value="90x55">90x55</option>)'))
+            //.append($('<option value="90x50">90x50</option>)'))
+            var x = document.getElementById("sourcepicker");
+
+            x.options[x.options.length] = new Option('--', '--');        
+            x.options[x.options.length] = new Option('Z-Depth', 'Z-Depth');
+            x.options[x.options.length] = new Option('Reshading', 'Reshading');
+            x.options[x.options.length] = new Option('Curvature', 'Curvature');
+            x.options[x.options.length] = new Option('2D Keypoints', '2D Keypoints');
+            x.options[x.options.length] = new Option('3D Keypoints', '3D Keypoints');
+            x.options[x.options.length] = new Option('2D Edges', '2D Edges');  
+            x.options[x.options.length] = new Option('Occlusion Edges', 'Occlusion Edges');  
+            x.options[x.options.length] = new Option('All', 'All');         
+
+            $('#sourcepicker').selectpicker('refresh');
+        }
+        if($('#targetpicker option:selected').val()=="Reshading"){
+         
+            $('#sourcepicker option').remove();
+            //$('#sourcepicker select').append($('<option value="210x100">210x100</option>)'))
+            //.append($('<option value="297x210">297x210</option>)'))
+            var x = document.getElementById("sourcepicker");
+            x.options[x.options.length] = new Option('--', '--');
+            x.options[x.options.length] = new Option('Z-Depth', 'Z-Depth');
+            x.options[x.options.length] = new Option('Normals', 'Normals');
+            x.options[x.options.length] = new Option('Curvature', 'Curvature');
+            x.options[x.options.length] = new Option('2D Keypoints', '2D Keypoints');
+            x.options[x.options.length] = new Option('3D Keypoints', '3D Keypoints');
+            x.options[x.options.length] = new Option('2D Edges', '2D Edges');
+            x.options[x.options.length] = new Option('Occlusion Edges', 'Occlusion Edges');
+            x.options[x.options.length] = new Option('All', 'All');
+            
+            $('#sourcepicker').selectpicker('refresh');
+
+        }
+
+        if($('#targetpicker option:selected').val()=="Z-Depth"){
+
+            $('#sourcepicker option').remove();
+            //$('#sourcepicker select').append($('<option value="210x100">210x100</option>)'))
+            //.append($('<option value="297x210">297x210</option>)'))
+            var x = document.getElementById("sourcepicker");
+            x.options[x.options.length] = new Option('--', '--');
+            x.options[x.options.length] = new Option('Reshading', 'Reshading');
+            x.options[x.options.length] = new Option('Normals', 'Normals');
+            x.options[x.options.length] = new Option('Curvature', 'Curvature');
+            x.options[x.options.length] = new Option('2D Keypoints', '2D Keypoints');
+            x.options[x.options.length] = new Option('3D Keypoints', '3D Keypoints');
+            x.options[x.options.length] = new Option('2D Edges', '2D Edges');
+            x.options[x.options.length] = new Option('Occlusion Edges', 'Occlusion Edges');
+            x.options[x.options.length] = new Option('All', 'All');
+
+            $('#sourcepicker').selectpicker('refresh');
+
+        }
+    })
+    
+
 
     $.get('../assets/transfers_to_videos.json', function(data) {
         transfers_to_videos = data;
@@ -804,11 +868,14 @@
         // console.log(innerHTML);
         $(document).ready(function () {
             $(document).ready(function () {
-                $('#targetpicker').selectpicker('val', 'Normals');
-                addSources();
+                //$('#targetpicker').selectpicker('val', 'Normals');
+                //addSources();
                 document.getElementById("targetpicker").addEventListener("change", addSources, false);    
                 document.getElementById("sourcepicker").addEventListener("change", replaceSourcpickerTitle, false);    
                 // $('#targetpicker').selectpicker('refresh');
+            
+          
+
             });
         });
     
