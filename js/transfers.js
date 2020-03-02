@@ -214,15 +214,16 @@
         }
 
    
-        //if ( (title=="Input video (<b><i>X</i><sub>1</sub> </b>)") || (title=='Baseline Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)') || (title=='Consistency Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)')) {
+        //if ( (title=="Input video (<b><i>X</i><sub>1</sub> </b>)") ) {
           
         //   videoHolder.classList.add('affix');
            //videoHolder.setAttribute('class', 'affix');
-       //    videoHolder.setAttribute('data-spy', 'affix');
-           //videoHolder.setAttribute('data-offset-bottom', '0');
+           // videoHolder.setAttribute('data-spy', 'affix');
+           //videoHolder.setAttribute('data-offset-top', '50');
+           //videoHolder.setAttribute('data-offset-bottom', '100');
            //videoHolder.setAttribute('id', 'source-section');
-   
-      //     }
+       //    videoHolder.setAttribute('style', 'z-index:1');
+       //  }
 
         videoHolder.appendChild(titleElem);
         videoHolder.appendChild(vid);
