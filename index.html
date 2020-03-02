@@ -310,7 +310,7 @@
                                                 Please see the video below demonstrating the effectiveness of consistency.
                                                 </p>
                                                 <div class="figure" style="text-align:center;">
-                                                <video width="80%" height="464" playsinline autoplay center loop muted class="video-bg" id="video-bg" poster="./loading.gif"> 
+                                                <video width="100%" height="464" playsinline autoplay center loop muted class="video-bg" id="video-bg" poster="./loading.gif"> 
                   <source src="./assets/output.mp4" type="video/mp4" alt="HTML5 background video" >
                                                 </div>    
 
@@ -329,7 +329,7 @@
 
 					<div class="figure">
 						<img width="80%" src="./img_consistency/graph_4.png" alt=""  class="center">
-						<p><strong>Enforcing cross-task consistency.</strong> <strong>(a)</strong> shows the typical multitask setup where predictors between domains are trained independently. <strong>(b)</strong> demonstrates the <i><strong>consistency constraint</strong></i>. <strong>(c)</strong> shows how the triangle unit from (b) can be an element of a larger system of domains. Finally, <strong>(d)</strong> illustrates the generalized case where in such a larger system of domains, consistency can be enforced along any paths of arbitrary length, as long as their beginning and end are the same. When two different paths with same endpoints yield similar results, that implies none of the middle domains introduced conflicting information, as far as the prediction job from the input to output is concerned. This is the general concept behind <strong>path-independence</strong> or <strong>conservativeness</strong>. The triangle in (b) is the smallest unit of such paths.</p>
+						<p><strong>Enforcing cross-task consistency.</strong> <strong>(a)</strong> shows the typical multitask setup where predictors between domains are trained independently (or with a shared encoder and separate decoder heads). Both neither explicitly enforce cross-task consistency among predictions nor empirically achieve that. <strong>(b)</strong> demonstrates the <i><strong>consistency constraint</strong></i>, over three domains. <strong>(c)</strong> shows how the triangle unit from (b) can be an element of a larger system of domains. Finally, <strong>(d)</strong> illustrates the generalized case where in such a larger system of domains, consistency can be enforced along any paths of arbitrary length, as long as their beginning and end are the same. When two different paths with the same endpoints are enforced to yield similar results, that implies none of the middle domains introduced conflicting information, as far as the prediction job from the input endpoint to the output endpoint was concerned. This is the general concept behind <i><strong>path-independence</strong></i> or <i><strong>conservativeness</strong></i>. The triangle in (b) is the smallest unit of such paths.</p>
 					</div>
 				<br>
 				<br>
@@ -532,7 +532,8 @@
 							<p>Robust Learning Through Cross-Task Consistency.<br><br>
 								Amir Zamir, Alexander Sax, Teresa Yeo, Oğuzhan Kar, Nikhil Cheerla,
 Rohan Suri, Zhangjie Cao, Jitendra Malik, Leonidas Guibas.<br><br>
-								CVPR 2020 
+								CVPR 2020<br>
+								(coming soon) 
 							</p>						
 							
 							<div class="bibtex">
