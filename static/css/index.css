@@ -1,0 +1,304 @@
+
+/*------------------------------------*/
+.home-particles {
+	background: #6e4141;
+	overflow: hidden;
+}
+.home-particles .pg-canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100% !important;
+	width: 100% !important;
+	opacity: .16;
+}
+.home-particles .shadow-overlay {
+	display: none;
+}
+
+/* ---- particles.js container ---- */
+
+/*#particles-js{
+  width: 100% !important;
+  height: 100% !important;
+  background-color: #630c12;
+  background-image: url('');
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}*/
+
+#particles-js {
+    position : absolute;
+    width:100%;
+    height:100%;
+    z-index:0;
+    background-color: #6e4141;
+}
+
+
+
+
+/*------------------------------------*\
+	Header
+\*------------------------------------*/
+
+header {
+    position: relative;
+}
+
+#home {
+    height: 80vh;
+}
+
+.home-wrapper{
+    padding-top: 50px; 
+}
+
+#home .home-wrapper {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    text-align: center;
+}
+
+.home-content h1 {
+  text-transform: uppercase;
+}
+.home-content button {
+  margin-top: 20px;
+}
+.home-content p {
+    opacity: 0.3;
+}
+
+.header-wrapper h2 {
+    display: inline-block;
+    margin-bottom: 0px;
+}
+
+.header-wrapper .breadcrumb {
+    float: right;
+    background: transparent;
+    margin-bottom: 0px;
+}
+
+.header-wrapper .breadcrumb .breadcrumb-item.active {
+    color: #868F9B;
+}
+
+.breadcrumb>li+li:before {
+    color: #868F9B;
+}
+
+/*------------------------------------*\
+	Teaser
+\*------------------------------------*/
+
+#teaser {
+    min-height: 20vh;
+}
+
+
+/*------------------------------------*\
+	Services
+\*------------------------------------*/
+
+.service {
+    position: relative;
+    padding: 13px 10px 10px 13px;
+    margin: 10px 0px;
+    border: 1px solid #DDD;
+    /* min-height: 10.5em; */
+    background-color: #FAFAFA;    
+}
+
+.service h3 {
+    text-align: center;
+    margin-bottom:15px;
+}
+
+.service .service-content i {
+    position: absolute;
+    left: 5px;
+    text-align: center;
+    font-size: 26px;
+    color: #6195FF;
+    border-radius: 50%;
+}
+
+.service-content a {
+    position: absolute;
+    bottom: 0px;
+}
+
+.service:after {
+    content: "";
+    background-color: #1C1D21;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0%;
+    z-index: -1;
+    -webkit-transition: 0.2s width;
+    transition: 0.2s width;
+}
+
+.service:hover:after {
+    width: 100%;
+}
+
+.service h3 {
+  -webkit-transition: 0.2s color;
+  transition: 0.2s color;
+}
+
+.service:hover h3 {
+    color: #fff;
+}
+
+.service-content {
+    z-index: 11;
+}
+
+
+.service::after {
+    content: "";
+    background-color: #1C1D21;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 0%;
+    z-index: 1;
+    -webkit-transition: 0.2s height;
+    transition: 0.2s height;
+}
+
+.service:hover:after {
+    height: 100%;
+}
+
+.service .service-content {
+    text-align: left;
+    position: relative;
+    z-index: 11;
+    padding-bottom: 20px;
+}
+
+.service .service-content h3 {
+    margin-bottom: 10px;
+    -webkit-transition: 0.2s color;
+    transition: 0.2s color;
+}
+
+.service .service-content span {
+    font-size: 14px;
+    text-transform: uppercase;
+    -webkit-transition: 0.2s color;
+    transition: 0.2s color;
+}
+
+.service:hover .service-content h3 {
+    color: #FFF;
+}
+
+.service:hover .service-content span {
+    color: #6195FF;
+}
+
+.service .service-social {
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    -webkit-transition: 0.2s opacity;
+    transition: 0.2s opacity;
+}
+
+.service:hover  {
+    opacity: 1;
+}
+
+/*------------------------------------*\
+	Paper and Citation
+\*------------------------------------*/
+
+.paper-img {
+    width: 70%;
+}
+
+.layered-paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+    box-shadow:
+            0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+            5px 5px 0 0px #fff, /* The second layer */
+            5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+            10px 10px 0 0px #fff, /* The third layer */
+            10px 10px 1px 1px rgba(0,0,0,0.35), /* The third layer shadow */
+            15px 15px 0 0px #fff, /* The fourth layer */
+            15px 15px 1px 1px rgba(0,0,0,0.35), /* The fourth layer shadow */
+            20px 20px 0 0px #fff, /* The fifth layer */
+            20px 20px 1px 1px rgba(0,0,0,0.35), /* The fifth layer shadow */
+            25px 25px 0 0px #fff, /* The fifth layer */
+            25px 25px 1px 1px rgba(0,0,0,0.35); /* The fifth layer shadow */
+    margin-left: 10px;
+    margin-right: 45px;
+}
+
+
+.layered-paper { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+    box-shadow:
+            0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+            5px 5px 0 0px #fff, /* The second layer */
+            5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+            10px 10px 0 0px #fff, /* The third layer */
+            10px 10px 1px 1px rgba(0,0,0,0.35); /* The third layer shadow */
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 30px;
+    margin-bottom: 5px;
+}
+
+.centering {
+    margin: 0 auto;
+    display: table;
+}
+
+.bibtex .outline-btn {
+    color: rgba(97, 149, 255, 1.0) !important;
+    border-color: rgba(97, 149, 255, 0.6);
+    /* position: absolute; */
+    right: 0px;
+	bottom: 0px;
+    height: 30px;
+    line-height: 5px;
+    background-color: transparent;
+    -webkit-transition: 0.2s color;    
+    transition: 0.2s color;    
+}
+
+.bibtex .outline-btn:hover, .bibtex .outline-btn:focus {
+    color: rgba(97, 149, 255, 1.0) !important;
+    border-color: rgba(97, 149, 255, 0.6);
+}
+.white-popup {
+    position: relative;
+    background: #FFF;
+    padding: 20px;
+    width:auto;
+    max-width: 900px;
+    margin: 20px auto;
+  }
+
+
+  @media screen and (max-device-width: 640px){
+    #home {
+        height: 100vh;
+    }
+  }
+  
