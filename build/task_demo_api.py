@@ -16,11 +16,11 @@ from   subprocess import call
 import traceback as tb
 
 import requests
-import boto3
-import botocore
+#import boto3
+#import botocore
 import pdb
 #pdb.set_trace()
-s3 = boto3.resource('s3')
+#s3 = boto3.resource('s3')
 
 
 app = Flask(__name__, static_url_path='', static_folder="/")
@@ -234,7 +234,7 @@ def validate_captcha(request):
 
     return r.json()['success']
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/runmodels', methods=['GET', 'POST'])
 def upload():
     try:
         if request.method == 'POST' and 'photo' in request.files:
@@ -329,5 +329,5 @@ def ping():
     return "OK", 200, {'content-length':'2'}
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=False, port=8886, threaded=True)
+    app.run(host='0.0.0.0', debug=False, port=80, threaded=True)
 
