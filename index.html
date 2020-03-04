@@ -307,10 +307,10 @@
 						First, desired tasks in machine learning are usually predictions of <strong>different aspects of one shared reality</strong> (e.g., the scene that underlies an image). Hence inconsistencies among predictions imply contradictions, and therefore, inconsistency is inherently undesirable for downstream uses of the predictions, casting doubt on their validity. Second, consistency-based constraints are informative and can be used in learning to better fit the data or lower the sample complexity required. Also, they may reduce the tendency of neural networks towards learning surface statistics (superficial cues), by enforcing strong and specific constraints rooted in different geometric or physical aspects of one observation. 
                                                 <br>
                                                 <br>
-                                                Please see the video below demonstrating the effectiveness of consistency.
+                                                The video below demonstrates the impact of disregarding consistency in learning as well as the effectiveness of augmenting learning with cross-task consistency constraints. Each window shows surface normals predicted out of various domains, which themselves are predicted out of images (i.e. image→{prediction domain X}→surface normals). The normals in the upper row (learning without consistency) are poor and different/inconsistent with each other for the same underlying image. The lower row shows the same except when learning image→{prediction domain X} was augmented with cross-task consistency constraints. Inferred surface normals look better and more similar to each other regardless of the middle prediction domain, which demonstrates all of the middle domains were made cross-task consistent w.r.t to normals. In the paper, we further extend this concept to many arbitrary domains with arbitrary inference path lengths, using a general and fully computational learning framework.  
                                                 </p>
                                                 <div class="figure" style="text-align:center;">
-                                                <video width="80%" height="464" playsinline autoplay center loop muted class="video-bg" id="video-bg" poster="./loading.gif"> 
+                                                <video width="100%" playsinline autoplay center loop muted class="video-bg" id="video-bg" poster="./loading.gif"> 
                   <source src="./assets/output.mp4" type="video/mp4" alt="HTML5 background video" >
                                                 </div>    
 
@@ -329,7 +329,7 @@
 
 					<div class="figure">
 						<img width="80%" src="./img_consistency/graph_4.png" alt=""  class="center">
-						<p><strong>Enforcing cross-task consistency.</strong> <strong>(a)</strong> shows the typical multitask setup where predictors between domains are trained independently. <strong>(b)</strong> demonstrates the <i><strong>consistency constraint</strong></i>. <strong>(c)</strong> shows how the triangle unit from (b) can be an element of a larger system of domains. Finally, <strong>(d)</strong> illustrates the generalized case where in such a larger system of domains, consistency can be enforced along any paths of arbitrary length, as long as their beginning and end are the same. When two different paths with same endpoints yield similar results, that implies none of the middle domains introduced conflicting information, as far as the prediction job from the input to output is concerned. This is the general concept behind <strong>path-independence</strong> or <strong>conservativeness</strong>. The triangle in (b) is the smallest unit of such paths.</p>
+						<p><strong>Enforcing cross-task consistency.</strong> <strong>(a)</strong> shows the typical multitask setup where predictors between domains are trained independently (or with a shared encoder and separate decoder heads). Both neither explicitly enforce cross-task consistency among predictions nor empirically achieve that. <strong>(b)</strong> demonstrates the <i><strong>consistency constraint</strong></i>, over three domains. <strong>(c)</strong> shows how the triangle unit from (b) can be an element of a larger system of domains. Finally, <strong>(d)</strong> illustrates the generalized case where in such a larger system of domains, consistency can be enforced along any paths of arbitrary length, as long as their beginning and end are the same. When two different paths with the same endpoints are enforced to yield similar results, that implies none of the middle domains introduced conflicting information, as far as the prediction job from the input endpoint to the output endpoint was concerned. This is the general concept behind <i><strong>path-independence</strong></i> or <i><strong>conservativeness</strong></i>. The triangle in (b) is the smallest unit of such paths.</p>
 					</div>
 				<br>
 				<br>
@@ -532,7 +532,8 @@
 							<p>Robust Learning Through Cross-Task Consistency.<br><br>
 								Amir Zamir, Alexander Sax, Teresa Yeo, Oğuzhan Kar, Nikhil Cheerla,
 Rohan Suri, Zhangjie Cao, Jitendra Malik, Leonidas Guibas.<br><br>
-								CVPR 2020 
+								CVPR 2020<br>
+								(coming soon) 
 							</p>						
 							
 							<div class="bibtex">
