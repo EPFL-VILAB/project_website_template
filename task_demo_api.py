@@ -215,9 +215,9 @@ sortOrder = [
         ];
 
 TARGET_TASKS = [map_to_display_names[t] for t in sortOrder]
-CAPTCHA_SECRET = "6Ler2EYUAAAAAI1hOvXBOpCUTwVZ6ZZ9y04P6YfY"
+#CAPTCHA_SECRET = "6Ler2EYUAAAAAI1hOvXBOpCUTwVZ6ZZ9y04P6YfY"
 # CAPTCHA_SECRET = "6LebLEoUAAAAAPf5vmOe-QjzVhAx8U-Q16Ut488i"
-
+CAPTCHA_SECRET = "6LcswN4UAAAAANsmSXmhqZzKtN039HjlR_QiAOBw"
 def validate_captcha(request):
     print({
             "secret": CAPTCHA_SECRET,
