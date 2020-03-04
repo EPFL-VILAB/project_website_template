@@ -13,22 +13,22 @@ from   shutil import copyfile
 import time
 import traceback
 from   subprocess import call
-import traceback as tb
+import traceback as tb 
 
 import requests
-#import boto3
-#import botocore
+import boto3
+import botocore
 import pdb
 #pdb.set_trace()
-#s3 = boto3.resource('s3')
+s3 = boto3.resource('s3')
 
 
 app = Flask(__name__, static_url_path='', static_folder="/")
 app.config['CORS_HEADERS'] = 'Content-Type'
-app.config['UPLOADED_PHOTOS_DEST'] = '../code/uploaded_photos/'
-app.config['INPUT_PHOTOS_DEST'] = '../code/other/demo_images'
-app.config['PROCESSED_PHOTOS_DEST'] = '../code/other/task-demo-results'
-app.config['PROCESSING_SCRIPT_LOCATION'] = '../code/scaling/demo.py'
+app.config['UPLOADED_PHOTOS_DEST'] = '/tmp/'
+app.config['INPUT_PHOTOS_DEST'] = '/workspace/demo_images'
+app.config['PROCESSED_PHOTOS_DEST'] = '/workspace/task-demo-results'
+app.config['PROCESSING_SCRIPT_LOCATION'] = '/workspace/scaling-geonet/make_videos.py'
 PROCESSOR_SERVER = 'localhost' #'taskonomy-task-demo-797030650.us-west-2.elb.amazonaws.com'
 #PROCESSOR_SERVER = 'taskonomy-task-demo-797030650.us-west-2.elb.amazonaws.com'
 VALID_UPLOADTOKEN_PREFIX = "aa"
@@ -82,14 +82,14 @@ def convert_to_png(src):
 
 def fix_orientation(filename):
     ''' iOS devices might save images as portraits. This is handled
-      by parsing EXIF data. However, python libraries often do not
+      by parsing EXIF data. However, python libraries often do not 
       implement EXIF handling. Therefore, we may rotate/flip the image
       as appropriate here, before saving, to spare us from the headache.
 
       Warnings: Mutates saved image on disk
 
       Inputs:
-        filename: path to the saved image
+        filename: path to the saved image 
     '''
     img = Image.open(filename)
     if hasattr(img, '_getexif'):
@@ -148,7 +148,7 @@ def process_input_file(src, unique_dir, fpath, filename, task, uploadToken):
     cleaned_task = clean_task_name(task)
     # # cmd = "sudo cp " + os.path.join(fpath, filename) + " " + os.path.join(fpath, task + ext)
 
-    tmpdir = '../code/uploaded_photos/' + unique_dir
+    tmpdir = '/tmp/' + unique_dir
     call("mkdir " + tmpdir, shell=True)
     call("mkdir " + fpath, shell=True)
 
@@ -159,14 +159,14 @@ def process_input_file(src, unique_dir, fpath, filename, task, uploadToken):
          src, tmpdir
      ), shell=True)
     #pdb.set_trace()
-    cmd = "python {} --task {} --img_path {} --output_path {}".format(
+    cmd = "python {} --config_to_run {} --frame_dir {} --output_dir {}".format(
          app.config['PROCESSING_SCRIPT_LOCATION'],
          display_name_to_task[task],
          tmpdir,
          tmpdir
      )
     call(cmd, shell=True)
-
+    
     call("cp {} {} && rm {}".format(
          os.path.join(tmpdir, display_name_to_task[task] + ext),
          os.path.join(fpath, cleaned_task + ext),
@@ -179,7 +179,7 @@ def process_input_file(src, unique_dir, fpath, filename, task, uploadToken):
     "gs://taskonomy-shared/assets/task-demo-results/" + uploadToken
     + "__" + display_name_to_task[task] + ".png")
 
-
+   
     #call(cmd_gsutil, shell=True)
 
     cmd_cplocal = "cp {} {}".format(
@@ -204,7 +204,7 @@ def secureFileName(uploadToken, ext):
 # TARGET_TASKS =  [
 #         'Autoencoding', 'Curvature', 'Scene Class.', 'Denoising', '2D Edges', 'Occlusion Edges',
 #         '2D Keypoints', '3D Keypoints', 'Reshading', 'Z-Depth', 'Distance', 'Normals', 'Layout',
-#         '2.5D Segm.', '2D Segm.', 'Vanishing Pts.', 'Semantic Segm.',  'Object Class. (1000)',
+#         '2.5D Segm.', '2D Segm.', 'Vanishing Pts.', 'Semantic Segm.',  'Object Class. (1000)', 
 #         'Colorization', 'Jigsaw', 'In-painting'
 #     ]
 
@@ -234,14 +234,14 @@ def validate_captcha(request):
 
     return r.json()['success']
 
-@app.route('/runmodels', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def upload():
     try:
         if request.method == 'POST' and 'photo' in request.files:
             if not validate_captcha(request):
                 return "Captcha failed", 403
             uploadToken = request.form['uploadToken']
-
+            
             if uploadToken in UPLOAD_TOKENS_FOR_SAMPLES:
                 print("in Sample")
                 return 'sample', 200
@@ -255,7 +255,7 @@ def upload():
             call("sudo mkdir " + dir_for_token, shell=True)
 
             src = app.config['UPLOADED_PHOTOS_DEST'] + filename
-
+            
 
             #### HERE #####
             fix_orientation(os.path.join(app.config['UPLOADED_PHOTOS_DEST'], filename))
@@ -326,8 +326,8 @@ def send_js(path):
 
 @app.route('/ping', methods=['GET'])
 def ping():
-    return "OK", 200, {'content-length':'2'}
+    return "OK", 200, {'content-length':'2'} 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=False, port=80, threaded=True)
+    app.run(host='0.0.0.0', debug=False, port=8886, threaded=True)
 
