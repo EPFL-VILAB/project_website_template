@@ -229,7 +229,7 @@
             var xhr = new XMLHttpRequest();
         
             var imageUri = encodeURI(
-                "//consistency.epfl.ch/demo/task-demo-results/" + uploadtoken + "__" + display_names_to_task[task] + ".png");
+                "//consistency.epfl.ch/demopage/static/task-demo-results/" + uploadtoken + "__" + display_names_to_task[task] + ".png");
 
            
             //xhr.onload = function () {
@@ -269,7 +269,7 @@
             xhr.open(
                 'HEAD', 
                 encodeURI(
-                    "//consistency.epfl.ch/demo/task-demo-results/" + uploadtoken + "__" + display_names_to_task[task] + ".png"),
+                    "//consistency.epfl.ch/demopage/static/task-demo-results/" + uploadtoken + "__" + display_names_to_task[task] + ".png"),
                 true);
             xhr.timeout = 3000;
             xhr.send();
@@ -277,7 +277,7 @@
           
         };
         console.log(encodeURI(
-            "//consistency.epfl.ch/demo/task-demo-results/" + uploadtoken + "__" + display_names_to_task[task] + ".png"));
+            "//consistency.epfl.ch/demopage/static/task-demo-results/" + uploadtoken + "__" + display_names_to_task[task] + ".png"));
         // checkTask();
         checkTaskIntervalId = setInterval(checkTask, 3000);
         intervals.push(checkTaskIntervalId);
