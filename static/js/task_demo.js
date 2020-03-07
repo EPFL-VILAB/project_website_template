@@ -13,10 +13,10 @@
         'keypoint3d': '3D Keypoints',
         'non_fixated_pose': 'Pairwise Non-fixated Camera Pose',
         'point_match': 'Point Matching',
-        'reshade': 'Image Reshading',
-        'rgb2depth': 'Z-buffer Depth',
+        'reshade': 'Reshading (Consistency)',
+        'rgb2depth': 'Z-Depth (Consistency)',
         'rgb2mist': 'Euclidean Distance',
-        'rgb2sfnorm': 'Surface Normals',
+        'rgb2sfnorm': 'Normals (Consistency)',
         'room_layout': 'Room Layout',
         'segment25d': 'Unsupervised 2.5D Segm.',
         'segment2d': 'Unsupervised 2D Segm.',
@@ -29,7 +29,22 @@
         'pixels': 'Only Image',
         'impainting_whole': 'Image In-painting',
         'colorization': 'Colorization',
-        'jigsaw': 'Jigsaw Puzzle', 
+        'jigsaw': 'Jigsaw Puzzle',
+        'rgb2sfnormb': 'Normals (Baseline)',
+        'rgb2depthb': 'Z-Depth (Baseline)',
+        'reshadeb': 'Reshading (Baseline)',
+        'curvature_baseline': 'Curvature (Baseline Readout)',
+        'curvature_consistency': 'Curvature (Consistency Readout)',
+        'edge2d_baseline' : '2D Edges (Baseline Readout)',
+        'edge2d_consistency' : '2D Edges (Consistency Readout)',
+        'edge3d_baseline' : 'Occlusion Edges (Baseline Readout)',
+        'edge3d_consistency' : 'Occlusion Edges (Consistency Readout)',
+        'keypoint2d_baseline' : '2D Keypoints (Baseline Readout)',
+        'keypoint2d_consistency' : '2D Keypoints (Consistency Readout)',
+        'keypoint3d_baseline' : '3D Keypoints (Baseline Readout)',
+        'keypoint3d_consistency' : '3D Keypoints (Consistency Readout)',
+
+
     }
     var display_names_to_task = []; // or var revMap = {};
     Object.keys(map_to_display_names).forEach(function(key) { 
@@ -46,8 +61,23 @@
     var sortOrder = [
         'rgb2sfnorm',
         'reshade',
-        'rgb2depth'
+        'rgb2depth',
+        'rgb2sfnormb',
+        'reshadeb',
+        'rgb2depthb',
+        'curvature_consistency',
+        'edge2d_consistency',
+        'edge3d_consistency',
+        'curvature_baseline',
+        'edge2d_baseline',
+        'edge3d_baseline',
+        'keypoint2d_consistency',
+        'keypoint3d_consistency',
+        'keypoint2d_baseline',
+        'keypoint3d_baseline',
+
         ];
+
 
     for (var i in sortOrder){
         VALID_TARGETS.push(map_to_display_names[sortOrder[i]]);
@@ -229,7 +259,7 @@
             var xhr = new XMLHttpRequest();
         
             var imageUri = encodeURI(
-                "//consistency.epfl.ch/static/task-demo-results/" + uploadtoken + "__" + display_names_to_task[task] + ".png");
+                "//consistency.epfl.ch/demopage/static/task-demo-results/" + uploadtoken + "__" + display_names_to_task[task] + ".png");
 
            
             //xhr.onload = function () {
@@ -269,7 +299,7 @@
             xhr.open(
                 'HEAD', 
                 encodeURI(
-                    "//consistency.epfl.ch/static/task-demo-results/" + uploadtoken + "__" + display_names_to_task[task] + ".png"),
+                    "//consistency.epfl.ch/demopage/static/task-demo-results/" + uploadtoken + "__" + display_names_to_task[task] + ".png"),
                 true);
             xhr.timeout = 3000;
             xhr.send();
@@ -277,7 +307,7 @@
           
         };
         console.log(encodeURI(
-            "//consistency.epfl.ch/static/task-demo-results/" + uploadtoken + "__" + display_names_to_task[task] + ".png"));
+            "//consistency.epfl.ch/demopage/static/task-demo-results/" + uploadtoken + "__" + display_names_to_task[task] + ".png"));
         // checkTask();
         checkTaskIntervalId = setInterval(checkTask, 3000);
         intervals.push(checkTaskIntervalId);
