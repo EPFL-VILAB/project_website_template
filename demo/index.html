@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <link rel="shortcut icon" type="image/x-icon" href="../triangle.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="../static/triangle.ico">
 	<title>X-TaC</title>
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 
@@ -14,22 +14,22 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round" rel="stylesheet">
 	
 	<!-- Bootstrap -->
-	<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" />
+	<link type="text/css" rel="stylesheet" href="../static/css/bootstrap.min.css" />
 	
 	<!-- Owl Carousel -->
-	<link type="text/css" rel="stylesheet" href="../css/owl.carousel.css" />
-	<link type="text/css" rel="stylesheet" href="../css/owl.theme.default.css" />
+	<link type="text/css" rel="stylesheet" href="../static/css/owl.carousel.css" />
+	<link type="text/css" rel="stylesheet" href="../static/css/owl.theme.default.css" />
 
 	<!-- Magnific Popup -->
-	<link type="text/css" rel="stylesheet" href="../css/magnific-popup.css" />
+	<link type="text/css" rel="stylesheet" href="../static/css/magnific-popup.css" />
 
 	<!-- Font Awesome Icon -->
-	<link rel="stylesheet" href="../css/font-awesome.min.css">
+	<link rel="stylesheet" href="../static/css/font-awesome.min.css">
 
 	<!-- Custom stlylesheet -->
-	<link type="text/css" rel="stylesheet" href="../css/style.css" />
-	<link type="text/css" rel="stylesheet" href="../css/transfers.css" />
-	<link type="text/css" rel="stylesheet" href="../css/tasks.css" />  	
+	<link type="text/css" rel="stylesheet" href="../static/css/style.css" />
+	<link type="text/css" rel="stylesheet" href="../static/css/tasks.css" />
+	
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -38,13 +38,15 @@
 	<![endif]-->
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-89674082-5"></script>
 <script>
+  var grecaptcha = null;
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'UA-89674082-5');
+  
 </script>
 
 
@@ -60,15 +62,15 @@
 				<div class="navbar-header">
 					<!-- Logo -->
 					<div class="navbar-brand">
-						<a class="logo-text" href="//consistency.epfl.ch">X-TaC</a>						
+						<a class="logo-text" href="//consistency.epfl.ch">X-TaC</a>
 						<a href="http://svl.stanford.edu/">
-								<img class="logo" src="../img/stanford-logo.png" alt="logo">
-								<img class="logo-alt" src="../img/stanford-logo-white.png" alt="logo">
+								<img class="logo" src="../static/img/stanford-logo.png" alt="logo">
+								<img class="logo-alt" src="../static/img/stanford-logo-white.png" alt="logo">
 						</a>
 						<a href="http://bair.berkeley.edu/">							
-								<img class="logo" src="../img/berkeley-logo.png" alt="logo">
-								<img class="logo-alt" src="../img/berkeley-logo-white.png" alt="logo">
-								<!-- <img class="logo-alt" src="./img/logo-alt.png" alt="logo"> -->
+								<img class="logo" src="../static/img/berkeley-logo.png" alt="logo">
+								<img class="logo-alt" src="../static/img/berkeley-logo-white.png" alt="logo">
+								<!-- <img class="logo-alt" src="../img/logo-alt.png" alt="logo"> -->
 						</a>
 					</div>
 					<!-- /Logo -->
@@ -83,7 +85,7 @@
 				<!--  Main navigation  -->
 				<ul class="main-nav nav navbar-nav navbar-right">
 					<li><a href="//consistency.epfl.ch/index.html#home">Home</a></li>
-					<li><a href="//consistency.epfl.ch/demo">Live Demo</a></li>
+                                        <li><a href="//consistency.epfl.ch/demo">Live Demo</a></li>
                                         <li><a href="//consistency.epfl.ch/visuals">Visualization</a></li>
 					<li><a href="//consistency.epfl.ch/index.html#models">Pretrained Models</a></li>
 					<li><a href="//consistency.epfl.ch/index.html#paper">Paper</a></li>					
@@ -102,89 +104,80 @@
 		<!-- /Nav -->
 	</header>
 	<!-- /Header -->
-
-	<!-- Abstract -->
-	<div id="content" class="section bg-grey sm-padding main-section">
-
+	<div id="content" class="section sm-padding bg-grey main-section">
+		<div class="container">
+					
+			<!-- Section header -->
+			<div class="section-header text-center">
+				<h2 class="title">Consistency Demo
+                                <br>
+                                <small>(Under Development. Please check after March 12)</small>
+                                </h2>
+			</div>
+			<div class="container">			
+				<div class="row">	
+					<div class="content-body">			
+						<p> 
+							We provide a demo where you can upload (or use a preselected image) and visualize the outputs of different consistency-trained networks. The pretrained consistency models can be <a href="https://github.com/ConsistencyPaper">downloaded here.</a>
+						</p>
+						<p>
+							Our networks were trained on 3 million images of varied indoor scenes. You can see the statistics of the training set <a href="https://github.com/StanfordVL/taskonomy/tree/master/taskbank">here</a>. If your query image severly deviates from these statistics, the performance is expected to degrade. Processing usually takes around 30 seconds.
+						</p>
+					</div>		
+				</div>			
+			</div>
+		</div>
+	</div>
+	
+	<div id="content" class="section sm-padding">			
 		<!-- Container -->
 		<div class="container">
-
 			<!-- Row -->
 			<div class="row">
-
-				<!-- Section header -->
-				<div class="section-header text-center">
-					<h2 class="title">Visualization of Consistency-Based Prediction</h2>
-				</div>
-
-                                <div class="figure">
-						<img width="15%" src="../img_consistency/consistency_triangle.png" alt="" class="center">					
-  				</div>
-						<br>				
-				<!-- /Section header -->
-				<div class="content-body col-md-12">
-					<p> 
-						We visualized the result of evaluating various models with and without consistency on the same (non-cherry-picked) YouTube video. Below you can select different target tasks to see how well the consistency works. You can also visualize the perceptual domain predictions originated from the target. <u>The prediction is done frame-by-frame without any temporal smoothing.</u>
-                    </p>
-
-					<!-- transfer selectors -->
-                	<form action="#" onsubmit="return false;">
-						<div style="float:left;">
-							<br> <p >Prediction Task<br> (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)</p>
-							<select name="target" class="selectpicker selector" id="targetpicker">
-
-                                <option value="Tasks">Pick Task</option>								
-                                <option value="Normals">Normals</option>               
-                                <option value="Reshading">Reshading</option>                                
-                                <option value="Z-Depth">Z-Depth</option>
-							</select>
+				<!-- task form -->
+				<div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
+													
+					<div class='row no-pad'>
+						<div id='source-section'>
 						</div>
-                                   
-                                                <div style="float:left;" id="sourcecolumn">
-							<br> <p>Consistency Readout Task<br> (<b><i>X</i><sub>2</sub>→<i>X</i><sub>3</sub> </b>)</p>								
-							<select name="source" class="selectpicker selector" id="sourcepicker">
-                                                 <option value="--">--</option>                                                               							</select>
-						</div>
-
-                                                <div style="float:left;">
-                                                        <br><p>Show External Baselines</p><br>
-                                                        <p hidden>|</p>
-                                                        <select name="others" class="selectpicker selector" id="otherpicker">
-
-                                <option value="No">No</option>
-                                <option value="Yes">Yes</option>
-                                                        </select>
-                                                </div>
-                                                <br> <br>                                                
-						<div>
-							<input style="margin-top: 35px" id="submitDemo" type="submit" class="btn btn-info" value="See Results">
-							<input style="margin-top: 35px" id="clearDemo" type="submit" class="btn btn-secondary" value="Clear">
-
-                                                        <input style="margin-top: 35px" id="pauseDemo" type="button" class="btn btn-secondary" value="Play/Pause">
-						</div>
-                    </form>
-					<!-- /transfer selectors -->
-
-					<div id="video-section" class="row sm-padding">
-						<!-- <div id="our-vids" class="col-xs-4 no-pad">
-						</div>
-						<div id="alex-vids" class="col-xs-4 no-pad">
-						</div>
-						<div id="scratch-vids" class="col-xs-4 no-pad">
-                        </div>
-                        <div id="source-vids" class="col-xs-4 no-pad">
-                        </div> -->
 					</div>
 
+					<div class='samples row'>
+						<p>Sample Images (click to use).</p>
+						<img id="sample1" class="sample-img col-xs-4 no-pad"  src="../static/img/sample_keep_1.png" alt="sample 1">							
+						<img id="sample4" class="sample-img col-xs-4 no-pad"  src="../static/img/sample_keep_4.png" alt="sample 4">							
+						<img id="sample3" class="sample-img col-xs-4 no-pad"  src="../static/img/sample_keep_3.png" alt="sample 3">							
+					</div>
+						
+					<!-- <form method="POST" enctype=multipart/form-data action="http://localhost:8886/runmodels" target=formResponse>								 -->
+					<div class="row sm-padding ">
+						<form id="uploadForm" method="post" enctype=multipart/form-data action="https://storage.googleapis.com/task-demo-results" target=formResponse>
+							<div>								
+								<div>
+										<label id="imageUploadInputLabel" for="imageUploadInput">Image to upload:</label>
+										<input type="file" id="imageUploadInput" name="file" accept="image/*" />
+								</div>
 
+								<input id="uploadToken" type="text" name="key" value="uploadToken" style="display:none">
+								<input style="margin-top: 35px" id="submitDemo" type="submit" class="btn btn-info" value="Run inference">
+								<div class="g-recaptcha" data-theme="light" data-sitekey="6LcswN4UAAAAAPDUWfiDZio6vG0VjuAP2QbvJyV2" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;"></div> 
+							</div>
+						
+						</form>
+						<iframe name="formResponse" style="display:none;" ></iframe>
+					</div>
+
+				</div>
+				<!-- /task form -->
+	
+				<div id="output-section" class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
+				</div>
 			</div>
 			<!-- /Row -->
-
 		</div>
 		<!-- /Container -->
-
 	</div>
-	<!-- /Abstract -->
+	
 
 
 
@@ -200,10 +193,9 @@
 				<div class="col-md-12">
 
 					<!-- footer logo -->
-					<div class="footer-logo">
-
-
-					</div>
+					
+							
+					
 					<!-- /footer logo -->
 
 					<!-- footer follow -->
@@ -251,27 +243,26 @@
 
 	<!-- jQuery Plugins -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="../js/plugins.js"></script>
+	<script src="../static/js/plugins.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://use.fontawesome.com/fb1c3247d7.js"></script>    
 	
-	<script src="../js/waypoints.min.js"></script>
-	<script src="../js/jquery.counterup.min.js"></script>
-
+	<script src="../static/js/waypoints.min.js"></script>
+	<script src="../static/js/jquery.counterup.min.js"></script>
+	
 	<!-- <script type="text/javascript" src="js/jquery.min.js"></script> -->
 	<!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
 
-	<script type="text/javascript" src="../js/owl.carousel.min.js"></script>
-	<script type="text/javascript" src="../js/jquery.magnific-popup.js"></script>
-	<script type="text/javascript" src="../js/main.js"></script>
-	<script type="text/javascript" src="../js/transfers.js"></script>
+	<script type="text/javascript" src="../static/js/owl.carousel.min.js"></script>
+	<script type="text/javascript" src="../static/js/jquery.magnific-popup.js"></script>
+	<script type="text/javascript" src="../static/js/main.js"></script>
+	<script type="text/javascript" src="../static/js/task_demo.js"></script>
 	
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
-
+	
 
 <!-- Start of StatCounter Code for Default Guide -->
 <script type="text/javascript">
