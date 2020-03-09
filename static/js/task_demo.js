@@ -13,10 +13,10 @@
         'keypoint3d': '3D Keypoints',
         'non_fixated_pose': 'Pairwise Non-fixated Camera Pose',
         'point_match': 'Point Matching',
-        'reshade': 'Reshading (Consistency)',
-        'rgb2depth': 'Z-Depth (Consistency)',
+        'reshade': 'Reshading (Target)',
+        'rgb2depth': 'Z-Depth (Target)',
         'rgb2mist': 'Euclidean Distance',
-        'rgb2sfnorm': 'Normals (Consistency)',
+        'rgb2sfnorm': 'Normals (Target)',
         'room_layout': 'Room Layout',
         'segment25d': 'Unsupervised 2.5D Segm.',
         'segment2d': 'Unsupervised 2D Segm.',
@@ -34,16 +34,24 @@
         'rgb2depthb': 'Z-Depth (Baseline)',
         'reshadeb': 'Reshading (Baseline)',
         'curvature_baseline': 'Curvature (Baseline Readout)',
-        'curvature_consistency': 'Curvature (Consistency Readout)',
+        'curvature_consistency': 'Curvature (Readout)',
         'edge2d_baseline' : '2D Edges (Baseline Readout)',
-        'edge2d_consistency' : '2D Edges (Consistency Readout)',
+        'edge2d_consistency' : '2D Edges (Readout)',
         'edge3d_baseline' : 'Occlusion Edges (Baseline Readout)',
-        'edge3d_consistency' : 'Occlusion Edges (Consistency Readout)',
+        'edge3d_consistency' : 'Occlusion Edges (Readout)',
         'keypoint2d_baseline' : '2D Keypoints (Baseline Readout)',
-        'keypoint2d_consistency' : '2D Keypoints (Consistency Readout)',
+        'keypoint2d_consistency' : '2D Keypoints (Readout)',
         'keypoint3d_baseline' : '3D Keypoints (Baseline Readout)',
-        'keypoint3d_consistency' : '3D Keypoints (Consistency Readout)',
+        'keypoint3d_consistency' : '3D Keypoints (Readout)',
 
+        'rgb2normal_cycle' : 'Normals (Cycle Baseline)',
+        'rgb2normal_geonet' : 'Normals (Geonet Baseline)',
+        'rgb2normal_multitask' : 'Normals (Multitask Baseline)',
+
+        'rgb2depth_geonet' : 'Z-Depth (Geonet Baseline)',
+        'rgb2depth_multitask' : 'Z-Depth (Multitask Baseline)',
+
+        'rgb2reshading_multitask' : 'Reshading (Multitask Baseline)',
 
     }
     var display_names_to_task = []; // or var revMap = {};
@@ -58,7 +66,7 @@
     //     '2.5D Segm.', '2D Segm.', 'Vanishing Pts.', 'Semantic Segm.',  'Object Class. (1000)', 
     //     'Colorization', 'Jigsaw', 'In-painting'
     // ]
-    var sortOrder = [
+    var sortOrder_old = [
         'rgb2sfnorm',
         'reshade',
         'rgb2depth',
@@ -76,6 +84,33 @@
         'keypoint2d_baseline',
         'keypoint3d_baseline',
 
+        ];
+
+    var sortOrder = [
+        'rgb2sfnorm',
+        'reshade',
+        'rgb2depth',
+        'curvature_consistency',
+        'edge2d_consistency',
+        'edge3d_consistency',
+        'keypoint2d_consistency',
+        'keypoint3d_consistency',
+
+        'rgb2sfnorm',
+        'rgb2sfnormb',
+        'rgb2normal_cycle',
+        'rgb2normal_geonet',
+        'rgb2normal_multitask',
+
+        'reshade',
+        'reshadeb',
+        'rgb2reshading_multitask',
+  
+        'rgb2depth',
+        'rgb2depthb',
+        'rgb2depth_geonet',
+        'rgb2depth_multitask
+        
         ];
 
 
@@ -201,8 +236,8 @@
         imFrame[0].classList.remove('col-sm-6');
         imFrame[0].classList.remove('col-med-6');
         imFrame[0].classList.remove('col-lg-4');
-        document.getElementById("source-section").setAttribute("data-spy", "affix");
-        document.getElementById("source-section").setAttribute("data-offset-top", "01");
+        //document.getElementById("source-section").setAttribute("data-spy", "affix");
+        //document.getElementById("source-section").setAttribute("data-offset-top", "01");
         document.getElementById("source-section").appendChild(imFrame[0]);
     }
 
@@ -348,6 +383,9 @@
         var uploadtoken = document.getElementById("uploadToken").value;
         // var selectedTasks = $("#targetpicker").val()
 
+        var titleElem = makeRowTitle("Consistency-based learning");
+        document.getElementById("output-section").appendChild(titleElem);
+
         for (var t in VALID_TARGETS) {
             var task = VALID_TARGETS[t];
             // Make the api call here...
@@ -356,6 +394,38 @@
                 imFrame = updateImageFrame(imFrame[0], image_uri, false);
             });
             // break;
+
+           if (task=='3D Keypoints (Readout)'){
+
+            var titleElem = makeRowTitle("Consistency-based learning vs baselines (Normals)");
+        document.getElementById("output-section").appendChild(titleElem);
+
+
+           }
+
+
+           if (task=='Normals (Multitask Baseline)'){
+
+            var titleElem = makeRowTitle("Consistency-based learning vs baselines (Reshading)");
+        document.getElementById("output-section").appendChild(titleElem);
+
+           }
+
+
+
+           if (task=='Reshading (Multitask Baseline)'){
+
+            var titleElem = makeRowTitle("Consistency-based learning vs baselines (Z-Depth)");
+        document.getElementById("output-section").appendChild(titleElem);
+
+
+           }
+
+           
+
+
+
+
         }
     });
 
@@ -385,6 +455,8 @@
             });
             showSourceImage(this.src);
 
+            var titleElem = makeRowTitle("Consistency-based learning");
+            document.getElementById("output-section").appendChild(titleElem);
 
             var uploadtoken = document.getElementById("uploadToken").value;
             
@@ -396,6 +468,35 @@
                     imFrame = updateImageFrame(imFrame[0], image_uri, false);
                 });
                 // break;
+ 
+              if (task=='3D Keypoints (Readout)'){
+
+            var titleElem = makeRowTitle("Consistency-based learning vs baselines (Normals)");
+        document.getElementById("output-section").appendChild(titleElem);
+
+
+           }
+
+
+           if (task=='Normals (Multitask Baseline)'){
+
+            var titleElem = makeRowTitle("Consistency-based learning vs baselines (Reshading)");
+        document.getElementById("output-section").appendChild(titleElem);
+
+           }
+
+
+
+           if (task=='Reshading (Multitask Baseline)'){
+
+            var titleElem = makeRowTitle("Consistency-based learning vs baselines (Z-Depth)");
+        document.getElementById("output-section").appendChild(titleElem);
+
+
+           } 
+
+
+
             }
         });
     });
