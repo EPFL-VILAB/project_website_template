@@ -217,8 +217,8 @@
 
     var loadFile = function(event) {
         var fileSizeInMB = $('#imageUploadInput')[0].files[0].size/1024/1024;
-        if (fileSizeInMB > 8.4) {
-            alert('Please ensure upload is < 8MB. The current image size is: ' + fileSizeInMB.toFixed(2) + "MB.");
+        if (fileSizeInMB > 2.0) {
+            alert('Please ensure upload is < 2MB. The current image size is: ' + fileSizeInMB.toFixed(2) + "MB.");
             document.getElementById("imageUploadInput").value = '';
             return;
         }
