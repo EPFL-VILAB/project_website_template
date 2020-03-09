@@ -375,6 +375,25 @@
 
     };
 
+
+    var makeRowTitle = function(title) {
+        var folderName = title == "Source" ? 'video_short' : 'video_short';
+        var videoHolder = document.createElement("div");
+        videoHolder.classList.add('col-xs-12');
+        // videoHolder.classList.add('no-pad');
+
+        var bb = videoHolder.getBoundingClientRect();
+        var width = bb.right - bb.left;
+
+
+        // var titleElem = document.createElement("div");
+        // videoHolder.innerHTML = "<h4 style='float:right; transform: translateX(-100%) rotate(-90deg) ;'>" + title + "</h4>";
+        videoHolder.innerHTML = "<h3 style='text-align:center;    text-decoration: underline; '>" + title + "</h4>";
+
+        // videoHolder.appendChild(titleElem);
+        return videoHolder;
+    }
+
     $('#submitDemo').on("click",function() {
         if (!formValid()){
             return;
