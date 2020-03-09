@@ -109,7 +109,7 @@
         'rgb2depth',
         'rgb2depthb',
         'rgb2depth_geonet',
-        'rgb2depth_multitask
+        'rgb2depth_multitask',
         
         ];
 
