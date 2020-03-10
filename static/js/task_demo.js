@@ -300,7 +300,7 @@
         //     document.getElementById("output-section").appendChild(newRow);
         // }
 
-        var curr_task = display_names_to_task[task]i+'.png';
+        var curr_task = display_names_to_task[task]+'.png';
        
         if (curr_task=='rgb2sfnorm1.png'){
             curr_task='rgb2sfnorm.png';
