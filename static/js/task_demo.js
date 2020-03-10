@@ -13,10 +13,10 @@
         'keypoint3d': '3D Keypoints',
         'non_fixated_pose': 'Pairwise Non-fixated Camera Pose',
         'point_match': 'Point Matching',
-        'reshade': 'Reshading (Consistency)',
-        'rgb2depth': 'Z-Depth (Consistency)',
+        'reshade': 'Reshading',
+        'rgb2depth': 'Depth',
         'rgb2mist': 'Euclidean Distance',
-        'rgb2sfnorm': 'Normals (Consistency)',
+        'rgb2sfnorm': 'Normals',
         'room_layout': 'Room Layout',
         'segment25d': 'Unsupervised 2.5D Segm.',
         'segment2d': 'Unsupervised 2D Segm.',
@@ -30,29 +30,32 @@
         'impainting_whole': 'Image In-painting',
         'colorization': 'Colorization',
         'jigsaw': 'Jigsaw Puzzle',
-        'rgb2sfnormb': 'Normals (Baseline)',
-        'rgb2depthb': 'Z-Depth (Baseline)',
-        'reshadeb': 'Reshading (Baseline)',
+        'rgb2sfnormb': 'Baseline U-Net Normals',
+        'rgb2depthb': 'Baseline U-Net Depth',
+        'reshadeb': 'Baseline U-Net Reshading',
         'curvature_baseline': 'Curvature (Baseline Readout)',
-        'curvature_consistency': 'Curvature (Readout)',
+        'curvature_consistency': 'Curvature',
         'edge2d_baseline' : '2D Edges (Baseline Readout)',
-        'edge2d_consistency' : '2D Edges (Readout)',
+        'edge2d_consistency' : '2D Edges',
         'edge3d_baseline' : 'Occlusion Edges (Baseline Readout)',
-        'edge3d_consistency' : 'Occlusion Edges (Readout)',
+        'edge3d_consistency' : 'Occlusion Edges',
         'keypoint2d_baseline' : '2D Keypoints (Baseline Readout)',
-        'keypoint2d_consistency' : '2D Keypoints (Readout)',
+        'keypoint2d_consistency' : '2D Keypoints',
         'keypoint3d_baseline' : '3D Keypoints (Baseline Readout)',
-        'keypoint3d_consistency' : '3D Keypoints (Readout)',
+        'keypoint3d_consistency' : '3D Keypoints',
 
-        'rgb2normal_cycle' : 'Normals (Cycle Baseline)',
-        'rgb2normal_geonet' : 'Normals (Geonet Baseline)',
-        'rgb2normal_multitask' : 'Normals (Multitask Baseline)',
+        'rgb2normal_cycle' : 'Cycle-Consistency Baseline',
+        'rgb2normal_geonet' : 'GeoNet Baseline Normals',
+        'rgb2normal_multitask' : 'Multitask Baseline Normals',
 
-        'rgb2depth_geonet' : 'Z-Depth (Geonet Baseline)',
-        'rgb2depth_multitask' : 'Z-Depth (Multitask Baseline)',
+        'rgb2depth_geonet' : 'GeoNet Baseline Depth',
+        'rgb2depth_multitask' : 'Multitask Baseline Depth',
 
-        'rgb2reshading_multitask' : 'Reshading (Multitask Baseline)',
+        'rgb2reshading_multitask' : 'Multitask Baseline Reshading',
 
+        'rgb2sfnorm1': 'Consistency Normals',
+        'rgb2depth1': 'Consistency Depth',
+        'reshade1': 'Consistency Reshading',
     }
     var display_names_to_task = []; // or var revMap = {};
     Object.keys(map_to_display_names).forEach(function(key) { 
@@ -96,17 +99,17 @@
         'keypoint2d_consistency',
         'keypoint3d_consistency',
 
-        'rgb2sfnorm',
+        'rgb2sfnorm1',
         'rgb2sfnormb',
         'rgb2normal_cycle',
         'rgb2normal_geonet',
         'rgb2normal_multitask',
 
-        'reshade',
+        'reshade1',
         'reshadeb',
         'rgb2reshading_multitask',
   
-        'rgb2depth',
+        'rgb2depth1',
         'rgb2depthb',
         'rgb2depth_geonet',
         'rgb2depth_multitask',
@@ -150,7 +153,22 @@
         imageHolder.classList.add('no-pad');
         imageHolder.classList.add('image-holder');
 
-        
+        if ((title=='Baseline U-Net Normals') || (title=='Baseline U-Net Depth') || (title=='Baseline U-Net Reshading')){
+            title = 'Baseline U-Net';
+        }
+
+        if ((title=='Consistency Normals') || (title=='Consistency Depth') || (title=='Consistency Reshading')){
+            title = 'Consistency';
+        }
+
+        if ((title=='GeoNet Baseline Normals') || (title=='GeoNet Baseline Depth')){
+            title = 'GeoNet Baseline';
+        }
+
+        if ((title=='Multitask Baseline Normals') || (title=='Multitask Baseline Depth')  ||  (title=='Multitask Baseline Reshading')){
+            title = 'Multitask Baseline';
+        }
+
         var titleElem = document.createElement("div");
         titleElem.innerHTML = "<h4 style='word-wrap: break-word;padding-bottom: 5px;margin-bottom: 0px'>" + title + "</h4>";
 
@@ -280,6 +298,17 @@
         //     document.getElementById("output-section").appendChild(newRow);
         // }
 
+        var curr_task = display_names_to_task[task];
+        if (curr_task=='rgb2sfnorm1'){
+            curr_task=='rgb2sfnorm');
+        }
+        if (curr_task=='reshade1'){
+            curr_task=='reshade');
+        }
+        if (curr_task=='rgb2depth1'){
+            curr_task=='rgb2depth');
+        }
+
         var checkTaskIntervalId = null;        
         var checkTaskCounter = 0;
         var maxCheckTaskAttempts = 60
@@ -294,7 +323,7 @@
             var xhr = new XMLHttpRequest();
         
             var imageUri = encodeURI(
-                "https://storage.googleapis.com/task-demo-results/predictions/" + uploadtoken + "__" + display_names_to_task[task] + ".png");
+                "https://storage.googleapis.com/task-demo-results/predictions/" + uploadtoken + "__" + curr_task + ".png");
 
            
             //xhr.onload = function () {
@@ -334,7 +363,7 @@
             xhr.open(
                 'HEAD', 
                 encodeURI(
-                    "https://storage.googleapis.com/task-demo-results/predictions/" + uploadtoken + "__" + display_names_to_task[task] + ".png"),
+                    "https://storage.googleapis.com/task-demo-results/predictions/" + uploadtoken + "__" + curr_task + ".png"),
                 true);
             xhr.timeout = 3000;
             xhr.send();
@@ -342,7 +371,7 @@
           
         };
         console.log(encodeURI(
-            "https://storage.googleapis.com/task-demo-results/predictions/" + uploadtoken + "__" + display_names_to_task[task] + ".png"));
+            "https://storage.googleapis.com/task-demo-results/predictions/" + uploadtoken + "__" + curr_task + ".png"));
         // checkTask();
         checkTaskIntervalId = setInterval(checkTask, 3000);
         intervals.push(checkTaskIntervalId);
@@ -402,7 +431,7 @@
         var uploadtoken = document.getElementById("uploadToken").value;
         // var selectedTasks = $("#targetpicker").val()
 
-        var titleElem = makeRowTitle("Consistency-based learning");
+        var titleElem = makeRowTitle("Consistency-based learning results");
         document.getElementById("output-section").appendChild(titleElem);
 
         for (var t in VALID_TARGETS) {
@@ -414,7 +443,7 @@
             });
             // break;
 
-           if (task=='3D Keypoints (Readout)'){
+           if (task=='3D Keypoints')  {
 
             var titleElem = makeRowTitle("Consistency-based learning vs baselines (Normals)");
         document.getElementById("output-section").appendChild(titleElem);
@@ -423,7 +452,7 @@
            }
 
 
-           if (task=='Normals (Multitask Baseline)'){
+           if (task=='Multitask Baseline Normals'){
 
             var titleElem = makeRowTitle("Consistency-based learning vs baselines (Reshading)");
         document.getElementById("output-section").appendChild(titleElem);
@@ -432,13 +461,13 @@
 
 
 
-           if (task=='Reshading (Multitask Baseline)'){
+           if (task=='Multitask Baseline Reshading')) {
 
-            var titleElem = makeRowTitle("Consistency-based learning vs baselines (Z-Depth)");
+            var titleElem = makeRowTitle("Consistency-based learning vs baselines (Depth)");
         document.getElementById("output-section").appendChild(titleElem);
 
 
-           }
+           } 
 
            
 
@@ -474,7 +503,7 @@
             });
             showSourceImage(this.src);
 
-            var titleElem = makeRowTitle("Consistency-based learning");
+            var titleElem = makeRowTitle("Consistency-based learning results");
             document.getElementById("output-section").appendChild(titleElem);
 
             var uploadtoken = document.getElementById("uploadToken").value;
@@ -488,7 +517,7 @@
                 });
                 // break;
  
-              if (task=='3D Keypoints (Readout)'){
+              if (task=='3D Keypoints')  {
 
             var titleElem = makeRowTitle("Consistency-based learning vs baselines (Normals)");
         document.getElementById("output-section").appendChild(titleElem);
@@ -497,7 +526,7 @@
            }
 
 
-           if (task=='Normals (Multitask Baseline)'){
+           if (task=='Multitask Baseline Normals'){
 
             var titleElem = makeRowTitle("Consistency-based learning vs baselines (Reshading)");
         document.getElementById("output-section").appendChild(titleElem);
@@ -506,9 +535,9 @@
 
 
 
-           if (task=='Reshading (Multitask Baseline)'){
+           if (task=='Multitask Baseline Reshading')) {
 
-            var titleElem = makeRowTitle("Consistency-based learning vs baselines (Z-Depth)");
+            var titleElem = makeRowTitle("Consistency-based learning vs baselines (Depth)");
         document.getElementById("output-section").appendChild(titleElem);
 
 
