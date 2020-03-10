@@ -299,14 +299,15 @@
         // }
 
         var curr_task = display_names_to_task[task];
+       
         if (curr_task=='rgb2sfnorm1'){
-            curr_task=='rgb2sfnorm');
+            curr_task='rgb2sfnorm';
         }
         if (curr_task=='reshade1'){
-            curr_task=='reshade');
+            curr_task='reshade';
         }
         if (curr_task=='rgb2depth1'){
-            curr_task=='rgb2depth');
+            curr_task='rgb2depth';
         }
 
         var checkTaskIntervalId = null;        
@@ -461,7 +462,7 @@
 
 
 
-           if (task=='Multitask Baseline Reshading')) {
+           if (task=='Multitask Baseline Reshading') {
 
             var titleElem = makeRowTitle("Consistency-based learning vs baselines (Depth)");
         document.getElementById("output-section").appendChild(titleElem);
@@ -535,7 +536,7 @@
 
 
 
-           if (task=='Multitask Baseline Reshading')) {
+           if (task=='Multitask Baseline Reshading') {
 
             var titleElem = makeRowTitle("Consistency-based learning vs baselines (Depth)");
         document.getElementById("output-section").appendChild(titleElem);
