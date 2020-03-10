@@ -56,6 +56,8 @@
         'rgb2sfnorm1': 'Consistency Normals',
         'rgb2depth1': 'Consistency Depth',
         'reshade1': 'Consistency Reshading',
+        'kenburns': 'From Consistency Depth',
+
     }
     var display_names_to_task = []; // or var revMap = {};
     Object.keys(map_to_display_names).forEach(function(key) { 
@@ -113,7 +115,7 @@
         'rgb2depthb',
         'rgb2depth_geonet',
         'rgb2depth_multitask',
-        
+        'kenburns',
         ];
 
 
@@ -298,16 +300,20 @@
         //     document.getElementById("output-section").appendChild(newRow);
         // }
 
-        var curr_task = display_names_to_task[task];
+        var curr_task = display_names_to_task[task]i+'.png';
        
-        if (curr_task=='rgb2sfnorm1'){
-            curr_task='rgb2sfnorm';
+        if (curr_task=='rgb2sfnorm1.png'){
+            curr_task='rgb2sfnorm.png';
         }
-        if (curr_task=='reshade1'){
-            curr_task='reshade';
+        if (curr_task=='reshade1.png'){
+            curr_task='reshade.png';
         }
-        if (curr_task=='rgb2depth1'){
-            curr_task='rgb2depth';
+        if (curr_task=='rgb2depth1.png'){
+            curr_task='rgb2depth.png';
+        }
+
+        if (curr_task=='kenburns.png'){
+           curr_task='kenburns.mp4';
         }
 
         var checkTaskIntervalId = null;        
@@ -324,7 +330,7 @@
             var xhr = new XMLHttpRequest();
         
             var imageUri = encodeURI(
-                "https://storage.googleapis.com/task-demo-results/predictions/" + uploadtoken + "__" + curr_task + ".png");
+                "https://storage.googleapis.com/task-demo-results/predictions/" + uploadtoken + "__" + curr_task);
 
            
             //xhr.onload = function () {
@@ -364,7 +370,7 @@
             xhr.open(
                 'HEAD', 
                 encodeURI(
-                    "https://storage.googleapis.com/task-demo-results/predictions/" + uploadtoken + "__" + curr_task + ".png"),
+                    "https://storage.googleapis.com/task-demo-results/predictions/" + uploadtoken + "__" + curr_task ),
                 true);
             xhr.timeout = 3000;
             xhr.send();
@@ -372,7 +378,7 @@
           
         };
         console.log(encodeURI(
-            "https://storage.googleapis.com/task-demo-results/predictions/" + uploadtoken + "__" + curr_task + ".png"));
+            "https://storage.googleapis.com/task-demo-results/predictions/" + uploadtoken + "__" + curr_task));
         // checkTask();
         checkTaskIntervalId = setInterval(checkTask, 3000);
         intervals.push(checkTaskIntervalId);
@@ -470,7 +476,14 @@
 
            } 
 
-           
+           if (task=='Multitask Baseline Depth') {
+
+            var titleElem = makeRowTitle("3D Ken Burns");
+        document.getElementById("output-section").appendChild(titleElem);
+
+
+           }
+
 
 
 
@@ -543,6 +556,14 @@
 
 
            } 
+
+          if (task=='Multitask Baseline Depth') {
+
+            var titleElem = makeRowTitle("3D Ken Burns");
+        document.getElementById("output-section").appendChild(titleElem);
+
+
+           }
 
 
 
