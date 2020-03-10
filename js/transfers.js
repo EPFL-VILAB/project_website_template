@@ -401,7 +401,7 @@
 
             // Add targets
             // Baseline
-            source = makeVideoFrame('Baseline Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)', transfers_to_videos[selected_target]["target"]['baseline']);
+            source = makeVideoFrame('Baseline U-Net Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)', transfers_to_videos[selected_target]["target"]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
@@ -438,7 +438,7 @@
 
             // Add targets
             // Baseline
-            source = makeVideoFrame('Baseline Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)', transfers_to_videos[selected_target]["target"]['baseline']);
+            source = makeVideoFrame('Baseline U-Net Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)', transfers_to_videos[selected_target]["target"]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
@@ -454,12 +454,12 @@
 
             // Then add the other baselines
            
-            source = makeVideoFrame("Cycle Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['cycle']);
+            source = makeVideoFrame("Cycle-Consistency Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['cycle']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
                
 
-            source = makeVideoFrame("Geonet Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['geonet']);
+            source = makeVideoFrame("GeoNet Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['geonet']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
@@ -496,7 +496,7 @@
 
             // Add targets
             // Baseline
-            source = makeVideoFrame('Baseline Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)', transfers_to_videos[selected_target]["target"]['baseline']);
+            source = makeVideoFrame('Baseline U-Net Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)', transfers_to_videos[selected_target]["target"]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
@@ -532,7 +532,7 @@
 
 
             //Additional baselines for Z-Depth
-            if ((other_baselines == "Yes") && (selected_target=="Z-Depth")){
+            if ((other_baselines == "Yes") && (selected_target=="Depth")){
 
             // First clear everything and add input + targets
             document.getElementById("video-section").innerHTML = "";
@@ -553,7 +553,7 @@
 
             // Add targets
             // Baseline
-            source = makeVideoFrame('Baseline Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)', transfers_to_videos[selected_target]["target"]['baseline']);
+            source = makeVideoFrame('Baseline U-Net Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)', transfers_to_videos[selected_target]["target"]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
@@ -566,7 +566,7 @@
             }
 
 
-            source = makeVideoFrame("Geonet Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['geonet']);
+            source = makeVideoFrame("GeoNet Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['geonet']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
@@ -793,7 +793,7 @@
             var x = document.getElementById("sourcepicker");
 
             x.options[x.options.length] = new Option('--', '--');        
-            x.options[x.options.length] = new Option('Z-Depth', 'Z-Depth');
+            x.options[x.options.length] = new Option('Depth', 'Depth');
             x.options[x.options.length] = new Option('Reshading', 'Reshading');
             x.options[x.options.length] = new Option('Curvature', 'Curvature');
             x.options[x.options.length] = new Option('2D Keypoints', '2D Keypoints');
@@ -811,7 +811,7 @@
             //.append($('<option value="297x210">297x210</option>)'))
             var x = document.getElementById("sourcepicker");
             x.options[x.options.length] = new Option('--', '--');
-            x.options[x.options.length] = new Option('Z-Depth', 'Z-Depth');
+            x.options[x.options.length] = new Option('Depth', 'Depth');
             x.options[x.options.length] = new Option('Normals', 'Normals');
             x.options[x.options.length] = new Option('Curvature', 'Curvature');
             x.options[x.options.length] = new Option('2D Keypoints', '2D Keypoints');
@@ -824,7 +824,7 @@
 
         }
 
-        if($('#targetpicker option:selected').val()=="Z-Depth"){
+        if($('#targetpicker option:selected').val()=="Depth"){
 
             $('#sourcepicker option').remove();
             //$('#sourcepicker select').append($('<option value="210x100">210x100</option>)'))

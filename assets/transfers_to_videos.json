@@ -1,6 +1,6 @@
 {
   "Normals": {
-    "Z-Depth": {
+    "Depth": {
       "ours": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/cropped_trimmed/rgb2normal2x/consistency_rgb2normal2depth_zbuffer.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project",
       "baseline": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/cropped_trimmed/rgb2normal2x/baseline_rgb2normal2depth_zbuffer.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project"
     },
@@ -33,7 +33,7 @@
       "baseline": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/cropped_trimmed/rgb2normal_method_comparison/rgb2normal_baseline.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project"
     },
     "All": {
-      "source1": "Z-Depth",
+      "source1": "Depth",
       "source2": "Reshading",
       "source3": "Curvature",
       "source4": "2D Keypoints",
@@ -49,7 +49,7 @@
     }
   },
   "Reshading": {
-    "Z-Depth": {
+    "Depth": {
       "ours": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/cropped_trimmed/rgb2reshading2x/consistency_rgb2reshading2depth_zbuffer.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project",
       "baseline": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/cropped_trimmed/rgb2reshading2x/baseline_rgb2reshading2depth_zbuffer.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project"
     },
@@ -82,7 +82,7 @@
       "baseline": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/cropped_trimmed/rgb2normal_method_comparison/rgb2reshading_baseline.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project"
     },
     "All": {
-      "source1": "Z-Depth",
+      "source1": "Depth",
       "source2": "Normals",
       "source3": "Curvature",
       "source4": "2D Keypoints",
@@ -97,7 +97,7 @@
     }
   },
 
-  "Z-Depth": {
+  "Depth": {
     "Reshading": {
       "ours": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/cropped_trimmed/rgb2depth_zbuffer2x/consistency_rgb2depth_zbuffer2reshading.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project",
       "baseline": "https://storage.cloud.google.com/taskonomy-shared/assets/reduced_flicker/cropped_trimmed/rgb2depth_zbuffer2x/baseline_rgb2depth_zbuffer2reshading.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project"
