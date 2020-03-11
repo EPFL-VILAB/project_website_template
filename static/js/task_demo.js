@@ -109,18 +109,18 @@
         'rgb2sfnormb',
         'rgb2normal_cycle',
         'rgb2normal_geonet',
-        'rgb2normal_taskonomy'
+        'rgb2normal_taskonomy',
         'rgb2normal_multitask',
 
         'reshade1',
         'reshadeb',
-        'rgb2reshading_taskonomy'
+        'rgb2reshading_taskonomy',
         'rgb2reshading_multitask',
   
         'rgb2depth1',
         'rgb2depthb',
         'rgb2depth_geonet',
-        'rgb2depth_taskonomy'
+        'rgb2depth_taskonomy',
         'rgb2depth_multitask',
         'kenburns',
         ];
@@ -176,6 +176,10 @@
 
         if ((title=='Multitask Baseline Normals') || (title=='Multitask Baseline Depth')  ||  (title=='Multitask Baseline Reshading')){
             title = 'Multitask Baseline';
+        }
+
+        if ((title=='Taskonomy Baseline Normals') || (title=='Taskonomy Baseline Depth')  ||  (title=='Taskonomy Baseline Reshading')){
+            title = 'Taskonomy Baseline';
         }
 
         var titleElem = document.createElement("div");
