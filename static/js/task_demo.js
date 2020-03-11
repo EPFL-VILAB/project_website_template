@@ -61,7 +61,7 @@
         'rgb2normal_taskonomy':'Taskonomy Baseline Normals',
         'rgb2depth_taskonomy' :'Taskonomy Baseline Depth',
         'rgb2reshading_taskonomy': 'Taskonomy Baseline Reshading',
-
+        'energy': 'Consistency Energy of Query Image (Red Line)',
     }
     var display_names_to_task = []; // or var revMap = {};
     Object.keys(map_to_display_names).forEach(function(key) { 
@@ -122,7 +122,8 @@
         'rgb2depth_geonet',
         'rgb2depth_taskonomy',
         'rgb2depth_multitask',
-     
+        
+        'energy',
         ];
 
 
@@ -487,13 +488,13 @@
 
            } 
 
-         //  if (task=='Multitask Baseline Depth') {
+         if (task=='Multitask Baseline Depth') {
 
-         //   var titleElem = makeRowTitle("3D Ken Burns");
-       // document.getElementById("output-section").appendChild(titleElem);
+            var titleElem = makeRowTitle("Energy");
+       document.getElementById("output-section").appendChild(titleElem);
 
 
-         //  }
+           }
 
 
 
@@ -568,13 +569,13 @@
 
            } 
 
-          //if (task=='Multitask Baseline Depth') {
+          if (task=='Multitask Baseline Depth') {
 
-            //var titleElem = makeRowTitle("3D Ken Burns");
-        //document.getElementById("output-section").appendChild(titleElem);
+            var titleElem = makeRowTitle("Energy");
+            document.getElementById("output-section").appendChild(titleElem);
 
 
-          // }
+           }
 
 
 
