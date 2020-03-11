@@ -58,6 +58,10 @@
         'reshade1': 'Consistency Reshading',
         'kenburns': 'From Consistency Depth',
 
+        'rgb2normal_taskonomy':'Taskonomy Baseline Normals',
+        'rgb2depth_taskonomy' :'Taskonomy Baseline Depth',
+        'rgb2reshading_taskonomy': 'Taskonomy Baseline Reshading',
+
     }
     var display_names_to_task = []; // or var revMap = {};
     Object.keys(map_to_display_names).forEach(function(key) { 
@@ -105,15 +109,18 @@
         'rgb2sfnormb',
         'rgb2normal_cycle',
         'rgb2normal_geonet',
+        'rgb2normal_taskonomy'
         'rgb2normal_multitask',
 
         'reshade1',
         'reshadeb',
+        'rgb2reshading_taskonomy'
         'rgb2reshading_multitask',
   
         'rgb2depth1',
         'rgb2depthb',
         'rgb2depth_geonet',
+        'rgb2depth_taskonomy'
         'rgb2depth_multitask',
         'kenburns',
         ];
