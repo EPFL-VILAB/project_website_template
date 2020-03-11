@@ -438,7 +438,7 @@
         var uploadtoken = document.getElementById("uploadToken").value;
         // var selectedTasks = $("#targetpicker").val()
 
-        var titleElem = makeRowTitle("Consistency-based learning results");
+        var titleElem = makeRowTitle("Consistency-based Learning Prediction Results");
         document.getElementById("output-section").appendChild(titleElem);
 
         for (var t in VALID_TARGETS) {
@@ -452,7 +452,7 @@
 
            if (task=='3D Keypoints')  {
 
-            var titleElem = makeRowTitle("Consistency-based learning vs baselines (Normals)");
+            var titleElem = makeRowTitle("Consistency-based Learning vs Baselines (Normals)");
         document.getElementById("output-section").appendChild(titleElem);
 
 
@@ -461,7 +461,7 @@
 
            if (task=='Multitask Baseline Normals'){
 
-            var titleElem = makeRowTitle("Consistency-based learning vs baselines (Reshading)");
+            var titleElem = makeRowTitle("Consistency-based Learning vs Baselines (Reshading)");
         document.getElementById("output-section").appendChild(titleElem);
 
            }
@@ -470,7 +470,7 @@
 
            if (task=='Multitask Baseline Reshading') {
 
-            var titleElem = makeRowTitle("Consistency-based learning vs baselines (Depth)");
+            var titleElem = makeRowTitle("Consistency-based Learning vs Baselines (Depth)");
         document.getElementById("output-section").appendChild(titleElem);
 
 
@@ -517,7 +517,7 @@
             });
             showSourceImage(this.src);
 
-            var titleElem = makeRowTitle("Consistency-based learning results");
+            var titleElem = makeRowTitle("Consistency-based Learning Prediction Results");
             document.getElementById("output-section").appendChild(titleElem);
 
             var uploadtoken = document.getElementById("uploadToken").value;
@@ -533,7 +533,7 @@
  
               if (task=='3D Keypoints')  {
 
-            var titleElem = makeRowTitle("Consistency-based learning vs baselines (Normals)");
+            var titleElem = makeRowTitle("Consistency-based Learning vs Baselines (Normals)");
         document.getElementById("output-section").appendChild(titleElem);
 
 
@@ -542,7 +542,7 @@
 
            if (task=='Multitask Baseline Normals'){
 
-            var titleElem = makeRowTitle("Consistency-based learning vs baselines (Reshading)");
+            var titleElem = makeRowTitle("Consistency-based Learning vs Baselines (Reshading)");
         document.getElementById("output-section").appendChild(titleElem);
 
            }
@@ -551,7 +551,7 @@
 
            if (task=='Multitask Baseline Reshading') {
 
-            var titleElem = makeRowTitle("Consistency-based learning vs baselines (Depth)");
+            var titleElem = makeRowTitle("Consistency-based Learning vs Baselines (Depth)");
         document.getElementById("output-section").appendChild(titleElem);
 
 
