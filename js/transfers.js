@@ -392,7 +392,7 @@
             document.getElementById(vidTitleElementForTarget(selected_target)).appendChild(titleElem);
 
             // document.getElementById(vidElementForTarget(selected_target)).appendChild(makeRowTitle(selected_target));
-            var source = makeVideoFrame("Input video (<b><i>X</i><sub>1</sub> </b>)", "https://storage.googleapis.com/taskonomy-shared/assets/reduced_flicker/cropped_trimmed/source_final_down.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
+            var source = makeVideoFrame("Input video (<b><i>X</i><sub>1</sub> </b>)", "https://storage.googleapis.com/cross-task-website/assets/reduced_flicker/cropped_trimmed/source_final_down.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
             //document.getElementById(vidBaselineElementForTarget(selected_target)).setAttribute("data-spy", "affix");
             //document.getElementById(vidBaselineElementForTarget(selected_target)).setAttribute("data-offset-top", "01");
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
@@ -431,7 +431,7 @@
             document.getElementById(vidTitleElementForTarget(selected_target)).appendChild(titleElem);
 
             // document.getElementById(vidElementForTarget(selected_target)).appendChild(makeRowTitle(selected_target));
-            var source = makeVideoFrame("Input video (<b><i>X</i><sub>1</sub> </b>)", "https://storage.googleapis.com/taskonomy-shared/assets/reduced_flicker/cropped_trimmed/source_final_down.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
+            var source = makeVideoFrame("Input video (<b><i>X</i><sub>1</sub> </b>)", "https://storage.googleapis.com/cross-task-website/assets/reduced_flicker/cropped_trimmed/source_final_down.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
             source_exists.push(selected_target);
@@ -489,7 +489,7 @@
             document.getElementById(vidTitleElementForTarget(selected_target)).appendChild(titleElem);
 
             // document.getElementById(vidElementForTarget(selected_target)).appendChild(makeRowTitle(selected_target));
-            var source = makeVideoFrame("Input video (<b><i>X</i><sub>1</sub> </b>)", "https://storage.googleapis.com/taskonomy-shared/assets/reduced_flicker/cropped_trimmed/source_final_down.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
+            var source = makeVideoFrame("Input video (<b><i>X</i><sub>1</sub> </b>)", "https://storage.googleapis.com/cross-task-website/assets/reduced_flicker/cropped_trimmed/source_final_down.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
             source_exists.push(selected_target);
@@ -546,7 +546,7 @@
             document.getElementById(vidTitleElementForTarget(selected_target)).appendChild(titleElem);
 
             // document.getElementById(vidElementForTarget(selected_target)).appendChild(makeRowTitle(selected_target));
-            var source = makeVideoFrame("Input video (<b><i>X</i><sub>1</sub> </b>)", "https://storage.googleapis.com/taskonomy-shared/assets/reduced_flicker/cropped_trimmed/source_final_down.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
+            var source = makeVideoFrame("Input video (<b><i>X</i><sub>1</sub> </b>)", "https://storage.googleapis.com/cross-task-website/assets/reduced_flicker/cropped_trimmed/source_final_down.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
             source_exists.push(selected_target);
