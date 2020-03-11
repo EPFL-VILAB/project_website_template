@@ -122,7 +122,7 @@
         'rgb2depth_geonet',
         'rgb2depth_taskonomy',
         'rgb2depth_multitask',
-        'kenburns',
+     
         ];
 
 
@@ -487,13 +487,13 @@
 
            } 
 
-           if (task=='Multitask Baseline Depth') {
+         //  if (task=='Multitask Baseline Depth') {
 
-            var titleElem = makeRowTitle("3D Ken Burns");
-        document.getElementById("output-section").appendChild(titleElem);
+         //   var titleElem = makeRowTitle("3D Ken Burns");
+       // document.getElementById("output-section").appendChild(titleElem);
 
 
-           }
+         //  }
 
 
 
@@ -568,13 +568,13 @@
 
            } 
 
-          if (task=='Multitask Baseline Depth') {
+          //if (task=='Multitask Baseline Depth') {
 
-            var titleElem = makeRowTitle("3D Ken Burns");
-        document.getElementById("output-section").appendChild(titleElem);
+            //var titleElem = makeRowTitle("3D Ken Burns");
+        //document.getElementById("output-section").appendChild(titleElem);
 
 
-           }
+          // }
 
 
 
