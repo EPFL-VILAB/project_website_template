@@ -300,7 +300,7 @@
             oImg.setAttribute('crossorigin', "anonymous");
             oImg.setAttribute('src', image_uri);
             oImg.setAttribute('loop', 'True');
-            oImg.play()
+            oImg.play();
             //all_videos.push(oImg);
             //play_all(all_videos);
         }
