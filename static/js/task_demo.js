@@ -189,6 +189,10 @@
 
         var loader = document.createElement("div");
         loader.innerHTML = loaderHTML;
+        if (title=='From Consistency Depth'){
+
+          loader.innerHTML = '<video muted playsinline preload="metadata" width=100%' + ' height=100%' + ' style="background-color:#ddd" class=' + 'hi' + ' loop >' + '</video>'
+        }
 
         if (ensureSameSize) {
             titleElem.classList.add('returnedImageTitle');
