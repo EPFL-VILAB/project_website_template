@@ -587,7 +587,7 @@
 
           if (task=='Consistency Energy of Query Image (Red Line)') {
 
-            var titleElem = makeRowTitle("Ken Burns (<a href=""https://github.com/sniklaus/3d-ken-burns"">source</a>)");
+            var titleElem = makeRowTitle("3D Ken Burns");
        document.getElementById("output-section").appendChild(titleElem);
 
 
