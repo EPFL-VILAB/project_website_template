@@ -256,6 +256,18 @@
         ensureSameSize(className);
     }
 
+    var all_videos = [];
+    var play_all = function(vids) {
+
+
+
+            vids.forEach( function(vid) {
+                vid = vid.children[0];
+                vid.play();
+            });
+
+        };
+
     var updateImageFrame = function(imageHolder, image_uri, crop) {    
         imageHolder.children[1].remove();
         var containerDiv = document.createElement("div");
@@ -288,6 +300,10 @@
         oImg.setAttribute('src', image_uri);        
         containerDiv.appendChild(oImg);
         imageHolder.appendChild(containerDiv);
+        if (choice=='4'){
+        all_videos.push(oImg);
+        play_all(all_videos);
+        }
         return [imageHolder, oImg];
     }
 
