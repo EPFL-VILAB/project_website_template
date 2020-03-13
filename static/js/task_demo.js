@@ -282,7 +282,7 @@
         var oImg = document.createElement("video");
             oImg.innerHTML = '<video muted playsinline preload="metadata" crossorigin="anonymous" width=100%' + 
             ' height=100%' + 
-            ' style="background-color:#ddd" class=' + cls + 
+            ' style="background-color:#ddd" class=' + 'hi' + 
             ' loop >' +
             '<source src="' + image_uri + '" type="video/mp4">' +
             //'<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/video_short/' + vid_name + '" type="video/webm">' +
