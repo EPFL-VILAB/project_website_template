@@ -289,6 +289,8 @@
             //'</video>';
 
             oImg.setAttribute('playsinline', 'True');
+            oImg.setAttribute('muted', 'True');
+            oImg.setAttribute('autoplay', 'True');
             oImg.setAttribute('height', '100%');
             oImg.setAttribute('width', '100%')
             oImg.onload = function() {
