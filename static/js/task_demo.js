@@ -298,8 +298,8 @@
             oImg.setAttribute('crossorigin', "anonymous");
             oImg.setAttribute('src', image_uri);
             oImg.setAttribute('loop', 'True');
-            all_videos.push(oImg);
-            play_all(all_videos);
+            //all_videos.push(oImg);
+            //play_all(all_videos);
         }
         else{
         oImg.setAttribute('alt', 'na');
