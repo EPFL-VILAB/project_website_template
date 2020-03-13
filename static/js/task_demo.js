@@ -189,10 +189,10 @@
 
         var loader = document.createElement("div");
         loader.innerHTML = loaderHTML;
-        if (title=='From Consistency Depth'){
-
-          loader.innerHTML = '<video muted playsinline preload="metadata" width=100%' + ' height=100%' + ' style="background-color:#ddd" class=' + 'hi' + ' loop >' + '</video>'
-        }
+        //if (title=='From Consistency Depth'){
+        //
+        //  loader.innerHTML = '<video muted playsinline preload="metadata" width=100%' + ' height=100%' + ' style="background-color:#ddd" class=' + 'hi' + ' loop >' + '</video>'
+        //}
 
         if (ensureSameSize) {
             titleElem.classList.add('returnedImageTitle');
@@ -202,6 +202,41 @@
         imageHolder.appendChild(titleElem);
         imageHolder.appendChild(loader);
         return [imageHolder];
+    }
+
+
+   var makeVideoFrame = function(title, vid_name) {
+        var videoHolder = document.createElement("div");
+        videoHolder.classList.add('col-xs-12');
+        videoHolder.classList.add('col-sm-6');
+        videoHolder.classList.add('col-lg-4');
+        // imageHolder.classList.add('col-xs-' + cols.toString());
+        videoHolder.classList.add('no-pad');
+      
+
+      
+        var titleElem = document.createElement("div");
+        titleElem.innerHTML = "<h4 style='word-wrap: break-word;padding-bottom: 5px;margin-bottom: 0px'>" + title + "</h4>";
+
+        //alert(vid_name);
+        var cls = "hi";
+        var vid = document.createElement("div");
+
+
+        vid.innerHTML = '<video muted playsinline preload="metadata" width=100%' + 
+            ' height=100%' + 
+            ' style="background-color:#ddd" class=' + cls + 
+            ' loop >' +
+            '<source src="' + vid_name + '" type="video/mp4">' +
+            //'<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/video_short/' + vid_name + '" type="video/webm">' +
+            //'<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/video_short_mp4/' + vid_name.replace('webm', 'mp4') + '" type="video/mp4">' +
+            'Video not found.</video>';
+
+        
+        videoHolder.appendChild(titleElem);
+        videoHolder.appendChild(vid);
+       
+        return [videoHolder, vid];
     }
 
 
@@ -306,7 +341,12 @@
     var num_on_row = 0;
     var getResponseURLs = function(uploadtoken, task, callback){    
         
+
+        if (display_names_to_task[task]=='kenburns'){
+        var imFrame = makeVideoFrame(task, 'https://storage.googleapis.com/task-demo-results/predictions/' +uploadtoken+ '__kenburns.mp4');
+        else{        
         var imFrame = makeImageFrame(task, true);
+        }
         document.getElementById("output-section").appendChild(imFrame[0]);
         
         num_on_row += 1;
@@ -318,6 +358,11 @@
         // }
 
         var curr_task = display_names_to_task[task]+'.png';
+
+        if (curr_task=='kenburns.png'){
+           curr_task='kenburns.mp4';
+        }
+
        
         if (curr_task=='rgb2sfnorm1.png'){
             curr_task='rgb2sfnorm.png';
@@ -329,9 +374,6 @@
             curr_task='rgb2depth.png';
         }
 
-        if (curr_task=='kenburns.png'){
-           curr_task='kenburns.mp4';
-        }
 
         var checkTaskIntervalId = null;        
         var checkTaskCounter = 0;
