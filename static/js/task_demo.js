@@ -263,6 +263,9 @@
             containerDiv.className = 'thumbnail2';
         }
 
+        alert(imageHolder);
+        alert(imageHolder.titleElem);
+        alert(image_uri);
         var oImg = document.createElement("img");
         oImg.setAttribute('alt', 'na');
         if (!crop){
