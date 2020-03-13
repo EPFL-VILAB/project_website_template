@@ -288,7 +288,7 @@
             ////'<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/video_short_mp4/' + vid_name.replace('webm', 'mp4') + '" type="video/mp4">' +
             //'</video>';
 
-            oImg.setAttribute('playsinline');
+            oImg.setAttribute('playsinline', 'True');
             oImg.setAttribute('height', '100%');
             oImg.setAttribute('width', '100%')
             oImg.onload = function() {
