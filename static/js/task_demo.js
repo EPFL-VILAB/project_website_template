@@ -288,12 +288,12 @@
             ////'<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/video_short_mp4/' + vid_name.replace('webm', 'mp4') + '" type="video/mp4">' +
             //'</video>';
 
-            //oImg.setAttribute('playsinline', 'True');
-            //oImg.setAttribute('muted', 'True');
-            //oImg.setAttribute('autoplay', 'True');
-            oImg.classList.add('playsinline');
-            oImg.classList.add('muted');
-            oImg.classList.add('autoplay');
+            oImg.setAttribute('playsinline', 'True');
+            oImg.setAttribute('muted', 'True');
+            oImg.setAttribute('autoplay', 'True');
+            //oImg.classList.add('playsinline');
+            //oImg.classList.add('muted');
+            //oImg.classList.add('autoplay');
             oImg.setAttribute('height', '100%');
             oImg.setAttribute('width', '100%')
             oImg.onload = function() {
