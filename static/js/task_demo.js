@@ -344,7 +344,7 @@
 
         if (display_names_to_task[task]=='kenburns'){
         var imFrame = makeVideoFrame(task, 'https://storage.googleapis.com/task-demo-results/predictions/' +uploadtoken+ '__kenburns.mp4');
-        else{        
+        else {        
         var imFrame = makeImageFrame(task, true);
         }
         document.getElementById("output-section").appendChild(imFrame[0]);
