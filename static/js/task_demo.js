@@ -263,10 +263,12 @@
             containerDiv.className = 'thumbnail2';
         }
 
-        alert(imageHolder);
-        alert(imageHolder.titleElem);
-        alert(image_uri);
+        var choice = image_uri[image_uri.length-1];
+    
         var oImg = document.createElement("img");
+        if (choice=='4'){
+        var oImg = document.createElement("video");
+        }
         oImg.setAttribute('alt', 'na');
         if (!crop){
             oImg.setAttribute('height', '100%');
