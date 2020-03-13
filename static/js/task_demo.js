@@ -213,7 +213,6 @@
         // imageHolder.classList.add('col-xs-' + cols.toString());
         videoHolder.classList.add('no-pad');
       
-
       
         var titleElem = document.createElement("div");
         titleElem.innerHTML = "<h4 style='word-wrap: break-word;padding-bottom: 5px;margin-bottom: 0px'>" + title + "</h4>";
@@ -223,7 +222,7 @@
         var vid = document.createElement("div");
 
 
-        vid.innerHTML = '<video muted playsinline preload="metadata" width=100%' + 
+        vid.innerHTML = '<video muted playsinline preload="metadata" crossorigin="anonymous" width=100%' + 
             ' height=100%' + 
             ' style="background-color:#ddd" class=' + cls + 
             ' loop >' +
