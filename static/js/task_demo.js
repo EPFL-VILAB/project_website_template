@@ -280,7 +280,20 @@
         var oImg = document.createElement("img");
         if (choice=='4'){
         var oImg = document.createElement("video");
+            oImg.innerHTML = '<video muted playsinline preload="metadata" crossorigin="anonymous" width=100%' + 
+            ' height=100%' + 
+            ' style="background-color:#ddd" class=' + cls + 
+            ' loop >' +
+            '<source src="' + image_uri + '" type="video/mp4">' +
+            //'<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/video_short/' + vid_name + '" type="video/webm">' +
+            //'<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/video_short_mp4/' + vid_name.replace('webm', 'mp4') + '" type="video/mp4">' +
+            'Video not found.</video>';
+
+            oImg.setAttribute('crossorigin', "anonymous");
+            all_videos.push(oImg);
+
         }
+        else{
         oImg.setAttribute('alt', 'na');
         if (!crop){
             oImg.setAttribute('height', '100%');
@@ -297,13 +310,12 @@
             }
         }
         oImg.setAttribute('crossorigin', "anonymous");
-        oImg.setAttribute('src', image_uri);        
+        oImg.setAttribute('src', image_uri);  
+
+        }      
         containerDiv.appendChild(oImg);
         imageHolder.appendChild(containerDiv);
-        if (choice=='4'){
-        all_videos.push(oImg);
-        play_all(all_videos);
-        }
+       
         return [imageHolder, oImg];
     }
 
