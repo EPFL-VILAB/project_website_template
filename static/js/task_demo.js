@@ -280,16 +280,24 @@
         var oImg = document.createElement("img");
         if (choice=='4'){
         var oImg = document.createElement("video");
-            oImg.innerHTML = '<video muted playsinline preload="metadata" crossorigin="anonymous" width=100%' + 
-            ' height=100%' + 
-            ' style="background-color:#ddd" class=' + 'hi' + 
-            ' loop >' +
-            //'<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/video_short/' + vid_name + '" type="video/webm">' +
-            //'<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/video_short_mp4/' + vid_name.replace('webm', 'mp4') + '" type="video/mp4">' +
-            '</video>';
+            //oImg.innerHTML = '<video muted playsinline preload="metadata" crossorigin="anonymous" width=100%' + 
+            //' height=100%' + 
+            //' style="background-color:#ddd" class=' + 'hi' + 
+            //' loop >' +
+            ////'<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/video_short/' + vid_name + '" type="video/webm">' +
+            ////'<source src="https://s3.us-west-2.amazonaws.com/task-preprocessing-512-oregon/video_short_mp4/' + vid_name.replace('webm', 'mp4') + '" type="video/mp4">' +
+            //'</video>';
 
+            oImg.setAttribute('playsinline');
+            oImg.setAttribute('height', '100%');
+            oImg.setAttribute('width', '100%')
+            oImg.onload = function() {
+                ensureSameSize('returnedImageTitle');
+                resizeMinHeight('returnedImage');
+            }
             oImg.setAttribute('crossorigin', "anonymous");
             oImg.setAttribute('src', image_uri);
+            oImg.setAttribute('loop', 'True');
             all_videos.push(oImg);
             play_all(all_videos);
         }
