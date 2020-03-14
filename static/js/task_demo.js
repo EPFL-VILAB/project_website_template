@@ -424,7 +424,7 @@
 
         var checkTaskIntervalId = null;        
         var checkTaskCounter = 0;
-        var maxCheckTaskAttempts = 60
+        var maxCheckTaskAttempts = 120
         var checkTask = function(){
             if (checkTaskCounter >= maxCheckTaskAttempts) {
                 clearInterval(checkTaskIntervalId);
