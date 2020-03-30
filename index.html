@@ -300,12 +300,12 @@
 						</div>
 						<br>
 
-						<strong>1) What is consistency? </strong>
+						<strong>1) <b>What</b> is consistency? </strong>
 						<br>
 						Suppose an object detector detects a chair in a particular region of an image, while a depth estimator returns a flat surface for the same region. This presents an issue -- at least one of them has to be wrong, because they are <strong>inconsistent</strong>. More concretely, the first prediction domain (objects), and the second prediction domain (depth) are not independent and consequently enforce restraints on each other, often referred to as <strong>consistency</strong> constraints.
 						<br>
 						<br>
-						<strong>2) Why is it important to consider consistency in learning? </strong>
+						<strong>2) <b>Why</b> is it important to consider consistency in learning? </strong>
 						<br>
 						First, desired tasks in machine learning are usually predictions of <strong>different aspects of one shared reality</strong> (e.g., the scene that underlies an image). Hence inconsistencies among predictions imply contradictions, and therefore, inconsistency is inherently undesirable for downstream uses of the predictions, casting doubt on their validity. Second, consistency-based constraints are informative and can be used in learning to better fit the data or lower the sample complexity required. Also, they may reduce the tendency of neural networks towards learning surface statistics (superficial cues), by enforcing strong and specific constraints rooted in different geometric or physical aspects of one observation. 
                                                 <br>
@@ -321,7 +321,7 @@
                                                 <p>
 						<br>
 						<br>
-						<strong>3) How can we design a learning system that makes consistent predictions? </strong>
+						<strong>3) <b>How</b> can we design a learning system that makes consistent predictions? </strong>
 						<br>
 						This paper proposes a fully computational method that, given an arbitrary dictionary of desired tasks to solve, augments the learning objective in such a way that the predictions are explicitly encouraged to be cross-task consistent. The consistency constraints are completely learned from the data, rather than from human supervision or known analytic relationships (e.g., it is not necessary to encode that surface normals are the 3D derivative of depth, though such derivations could be used if available). Please see the figure below.
 						<br>
@@ -753,9 +753,6 @@ Rohan Suri, Zhangjie Cao, Jitendra Malik, Leonidas Guibas},<br>
 						</div>
 						<!-- /team -->
 
-						</div>	
-						<div class="row">
-
 						<!-- team -->
 						<div class="col-sm-3">
 							<div class="team">
@@ -802,7 +799,7 @@ Rohan Suri, Zhangjie Cao, Jitendra Malik, Leonidas Guibas},<br>
 						  /team -->
 
 						<!-- team -->
-						<div class="col-sm-2">
+						<div class="col-sm-3">
 							<div class="team">
 								<div class="team-img">
 									<img class="img-responsive" src="./img/malik.png" alt="">
@@ -823,7 +820,7 @@ Rohan Suri, Zhangjie Cao, Jitendra Malik, Leonidas Guibas},<br>
 
 
 						<!-- team -->
-						<div class="col-sm-2">
+						<div class="col-sm-3">
 							<div class="team">
 								<div class="team-img">
 									<img class="img-responsive" src="./img/leo2.png" alt="">
