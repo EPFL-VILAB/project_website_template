@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <link rel="shortcut icon" type="image/x-icon" href="triangle.ico">
-	<title>X-TaC | Cross-Task Consistency</title>
+	<title>X-TAC | Cross-Task Consistency</title>
 	<meta name="keywords" content="consistency, robust-learning, multitask, computer vision, vision, stanford, tasks, berkeley, EPFL">
 	<meta name="description" content="Robust Learning Through Cross-Task Consistency EPFL, Stanford, UC Berkeley. We propose a flexible and fully computational framework for learning, while respecting consistency across an arbitrary dictionary of tasks.">
 	<!--meta name="google-site-verification" content="tBb4aimY-zxYS_s_z86g6faxMX2G_I_Wp_kzbF3U_RM" />--
@@ -82,7 +82,7 @@
 				<div class="navbar-header">
 					<!-- Logo -->
 					<div class="navbar-brand">
-						<a class="logo-text" href="//consistency.epfl.ch">X-TaC</a>
+						<a class="logo-text" href="//consistency.epfl.ch">X-TAC</a>
 						<a href="http://svl.stanford.edu/">
 								<img class="logo" src="./img/stanford-logo.png" alt="logo">
 								<img class="logo-alt" src="./img/stanford-logo-white.png" alt="logo">
@@ -132,7 +132,7 @@
 					<div class="col-md-10 col-md-offset-1">
 						<div class="home-content">
 							<h2 class="white-text">Robust Learning Through <u>Cross</u>-<u>Ta</u>sk <u>C</u>onsistency</h2>
-							<h2 class="white-text">(<u>X-TaC</u>)</h2>
+							<h2 class="white-text">(<u>X-TAC</u>)</h2>
 							<!--<h3 class="white-text">(Under Development. Please check after March 12 for live demo & final content)</h3>	-->
 							<a class="white-text" href="">(website partially under development)</a><span style="opacity:0.8"></span>
 							<br>
@@ -186,11 +186,11 @@
 					<div class="service">
 						<div class="service-content service-row-2">																		
 							
-						<h3>Live Demo of Consistency</h3>
+						<h3>Live Demo</h3>
 												
 
 						<p>
-						Upload an image and see live results of consistency training for different vision tasks, all output from our networks.</p>
+						Upload an image and see results of consistency-based learning versus various baselines for different vision tasks.</p>
 						<br>
 						<a href="./demo"> <img width="6%" src="./img/icon-demo1.png" > </a>
 						
@@ -213,7 +213,7 @@
 						<div class="service-content service-row-1">																		
 							<i class="fa fa-file-text-o"></i>
 							<h3>Paper</h3>
-							<p>The paper and supplementary material describing the methodology and evaluation.</p>
+							<p>The paper and supplementary material.</p>
 							<a href="#api">PDF</a>																					
 						</div>
 					</div>
@@ -226,7 +226,7 @@
 						<div class="service-content  service-row-1">																		
 							<i class="fa fa-video-camera"></i>
 							<h3>Visualization</h3>
-							<p>Examine the result of consistency training via sample videos.</p>
+							<p>Examine the result of consistency-based learning via sample videos.</p>
 							<a href="./visuals">Visualization Page</a>							
 						</div>
 					</div>
@@ -239,7 +239,7 @@
 							<div class="service-content service-row-1">																		
 							<i class="fa fa-cogs"></i>
 							<h3>Models</h3>
-							<p>Download pretrained models with and without enforcing consistency.</p>
+							<p>Download the trained consistency models and baselines.</p>
 							<a href="#models">Pretrained Models</a>							
 
 						</div>
@@ -253,7 +253,7 @@
 							<div class="service-content service-row-1">																		
 							<i class="fa fa-github"></i>
 							<h3>Code</h3>
-							<p>View code, train consistency models, and run experiments for several vision tasks.</p>
+							<p>The code for training and testing consistency models and baselines.</p>
 							<a href="https://github.com/ConsistencyPaper">Get started</a>							
 
 						</div>
@@ -296,7 +296,7 @@
 
 						<div class="figure">
 						<img width="80%" src="./img_consistency/motiv10_all-eps-converted-to.png" alt="" class="center">
-						<p><strong>Consistency overview.</strong> The upper and lower rows show the results of consistency-based learning and the baseline (individual learning). The consistency-based model yields higher quality (especially at hard-to-predict fine-grained details) and more consistent predictions.</p>
+						<p><strong>Learning with Cross-Task Consistency.</strong> The upper and lower rows show the results of consistency-based learning and the baseline (individual learning). The consistency-based model yields higher quality (especially at hard-to-predict fine-grained details) and more consistent predictions.</p>
 						</div>
 						<br>
 
@@ -424,16 +424,16 @@
 			<div class="row">
 				<div class="row">
 					<div class="section-header text-center">
-						<h2 class="title">Consistency Visualization</h2>
+						<h2 class="title">Interactive Visualizations</h2>
 					</div>
-					<p>In order to evaluate the quality of the consistency training, we ran the consistency networks on a youtube video. Visit the Consistency Visualization page to analyze the performance. You can compare the results to several baselines.</p>
+					<p>In order to convey a more tangible understanding of consistency-based learning versus various baselines, we ran the models frame-by-frame on a youtube video. Visit the visualization page to specify the comparison configuration of your choice and analyze the performance. You can compare the results to several baselines.</p>
 					<div class="figure">
 						<video width="100%" height="464" playsinline autoplay center loop muted class="video-bg" id="video-bg" poster="./loading.gif">
 							<source src="./assets/videos/consistency3.mp4" type="video/mp4" alt="HTML5 background video">
 						</video>					
 					</div>
 					<br>
-					<button class="main-btn centering" onclick="window.location.href='./visuals';"><strong>View Visualizations</strong></button>
+					<button class="main-btn centering" onclick="window.location.href='./visuals';"><strong>View Interactive Visualizations</strong></button>
 				</div>
 
 			</div>
@@ -452,7 +452,7 @@
 
 				<!-- Section header -->
 				<div class="section-header text-center">
-					<h2 class="title">Pretrained Visual Estimators with and without Enforcing Consistency</h2>
+					<h2 class="title">Live Demo on User Uploaded Images and Download Trained Models</h2>
 				</div>
                                 <div class="col-sm-3">
                                 </div>
@@ -649,7 +649,7 @@ Rohan Suri, Zhangjie Cao, Jitendra Malik, Leonidas Guibas},<br>
 						<!-- /Section header -->
 
 						<!-- team -->
-						<div class="col-sm-2">
+						<div class="col-sm-3">
 							<div class="team">
 								<div class="team-img">
 									<img class="img-responsive" src="https://cs.stanford.edu/~amirz/index_files/amir18_sq.png" alt="">
@@ -670,7 +670,7 @@ Rohan Suri, Zhangjie Cao, Jitendra Malik, Leonidas Guibas},<br>
 						<!-- /team -->
 
 						<!-- team -->
-						<div class="col-sm-2">
+						<div class="col-sm-3">
 							<div class="team">
 								<div class="team-img">
 									<img class="img-responsive" src="./img/sasha.png" alt="">
@@ -691,7 +691,7 @@ Rohan Suri, Zhangjie Cao, Jitendra Malik, Leonidas Guibas},<br>
 						<!-- /team -->
 
 						<!-- team -->
-						<div class="col-sm-2">
+						<div class="col-sm-3">
 							<div class="team">
 								<div class="team-img">
 									<img class="img-responsive" src="./img/teresa.jpg" alt="">
@@ -712,7 +712,7 @@ Rohan Suri, Zhangjie Cao, Jitendra Malik, Leonidas Guibas},<br>
 						<!-- /team -->
 
 						<!-- team -->
-						<div class="col-sm-2">
+						<div class="col-sm-3">
 							<div class="team">
 								<div class="team-img">
 									<img class="img-responsive" src="./img/oguzhan.jpg" alt="">
@@ -733,7 +733,7 @@ Rohan Suri, Zhangjie Cao, Jitendra Malik, Leonidas Guibas},<br>
 						<!-- /team -->
 
 						<!-- team -->
-						<div class="col-sm-2">
+						<div class="col-sm-3">
 							<div class="team">
 								<div class="team-img">
 									<img class="img-responsive" src="./img/nikhil.jpeg" alt="">
@@ -741,7 +741,7 @@ Rohan Suri, Zhangjie Cao, Jitendra Malik, Leonidas Guibas},<br>
 										<div class="team-social">
 											
 										
-											<a href="//github.com/nikcheerla"><i class="fa fa-github"></i></a>
+											<a href=""><i class="fa fa-github"></i></a>
 										</div>
 									</div>
 								</div>
@@ -757,7 +757,7 @@ Rohan Suri, Zhangjie Cao, Jitendra Malik, Leonidas Guibas},<br>
 						<div class="row">
 
 						<!-- team -->
-						<div class="col-sm-2">
+						<div class="col-sm-3">
 							<div class="team">
 								<div class="team-img">
 									<img class="img-responsive" src="./img/rohan.jpeg" alt="">
@@ -765,8 +765,7 @@ Rohan Suri, Zhangjie Cao, Jitendra Malik, Leonidas Guibas},<br>
 										<div class="team-social">
 											
 										
-											<a href="//github.com/rohan-suri
-"><i class="fa fa-github"></i></a>
+											<a href=""><i class="fa fa-github"></i></a>
 										</div>
 									</div>
 								</div>
@@ -778,7 +777,7 @@ Rohan Suri, Zhangjie Cao, Jitendra Malik, Leonidas Guibas},<br>
 						</div>
 						<!-- /team -->
 
-						<!-- team -->
+						<!-- team  
 						<div class="col-sm-2">
 							<div class="team">
 								<div class="team-img">
@@ -786,11 +785,10 @@ Rohan Suri, Zhangjie Cao, Jitendra Malik, Leonidas Guibas},<br>
 									<div class="overlay">
 										<div class="team-social">
 											
-											<a href="https://caozhangjie.github.io/"><i class="fa fa-globe"></i></a>
-											<a href="https://scholar.google.com/citations?user=pA-TqMEAAAAJ"><i class="ai ai-google-scholar big-icon"></i></a>
+											<a href=""><i class="fa fa-globe"></i></a>
+											<a href=""><i class="ai ai-google-scholar big-icon"></i></a>
 
-											<a href="//github.com/caozhangjie
-"><i class="fa fa-github"></i></a>
+											<a href=""><i class="fa fa-github"></i></a>
 										</div>
 									</div>
 								</div>
@@ -801,7 +799,7 @@ Rohan Suri, Zhangjie Cao, Jitendra Malik, Leonidas Guibas},<br>
 								</div>
 							</div>
 						</div>
-						<!-- /team -->
+						  /team -->
 
 						<!-- team -->
 						<div class="col-sm-2">
@@ -935,23 +933,22 @@ Rohan Suri, Zhangjie Cao, Jitendra Malik, Leonidas Guibas},<br>
 	<script src="js/particles.js"></script>	
 	<script src="js/app.js"></script>
 
-<!-- Start of StatCounter Code for Default Guide -->
+<!-- Default Statcounter code for Consistency.epfl.ch
+https://consistency.epfl.ch/ -->
 <script type="text/javascript">
-var sc_project=11618266; 
+var sc_project=12227943; 
 var sc_invisible=1; 
-var sc_security="2b47cce8"; 
-var scJsHost = (("https:" == document.location.protocol) ?
-"https://secure." : "http://www.");
+var sc_security="03ed03c6"; 
+var sc_https=1; 
+var sc_remove_link=1; 
 </script>
 <script type="text/javascript"
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
-<noscript><div class="statcounter"><a title="Web Analytics"
-href="http://statcounter.com/" target="_blank"><img
-class="statcounter"
-src="//c.statcounter.com/11618266/0/2b47cce8/1/" alt="Web
-Analytics"></a></div></noscript>
-<!-- End of StatCounter Code for Default Guide -->
+<noscript><div class="statcounter"><img class="statcounter"
+src="https://c.statcounter.com/12227943/0/03ed03c6/1/"
+alt="Web Analytics"></div></noscript>
+<!-- End of Statcounter Code -->
 
 </body>
 
