@@ -22,8 +22,8 @@ import pdb
 #pdb.set_trace()
 #s3 = boto3.resource('s3')
 
-
-app = Flask(__name__, static_url_path='', static_folder="/")
+app = Flask(__name__)
+#app = Flask(__name__, static_url_path='', static_folder="/")
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['UPLOADED_PHOTOS_DEST'] = '../code/uploaded_photos/'
 app.config['INPUT_PHOTOS_DEST'] = '../code/other/demo_images'
@@ -215,9 +215,9 @@ sortOrder = [
         ];
 
 TARGET_TASKS = [map_to_display_names[t] for t in sortOrder]
-CAPTCHA_SECRET = "6Ler2EYUAAAAAI1hOvXBOpCUTwVZ6ZZ9y04P6YfY"
+#CAPTCHA_SECRET = "6Ler2EYUAAAAAI1hOvXBOpCUTwVZ6ZZ9y04P6YfY"
 # CAPTCHA_SECRET = "6LebLEoUAAAAAPf5vmOe-QjzVhAx8U-Q16Ut488i"
-
+CAPTCHA_SECRET = "6LcswN4UAAAAANsmSXmhqZzKtN039HjlR_QiAOBw"
 def validate_captcha(request):
     print({
             "secret": CAPTCHA_SECRET,
@@ -233,6 +233,11 @@ def validate_captcha(request):
             })
 
     return r.json()['success']
+
+
+@app.route("/")
+def home():
+    return render_template("index.html")
 
 @app.route('/runmodels', methods=['GET', 'POST'])
 def upload():
@@ -329,5 +334,5 @@ def ping():
     return "OK", 200, {'content-length':'2'}
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=False, port=80, threaded=True)
+    app.run(host='0.0.0.0', debug=False, port=8000, threaded=True)
 

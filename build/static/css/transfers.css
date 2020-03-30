@@ -1,0 +1,74 @@
+
+
+.dropdown-menu{
+    white-space: normal;
+    max-width: 500px;
+}
+
+
+.main-section {
+    min-height: 100vh;
+}
+
+h3, h4 {
+    color: #444;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    /* text-align: center; */
+    /* padding-left: 5px;     */
+}
+
+h4 {
+    font-size: 0.9em;
+}
+
+/* #sourcecolumn {
+    width: 300px;
+} */
+
+.sourcepickerclass {
+    width: 300px !important;
+}
+
+
+.vidtitle {
+    color: #666;
+    font-size: 0.9em;
+    margin-top: 10px;
+    margin-bottom: 0px;    
+    word-wrap: break-word;
+}
+
+/* The heart of the matter */
+.horiz-scroll {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+.horiz-scroll > .scrollable {
+    display: inline-block;
+    float: none;
+}
+  
+.rowtitle {
+    position: relative;
+    transform-origin:bottom;
+    height: 200%;
+    min-height: 100%;
+    /* top: 50%; */
+    /* left: 50%; */
+    text-align: bottom;;
+}
+
+
+.popover {
+	/* font-family: consolas, courier, monaco, menlo, monospace; */
+	font-family: 'Poppins', sans-serif !important;	
+	color: #000;
+	max-width: 1000%;		
+
+}
+
+[role="combobox"] span {
+    display: block;
+    width: 100%
+} 

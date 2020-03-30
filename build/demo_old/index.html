@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link rel="shortcut icon" type="image/x-icon" href="../triangle.ico">
+	<title>X-TaC</title>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round" rel="stylesheet">
+	
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" />
+	
+	<!-- Owl Carousel -->
+	<link type="text/css" rel="stylesheet" href="../css/owl.carousel.css" />
+	<link type="text/css" rel="stylesheet" href="../css/owl.theme.default.css" />
+
+	<!-- Magnific Popup -->
+	<link type="text/css" rel="stylesheet" href="../css/magnific-popup.css" />
+
+	<!-- Font Awesome Icon -->
+	<link rel="stylesheet" href="../css/font-awesome.min.css">
+
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="../css/style.css" />
+	<link type="text/css" rel="stylesheet" href="../css/tasks.css" />
+	
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-89674082-5"></script>
+<script>
+  var grecaptcha = null;
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-89674082-5');
+  
+</script>
+
+
+</head>
+
+<body>
+	<!-- Header -->
+	<header>
+		<!-- Nav -->
+		<nav id="nav" class="navbar">
+			<div class="container">
+
+				<div class="navbar-header">
+					<!-- Logo -->
+					<div class="navbar-brand">
+						<a class="logo-text" href="//consistency.epfl.ch">X-TaC</a>
+						<a href="http://svl.stanford.edu/">
+								<img class="logo" src="../img/stanford-logo.png" alt="logo">
+								<img class="logo-alt" src="../img/stanford-logo-white.png" alt="logo">
+						</a>
+						<a href="http://bair.berkeley.edu/">							
+								<img class="logo" src="../img/berkeley-logo.png" alt="logo">
+								<img class="logo-alt" src="../img/berkeley-logo-white.png" alt="logo">
+								<!-- <img class="logo-alt" src="../img/logo-alt.png" alt="logo"> -->
+						</a>
+					</div>
+					<!-- /Logo -->
+
+					<!-- Collapse nav button -->
+					<div class="nav-collapse">
+						<span></span>
+					</div>
+					<!-- /Collapse nav button -->
+				</div>
+
+				<!--  Main navigation  -->
+				<ul class="main-nav nav navbar-nav navbar-right">
+					<li><a href="/consistency/index.html#home">Home</a></li>
+					<li><a href="/consistency/index.html#models">Pretrained Models</a></li>
+					<li><a href="/consistency/index.html#paper">Paper</a></li>					
+					<li><a href="/consistency/index.html#team">Team</a></li>
+					<!-- <li class="has-dropdown"><a href="#blog">Blog</a> -->
+						<!-- <ul class="dropdown"> -->
+							<!-- <li><a href="blog-single.html">blog post</a></li> -->
+						<!-- </ul> -->
+					<!-- </li> -->
+					<!-- <li><a href="#contact">Contact</a></li> -->
+				</ul>
+				<!-- /Main navigation -->
+
+			</div>
+		</nav>
+		<!-- /Nav -->
+	</header>
+	<!-- /Header -->
+	<div id="content" class="section sm-padding bg-grey main-section">
+		<div class="container">
+					
+			<!-- Section header -->
+			<div class="section-header text-center">
+				<h2 class="title">Consistency Demo
+                                <br>
+                                <small>(Under Development. Please check after March 12)</small>
+                                </h2>
+			</div>
+			<div class="container">			
+				<div class="row">	
+					<div class="content-body">			
+						<p> 
+							We provide a demo where you can upload (or use a preselected image) and visualize the outputs of different consistency-trained networks. The pretrained consistency models can be <a href="https://github.com/ConsistencyPaper">downloaded here.</a>
+						</p>
+						<p>
+							Our networks were trained on 3 million images of varied indoor scenes. You can see the statistics of the training set <a href="https://github.com/StanfordVL/taskonomy/tree/master/taskbank">here</a>. If your query image severly deviates from these statistics, the performance is expected to degrade. Processing usually takes around 30 seconds.
+						</p>
+					</div>		
+				</div>			
+			</div>
+		</div>
+	</div>
+	
+	<div id="content" class="section sm-padding">			
+		<!-- Container -->
+		<div class="container">
+			<!-- Row -->
+			<div class="row">
+				<!-- task form -->
+				<div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
+													
+					<div class='row no-pad'>
+						<div id='source-section'>
+						</div>
+					</div>
+
+					<div class='samples row'>
+						<p>Sample Images (click to use).</p>
+						<img id="sample1" class="sample-img col-xs-4 no-pad"  src="../img/sample_keep_1.png" alt="sample 1">							
+						<img id="sample4" class="sample-img col-xs-4 no-pad"  src="../img/sample_keep_4.png" alt="sample 4">							
+						<img id="sample3" class="sample-img col-xs-4 no-pad"  src="../img/sample_keep_3.png" alt="sample 3">							
+					</div>
+						
+					<!-- <form method="POST" enctype=multipart/form-data action="http://localhost:8886/runmodels" target=formResponse>								 -->
+					<div class="row sm-padding ">
+						<form id="uploadForm" method="POST" enctype=multipart/form-data action="https://consistency.epfl.ch:80/runmodels" target=formResponse>
+							<div>								
+								<div>
+										<label id="imageUploadInputLabel" for="imageUploadInput">Image to upload:</label>
+										<input type="file" id="imageUploadInput" name="photo" accept="image/*" />
+								</div>
+
+								<input id="uploadToken" type="text" name="uploadToken" style="display:none">
+								<input style="margin-top: 35px" id="submitDemo" type="submit" class="btn btn-info" value="Run inference">
+								<div class="g-recaptcha" data-theme="light" data-sitekey="6LcswN4UAAAAAPDUWfiDZio6vG0VjuAP2QbvJyV2" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;"></div> 
+							</div>
+						
+						</form>
+						<iframe name="formResponse" style="display:none;" ></iframe>
+					</div>
+
+				</div>
+				<!-- /task form -->
+	
+				<div id="output-section" class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
+				</div>
+			</div>
+			<!-- /Row -->
+		</div>
+		<!-- /Container -->
+	</div>
+	
+
+
+
+	<!-- Footer -->
+	<footer id="footer" class="sm-padding bg-dark footer">
+
+		<!-- Container -->
+		<div class="container">
+
+			<!-- Row -->
+			<div class="row">
+
+				<div class="col-md-12">
+
+					<!-- footer logo -->
+					
+							
+					
+					<!-- /footer logo -->
+
+					<!-- footer follow -->
+					<ul class="footer-follow">
+						<li><a href="https://github.com/ConsistencyPaper"><i class="fa fa-globe"></i></a></li>
+						<li><a href="//twitter.com/ConsistencyPaper"><i class="fa fa-twitter"></i></a></li>
+						<!-- <li><a href="#"><i class="fa fa-google-plus"></i></a></li> -->
+						<!-- <li><a href="#"><i class="fa fa-instagram"></i></a></li> -->
+						<!-- <li><a href="#"><i class="fa fa-linkedin"></i></a></li> -->
+						<!-- <li><a href="#"><i class="fa fa-youtube"></i></a></li> -->
+					</ul>
+					<!-- /footer follow -->
+
+					<!-- footer copyright -->
+					<div class="footer-copyright">
+						<p>Copyright © 2020. All Rights Reserved.</p>
+					</div>
+					<!-- /footer copyright -->
+
+				</div>
+
+			</div>
+			<!-- /Row -->
+
+		</div>
+		<!-- /Container -->
+
+	</footer>
+	<!-- /Footer -->
+
+	<!-- Back to top -->
+	<div id="back-to-top"></div>
+	<!-- /Back to top -->
+
+	<!-- Preloader -->
+	<!-- <div id="preloader">
+		<div class="preloader">
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div> -->
+	<!-- /Preloader -->
+
+	<!-- jQuery Plugins -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="../js/plugins.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<script src="../js/waypoints.min.js"></script>
+	<script src="../js/jquery.counterup.min.js"></script>
+	
+	<!-- <script type="text/javascript" src="js/jquery.min.js"></script> -->
+	<!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
+
+	<script type="text/javascript" src="../js/owl.carousel.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.magnific-popup.js"></script>
+	<script type="text/javascript" src="../js/main.js"></script>
+	<script type="text/javascript" src="../js/task_demo.js"></script>
+	
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+	
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=11618266; 
+var sc_invisible=1; 
+var sc_security="2b47cce8"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="//c.statcounter.com/11618266/0/2b47cce8/1/" alt="Web
+Analytics"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+</body>
+
+</html>

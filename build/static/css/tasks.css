@@ -1,0 +1,93 @@
+.bootstrap-select{
+    display: hidden;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    background-color: #333;
+  
+    margin: 100px auto;
+    -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
+    animation: sk-rotateplane 1.2s infinite ease-in-out;
+  }
+  
+  @-webkit-keyframes sk-rotateplane {
+    0% { -webkit-transform: perspective(120px) }
+    50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+    100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+  }
+  
+  @keyframes sk-rotateplane {
+    0% { 
+      transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+      -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg) 
+    } 50% { 
+      transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+      -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg) 
+    } 100% { 
+      transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+      -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    }
+  }
+
+  .thumbnail2 {
+    position: relative;
+    width: 256px;
+    height: 256px;
+    overflow: hidden;
+  }
+  .thumbnail2 img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 100%;
+    width: auto;
+    -webkit-transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+  }
+  .thumbnail2 img.portrait {
+    width: 100%;
+    height: auto;
+  }
+
+  #output-section {
+    margin-bottom: 20px;
+  }
+
+  .sample-img {
+    margin: 0px 0px;
+    padding: 0px 5px 0px 0px !important;
+    opacity: 0.7;    
+  }
+  
+
+  .sample-img.selected {
+    opacity: 1.0;
+  }
+
+  .samples {
+    margin-top: 15px;
+  }
+  .samples > p {
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+  }
+  
+  #source-section {
+    z-index: 9999;
+    background-color:rgba(255, 255, 255, 0.8);
+    padding-top: 10px !important;
+    padding-bottom: 15px !important;
+  }
+
+
+  .image-holder {
+    margin-bottom: 20px;
+    /* overflow: hidden; */
+  }
+
+  .returnedImageTitle {
+    /* margin-top: 20px;     */
+  }

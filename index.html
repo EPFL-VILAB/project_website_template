@@ -277,7 +277,7 @@
 
 
 	<!-- Abstract -->
-	<div id="abstract" class="section md-padding">
+	<div id="abstract" class="section sm-padding">
 
 		<!-- Container -->
 		<div class="container">
@@ -334,8 +334,7 @@
 						<img width="80%" src="./img_consistency/graph_4.png" alt=""  class="center">
 						<p><strong>Enforcing cross-task consistency.</strong> <strong>(a)</strong> shows the typical multitask setup where predictors between domains are trained independently (or with a shared encoder and separate decoder heads). Both neither explicitly enforce cross-task consistency among predictions nor empirically achieve that. <strong>(b)</strong> demonstrates the <i><strong>consistency constraint</strong></i>, over three domains. <strong>(c)</strong> shows how the triangle unit from (b) can be an element of a larger system of domains. Finally, <strong>(d)</strong> illustrates the generalized case where in such a larger system of domains, consistency can be enforced along any paths of arbitrary length, as long as their beginning and end are the same. When two different paths with the same endpoints are enforced to yield similar results, that implies none of the middle domains introduced conflicting information, as far as the prediction job from the input endpoint to the output endpoint was concerned. This is the general concept behind <i><strong>path-independence</strong></i> or <i><strong>conservativeness</strong></i>. The triangle in (b) is the smallest unit of such paths.</p>
 					</div>
-				<br>
-				<br>
+		
 					<div class="figure">
 						<img width="80%" src="./img_consistency/method_qualitative_2-eps-converted-to.png" alt="" class="center">
 						<p><strong>Enforcing cross-task consistency using perceptual losses illustrated with an example.</strong>
@@ -347,16 +346,6 @@
 <strong>Bottom row</strong> shows the ground truth. (The convention for visualizing normals: redder is righter, greener is more downwards, bluer is more towards the camera).
 </p>
 					</div>
-
-					
-
-
-					
-					
-
-				<!-- Second row of figures (Fc graph of weights and atlas force video)  -->
-				
-				<!-- Second row of figures (Fc graph of weights and atlas force video)  -->
 
                 
 	
@@ -375,7 +364,7 @@
 
 
 	<!-- Energy -->
-	<div id="energy" class="section md-padding">
+	<div id="energy" class="section sm-padding">
 
 		<!-- Container -->
 		<div class="container">
@@ -391,7 +380,7 @@
 				<!-- /Section header -->
 				<div class="abstract-body col-md-12">
 					<p> 
-						We quantify the amount of inconsistency in a prediction made for a query using an energy-based quantity called <strong>Consistency Energy</strong>. It is defined to be the sum of squared <strong>pairwise inconsistencies<strong>. This is also equivalent to the <strong>sample variance<strong> of the predictions. The consistency energy is an <strong>intrinsic quantity of the system</strong>, as it requires no ground truth and can be computed without any supervision. As shown below, it strongly correlates with estimation error and sample distributions.
+						We quantify the amount of inconsistency in a prediction made for a query using an energy-based quantity called <strong>Consistency Energy</strong>. It is defined to be the sum of squared <strong>pairwise inconsistencies</strong>. This is also equivalent to the <strong>sample variance</strong> of the predictions. The consistency energy is an <strong>intrinsic quantity of the system</strong>, as it requires no ground truth and can be computed without any supervision. As shown below, it strongly correlates with estimation error and sample distributions.
 
 						
 					</p>
@@ -403,7 +392,7 @@
 						<p><strong>Analysis of consistency energy.</strong> <strong>Left:</strong> The consistency energy shown over the course of training, demonstrating a successful optimization to achieve more consistent results, ending significantly lower than that of independent predictions and multi-task baselines. <strong>Middle:</strong> Energy is predictive of estimation error, with a Pearson correlation coefficient of 0.67. <strong>Right:</strong> Out-of-domain samples (blue, red) have an energy distribution significantly higher than in-distribution samples (grey), hence energy can be used as a strong unsupervised method for detecting domain shifts in the data (AUC=0.99).</p>
 					</div>
 				
-		
+				</div>		
 
 
 			</div>
@@ -419,7 +408,7 @@
 			
 
 	<!-- Transfers -->
-	<div id="transfers" class="section md-padding">
+	<div id="transfers" class="section sm-padding">
 		<div class="container">
 			<div class="row">
 				<div class="row">
@@ -442,7 +431,7 @@
 	<!-- /Transfers -->
 			
 	<!-- Pretrained -->
-	<div id="models" class="section md-padding">
+	<div id="models" class="section sm-padding">
 
 		<!-- Container -->
 		<div class="container">
@@ -532,7 +521,7 @@
 					<div class="row">
 						<div class="col-lg-5 col-m-5 col-sm-5 col-xs-12">
 							<a href="./Arxiv20_consistency.pdf">
-								<img style="width:80%" class="paper-img layered-paper" src=./img_consistency/paper_consistency.png>
+								<img style="width:35%" class="paper-img layered-paper" src=./img_consistency/paper_consistency.png>
 							</a>
 						</div>
 						<div class="col-lg-7 col-m-7 col-sm-7 col-xs-12">

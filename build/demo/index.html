@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <link rel="shortcut icon" type="image/x-icon" href="../triangle.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="../static/triangle.ico">
 	<title>X-TaC</title>
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 
@@ -14,21 +14,21 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round" rel="stylesheet">
 	
 	<!-- Bootstrap -->
-	<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" />
+	<link type="text/css" rel="stylesheet" href="../static/css/bootstrap.min.css" />
 	
 	<!-- Owl Carousel -->
-	<link type="text/css" rel="stylesheet" href="../css/owl.carousel.css" />
-	<link type="text/css" rel="stylesheet" href="../css/owl.theme.default.css" />
+	<link type="text/css" rel="stylesheet" href="../static/css/owl.carousel.css" />
+	<link type="text/css" rel="stylesheet" href="../static/css/owl.theme.default.css" />
 
 	<!-- Magnific Popup -->
-	<link type="text/css" rel="stylesheet" href="../css/magnific-popup.css" />
+	<link type="text/css" rel="stylesheet" href="../static/css/magnific-popup.css" />
 
 	<!-- Font Awesome Icon -->
-	<link rel="stylesheet" href="../css/font-awesome.min.css">
+	<link rel="stylesheet" href="../static/css/font-awesome.min.css">
 
 	<!-- Custom stlylesheet -->
-	<link type="text/css" rel="stylesheet" href="../css/style.css" />
-	<link type="text/css" rel="stylesheet" href="../css/tasks.css" />
+	<link type="text/css" rel="stylesheet" href="../static/css/style.css" />
+	<link type="text/css" rel="stylesheet" href="../static/css/tasks.css" />
 	
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -64,12 +64,12 @@
 					<div class="navbar-brand">
 						<a class="logo-text" href="//consistency.epfl.ch">X-TaC</a>
 						<a href="http://svl.stanford.edu/">
-								<img class="logo" src="../img/stanford-logo.png" alt="logo">
-								<img class="logo-alt" src="../img/stanford-logo-white.png" alt="logo">
+								<img class="logo" src="../static/img/stanford-logo.png" alt="logo">
+								<img class="logo-alt" src="../static/img/stanford-logo-white.png" alt="logo">
 						</a>
 						<a href="http://bair.berkeley.edu/">							
-								<img class="logo" src="../img/berkeley-logo.png" alt="logo">
-								<img class="logo-alt" src="../img/berkeley-logo-white.png" alt="logo">
+								<img class="logo" src="../static/img/berkeley-logo.png" alt="logo">
+								<img class="logo-alt" src="../static/img/berkeley-logo-white.png" alt="logo">
 								<!-- <img class="logo-alt" src="../img/logo-alt.png" alt="logo"> -->
 						</a>
 					</div>
@@ -84,10 +84,12 @@
 
 				<!--  Main navigation  -->
 				<ul class="main-nav nav navbar-nav navbar-right">
-					<li><a href="/consistency/index.html#home">Home</a></li>
-					<li><a href="/consistency/index.html#models">Pretrained Models</a></li>
-					<li><a href="/consistency/index.html#paper">Paper</a></li>					
-					<li><a href="/consistency/index.html#team">Team</a></li>
+					<li><a href="//consistency.epfl.ch/index.html#home">Home</a></li>
+                                        <li><a href="//consistency.epfl.ch/demo">Live Demo</a></li>
+                                        <li><a href="//consistency.epfl.ch/visuals">Visualization</a></li>
+					<li><a href="//consistency.epfl.ch/index.html#models">Pretrained Models</a></li>
+					<li><a href="//consistency.epfl.ch/index.html#paper">Paper</a></li>					
+					<li><a href="//consistency.epfl.ch/index.html#team">Team</a></li>
 					<!-- <li class="has-dropdown"><a href="#blog">Blog</a> -->
 						<!-- <ul class="dropdown"> -->
 							<!-- <li><a href="blog-single.html">blog post</a></li> -->
@@ -107,9 +109,7 @@
 					
 			<!-- Section header -->
 			<div class="section-header text-center">
-				<h2 class="title">Consistency Demo
-                                <br>
-                                <small>(Under Development. Please check after March 5)</small>
+				<h2 class="title">Consistency Live Demo
                                 </h2>
 			</div>
 			<div class="container">			
@@ -119,7 +119,7 @@
 							We provide a demo where you can upload (or use a preselected image) and visualize the outputs of different consistency-trained networks. The pretrained consistency models can be <a href="https://github.com/ConsistencyPaper">downloaded here.</a>
 						</p>
 						<p>
-							Our networks were trained on 3 million images of varied indoor scenes. You can see the statistics of the training set <a href="https://github.com/StanfordVL/taskonomy/tree/master/taskbank">here</a>. If your query image severly deviates from these statistics, the performance is expected to degrade. Processing usually takes around 30 seconds.
+							Our networks were trained on 3 million images of varied indoor scenes. You can see the statistics of the training set <a href="https://github.com/StanfordVL/taskonomy/tree/master/taskbank">here</a>. If your query image severly deviates from these statistics, the performance is expected to degrade. <u>Running the demo usually takes around 30 seconds, depending on the traffic.</u>.
 						</p>
 					</div>		
 				</div>			
@@ -142,23 +142,23 @@
 
 					<div class='samples row'>
 						<p>Sample Images (click to use).</p>
-						<img id="sample1" class="sample-img col-xs-4 no-pad"  src="../img/sample_keep_1.png" alt="sample 1">							
-						<img id="sample4" class="sample-img col-xs-4 no-pad"  src="../img/sample_keep_4.png" alt="sample 4">							
-						<img id="sample3" class="sample-img col-xs-4 no-pad"  src="../img/sample_keep_3.png" alt="sample 3">							
+						<img id="sample1" class="sample-img col-xs-4 no-pad"  src="../static/img/sample_keep_1.png" alt="sample 1">							
+						<img id="sample4" class="sample-img col-xs-4 no-pad"  src="../static/img/sample_keep_4.png" alt="sample 4">							
+						<img id="sample3" class="sample-img col-xs-4 no-pad"  src="../static/img/sample_keep_3.png" alt="sample 3">							
 					</div>
 						
 					<!-- <form method="POST" enctype=multipart/form-data action="http://localhost:8886/runmodels" target=formResponse>								 -->
 					<div class="row sm-padding ">
-						<form id="uploadForm" method="POST" enctype=multipart/form-data action="http://consistency.epfl.ch:80/runmodels" target=formResponse>
+						<form id="uploadForm" method="post" enctype=multipart/form-data action="https://storage.googleapis.com/task-demo-results" target=formResponse>
 							<div>								
 								<div>
 										<label id="imageUploadInputLabel" for="imageUploadInput">Image to upload:</label>
-										<input type="file" id="imageUploadInput" name="photo" accept="image/*" />
+										<input type="file" id="imageUploadInput" name="file" accept="image/*" />
 								</div>
 
-								<input id="uploadToken" type="text" name="uploadToken" style="display:none">
+								<input id="uploadToken" type="text" name="key" value="uploadToken" style="display:none">
 								<input style="margin-top: 35px" id="submitDemo" type="submit" class="btn btn-info" value="Run inference">
-								<div class="g-recaptcha" data-theme="light" data-sitekey="6Ler2EYUAAAAANww9OMcPj4BPGhTeldvUI0QydPm" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;"></div> 
+								<div class="g-recaptcha" data-theme="light" data-sitekey="6LcswN4UAAAAAPDUWfiDZio6vG0VjuAP2QbvJyV2" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;"></div> 
 							</div>
 						
 						</form>
@@ -241,19 +241,19 @@
 
 	<!-- jQuery Plugins -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="../js/plugins.js"></script>
+	<script src="../static/js/plugins.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	
-	<script src="../js/waypoints.min.js"></script>
-	<script src="../js/jquery.counterup.min.js"></script>
+	<script src="../static/js/waypoints.min.js"></script>
+	<script src="../static/js/jquery.counterup.min.js"></script>
 	
 	<!-- <script type="text/javascript" src="js/jquery.min.js"></script> -->
 	<!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
 
-	<script type="text/javascript" src="../js/owl.carousel.min.js"></script>
-	<script type="text/javascript" src="../js/jquery.magnific-popup.js"></script>
-	<script type="text/javascript" src="../js/main.js"></script>
-	<script type="text/javascript" src="../js/task_demo.js"></script>
+	<script type="text/javascript" src="../static/js/owl.carousel.min.js"></script>
+	<script type="text/javascript" src="../static/js/jquery.magnific-popup.js"></script>
+	<script type="text/javascript" src="../static/js/main.js"></script>
+	<script type="text/javascript" src="../static/js/task_demo.js"></script>
 	
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
