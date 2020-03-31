@@ -333,7 +333,7 @@
         return [imageHolder, oImg];
     }
 
-    var loadFile = function(event) {
+    var loadFile = async function(event) {
         var fileSizeInMB = $('#imageUploadInput')[0].files[0].size/1024/1024;
         if (fileSizeInMB > 10.0) {
             alert('Please ensure upload is < 10MB. The current image size is: ' + fileSizeInMB.toFixed(2) + "MB.");
@@ -345,10 +345,10 @@
         var image_uri = URL.createObjectURL(event.target.files[0])
         //showSourceImage(image_uri);
        
-        if (fileSizeInMB > 10.5) {
+        if (fileSizeInMB > 1.5) {
         //alert('downsampling');
         //alert(resizedataURL(image_uri, 512, 512));
-        var imgss = resizedataURL(image_uri, 512, 512);
+        var imgss = await resizedataURL(image_uri, 512, 512);
         //alert(imgss.src);
 
         //var imgss = new Image();
@@ -372,54 +372,13 @@
                 
         //}
         //alert(imgss2.src);
-       
-        image_uri = imgss;
-        //alert(event.target.files[0]);
-        //alert(event.target.files[0].value);
-        //alert(event.target.files);
-        //alert(event.target.files.value);
-        //alert($('#imageUploadInput').value);
-        //alert($('#imageUploadInput')[0].value);
-        //alert($('#imageUploadInput')[0].files[0].value);
-        //alert($('#imageUploadInput')[0].files[0]);
-        //document.getElementById("imageUploadInput")[0].src=image_uri;
-        //alert(document.getElementById("imageUploadInput"));
-        //alert(aaa);
-        //alert(aaa.value);
-        //alert(aaa.src);
 
-        //var img_fin = document.getElementById("imageUploadInput");
-        //img_fin.src = image_uri;
-
-        var form = document.getElementById("uploadForm");
-        alert(form.value);
-        alert(form.imageUploadInput);
-        alert(form.imageUploadInput.value);
-        //form.imageUploadInput.value = '';
-        alert(form.imageUploadInput.value);
-        form.imageUploadInput = image_uri;
-        //form.append("file", image_uri, "file");
-        alert(form.imageUploadInput);
-        alert(form.imageUploadInput.value);
-
-        var data = new FormData();
-        data.append("file", image_uri, "file");
-
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://storage.googleapis.com/task-demo-results', true);
-        xhr.send(data);        
-        alert('sent');
         }
 
-        //alert(imgss);      
+        alert(imgss);      
       
         //alert(image_uri);
         showSourceImage(image_uri);
-
-        //alert($('#imageUploadInput').value);
-        //alert($('#imageUploadInput')[0].value);
-        //alert($('#imageUploadInput')[0].files[0].value);
-        //alert($('#imageUploadInput')[0].files[0]);
  
     };
 

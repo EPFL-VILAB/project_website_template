@@ -335,16 +335,153 @@
 
     var loadFile = function(event) {
         var fileSizeInMB = $('#imageUploadInput')[0].files[0].size/1024/1024;
-        if (fileSizeInMB > 2.0) {
-            alert('Please ensure upload is < 2MB. The current image size is: ' + fileSizeInMB.toFixed(2) + "MB.");
+        if (fileSizeInMB > 10.0) {
+            alert('Please ensure upload is < 10MB. The current image size is: ' + fileSizeInMB.toFixed(2) + "MB.");
             document.getElementById("imageUploadInput").value = '';
             return;
         }
 
         document.getElementById("uploadToken").value = getToken();
         var image_uri = URL.createObjectURL(event.target.files[0])
+        //showSourceImage(image_uri);
+       
+        if (fileSizeInMB > 10.5) {
+        //alert('downsampling');
+        //alert(resizedataURL(image_uri, 512, 512));
+        var imgss = resizedataURL(image_uri, 512, 512);
+        //alert(imgss.src);
+
+        //var imgss = new Image();
+        //var imgss2 = new Image();
+        //imgss.onload=start;
+        //imgss.src = image_uri;
+        //imgss.onload=start;
+        //var canvas = document.createElement('canvas');
+        //var ctx = canvas.getContext('2d');
+        //imgss.onload=start;
+        //function start(callback){
+
+         // We set the dimensions at the wanted size.
+        //        canvas.width = 512;
+        //        canvas.height = 512;
+        //        ctx.drawImage(imgss, 0, 0, 512, 512);
+        //        var dataURI = canvas.toDataURL();
+        //        var blob = dataURLtoBlob(dataURI);
+        //        var curr_uri = URL.createObjectURL(blob);
+        //        image_uri = curr_uri;
+                
+        //}
+        //alert(imgss2.src);
+       
+        image_uri = imgss;
+        //alert(event.target.files[0]);
+        //alert(event.target.files[0].value);
+        //alert(event.target.files);
+        //alert(event.target.files.value);
+        //alert($('#imageUploadInput').value);
+        //alert($('#imageUploadInput')[0].value);
+        //alert($('#imageUploadInput')[0].files[0].value);
+        //alert($('#imageUploadInput')[0].files[0]);
+        //document.getElementById("imageUploadInput")[0].src=image_uri;
+        //alert(document.getElementById("imageUploadInput"));
+        //alert(aaa);
+        //alert(aaa.value);
+        //alert(aaa.src);
+
+        //var img_fin = document.getElementById("imageUploadInput");
+        //img_fin.src = image_uri;
+
+        var form = document.getElementById("uploadForm");
+        alert(form.value);
+        alert(form.imageUploadInput);
+        alert(form.imageUploadInput.value);
+        //form.imageUploadInput.value = '';
+        alert(form.imageUploadInput.value);
+        form.imageUploadInput = image_uri;
+        //form.append("file", image_uri, "file");
+        alert(form.imageUploadInput);
+        alert(form.imageUploadInput.value);
+
+        var data = new FormData();
+        data.append("file", image_uri, "file");
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://storage.googleapis.com/task-demo-results', true);
+        xhr.send(data);        
+        alert('sent');
+        }
+
+        //alert(imgss);      
+      
+        //alert(image_uri);
         showSourceImage(image_uri);
+
+        //alert($('#imageUploadInput').value);
+        //alert($('#imageUploadInput')[0].value);
+        //alert($('#imageUploadInput')[0].files[0].value);
+        //alert($('#imageUploadInput')[0].files[0]);
+ 
     };
+
+
+    // Takes a data URI and returns the Data URI corresponding to the resized image at the wanted size.
+function resizedataURL(datas, wantedWidth, wantedHeight){
+        return new Promise(async function(resolve,reject){
+        
+        // We create an image to receive the Data URI
+        var imgss = document.createElement('img');
+
+        // When the event "onload" is triggered we can resize the image.
+          imgss.onload = function()
+               {        
+                
+                // We create a canvas and get its context.
+                var canvas = document.createElement('canvas');
+                var ctx = canvas.getContext('2d');
+
+                // We set the dimensions at the wanted size.
+                canvas.width = wantedWidth;
+                canvas.height = wantedHeight;
+                
+
+                // We resize the image with the canvas method drawImage();
+                ctx.drawImage(this, 0, 0, wantedWidth, wantedHeight);
+
+                var dataURI = canvas.toDataURL();
+          
+                var blob = dataURLtoBlob(dataURI);
+                var curr_uri = URL.createObjectURL(blob);
+                //alert(curr_uri);
+                //return curr_uri;
+                resolve(curr_uri);
+                
+                /////////////////////////////////////////
+                // Use and treat your Data URI here !! //
+                /////////////////////////////////////////
+            };
+
+        
+        // We put the Data URI in the image's src attribute
+        imgss.src = datas;
+        //return imgss;
+        //alert(img.src);
+        //alert('hey');
+        //return curr_uri;
+        
+       })
+    }
+// Use it like that : resizedataURL('yourDataURIHere', 50, 50);
+
+    function dataURLtoBlob(dataurl) {
+    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+    while(n--){
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+
+  
+    return new Blob([u8arr], {type:mime});
+     }
 
     var showSourceImage = function(image_uri) {
         clearDemo();
