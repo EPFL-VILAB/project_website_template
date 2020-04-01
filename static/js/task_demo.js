@@ -668,7 +668,9 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
         // var titleElem = document.createElement("div");
         // videoHolder.innerHTML = "<h4 style='float:right; transform: translateX(-100%) rotate(-90deg) ;'>" + title + "</h4>";
         videoHolder.innerHTML = "<h3 style='text-align:center;    text-decoration: underline; '>" + title + "</h4>";
-
+        if (title=="3D Ken Burns"){//append link 
+        videoHolder.innerHTML = "<h3 style='text-align:center;    text-decoration: underline; '>" + title + "<a href=https://github.com/sniklaus/3d-ken-burns>*</a>" + "</h4>";
+        }
         // videoHolder.appendChild(titleElem);
         return videoHolder;
     }
