@@ -63,6 +63,15 @@
         'rgb2reshading_taskonomy': 'Taskonomy Baseline Reshading',
         'energy': 'Consistency Energy of Query Image (Red Line)',
     }
+
+
+    var random_queries = {
+     '0': 'aay5ej274l39n',
+     '1': 'aaasqk1jrm3',
+     '2': 'aacwe8pf8afa4',
+
+    }
+
     var display_names_to_task = []; // or var revMap = {};
     Object.keys(map_to_display_names).forEach(function(key) { 
         display_names_to_task[map_to_display_names[key]] = key;   
@@ -766,12 +775,22 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
                     this.classList.remove('selected');
                 }
             });
-            showSourceImage(this.src);
+            //showSourceImage(this.src);
+
+            //var pick_random = random_queries[Math.floor(Math.random()*2)];
+            
+           
 
             var titleElem = makeRowTitle("Consistency-based Learning Prediction Results");
             document.getElementById("output-section").appendChild(titleElem);
 
             var uploadtoken = document.getElementById("uploadToken").value;
+            if (this.id=='random'){
+            var uploadtoken = random_queries[Math.floor(Math.random()*3)];
+            this.src = "https://storage.googleapis.com/task-demo-results/predictions/" + uploadtoken + ".png"
+            }
+
+            showSourceImage(this.src);
             
             for (var t in VALID_TARGETS) {
                 var task = VALID_TARGETS[t];
