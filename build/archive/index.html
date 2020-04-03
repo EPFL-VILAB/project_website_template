@@ -109,22 +109,18 @@
 					
 			<!-- Section header -->
 			<div class="section-header text-center">
-				<h2 class="title">Consistency Live Demo
+				<h2 class="title">Consistency Live Demo Archive
                                 </h2>
 			</div>
 			<div class="container">			
 				<div class="row">	
 					<div class="content-body">			
 						<p> 
-							We provide a demo where you can upload (or use a preselected image) and visualize the outputs of different consistency-trained networks. The pretrained consistency models can be <a href="https://github.com/ConsistencyPaper">downloaded here.</a>
+						   Below you can reach to the previously uploaded user queries and their corresponding results.<br>
 						</p>
-						<p>
+						<!--p>
 							Our networks were trained on 3 million images of varied indoor scenes. You can see the statistics of the training set <a href="https://github.com/StanfordVL/taskonomy/tree/master/taskbank">here</a>. If your query image severly deviates from these statistics, the performance is expected to degrade. <u>Running the demo usually takes around 30 seconds, depending on the traffic.</u>.
-						</p>
-                                                <p>
-                                                        You can also visit the <a href="https://consistency.epfl.ch/archive">archive page</a> to examine previously uploaded query images and their corresponding results.
-                                                </p>
-
+						</p-->
 					</div>		
 				</div>			
 			</div>
@@ -145,31 +141,32 @@
 					</div>
 
 					<div class='samples row'>
-						<p>Sample Images (click to use). Select dice image to get a previous query result randomly.</p>
+						<p>Archived Images (click to use)</p>
 						<img id="sample1" class="sample-img col-xs-3 no-pad"  src="../static/img/sample_keep_1.png" alt="sample 1">							
 						<img id="sample4" class="sample-img col-xs-3 no-pad"  src="../static/img/sample_keep_4.png" alt="sample 4">							
-						<img id="sample3" class="sample-img col-xs-3 no-pad"  src="../static/img/sample_keep_3.png" alt="sample 3">							
-                                                <img id="random" class="sample-img col-xs-3 no-pad"  src="../static/img/random-dice.jpg" alt="random">
+						<img id="sample3" class="sample-img col-xs-3 no-pad"  src="../static/img/sample_keep_3.png" alt="sample 3">
+                                                <img id="aaasqk1jrm3" class="sample-img col-xs-3 no-pad"  src="../static/img/archived_queries/aaasqk1jrm3.png" alt="archive">
+                                                <img id="aay5ej274l39n" class="sample-img col-xs-3 no-pad"  src="../static/img/archived_queries/aay5ej274l39n.png" alt="archive"> 							
+                                                <img id="aacwe8pf8afa4" class="sample-img col-xs-3 no-pad"  src="../static/img/archived_queries/aacwe8pf8afa4.png" alt="archive">
 					</div>
 						
 					<!-- <form method="POST" enctype=multipart/form-data action="http://localhost:8886/runmodels" target=formResponse>								 -->
 					<div class="row sm-padding ">
 						<form id="uploadForm" method="post" enctype=multipart/form-data action="https://storage.googleapis.com/task-demo-results" target=formResponse>
-                                                <!--form id="uploadForm" method="post" enctype=multipart/form-data action="https://storage.googleapis.com/upload/storage/v1/b/task-demo-results/o?uploadType=resumable" target=formResponse-->
+                                               
 							<div>								
-								<div>
+								<!--div>
 										<label id="imageUploadInputLabel" for="imageUploadInput">Image to upload:</label>
                                                                       
-                                                        
-										<!--input type="file" id="imageUploadInput" name="file" accept="image/*" size="40"/-->
-								</div>
+                                                      
+								</div-->
 
 								<input id="uploadToken" type="text" name="key" value="uploadToken" style="display:none">
 
-                                                                <input type="file" id="imageUploadInput" name="file" accept="image/*" size="40"/>
+                                                                <!--input type="file" id="imageUploadInput" name="file" accept="image/*" size="40"/-->
 
-								<input style="margin-top: 35px" id="submitDemo" type="submit" class="btn btn-info" value="Run inference">
-								<div class="g-recaptcha" data-theme="light" data-sitekey="6LcswN4UAAAAAPDUWfiDZio6vG0VjuAP2QbvJyV2" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;"></div> 
+								<!--input style="margin-top: 35px" id="submitDemo" type="submit" class="btn btn-info" value="Run inference"-->
+								<!--div class="g-recaptcha" data-theme="light" data-sitekey="6LcswN4UAAAAAPDUWfiDZio6vG0VjuAP2QbvJyV2" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;"></div--> 
 							</div>
 						
 						</form>
