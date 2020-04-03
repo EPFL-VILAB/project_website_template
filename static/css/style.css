@@ -81,6 +81,15 @@ h5 {
     font-size: 16px;
 }
 
+.involved-share:hover .hover,
+.involved-share .hover-other {
+    display: none;
+}
+.involved-share:hover .hover-other {
+    display: block;
+}
+
+
 a {
     color: #6195FF;
     text-decoration: none;
