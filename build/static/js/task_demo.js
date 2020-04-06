@@ -72,6 +72,7 @@
      '0': 'aay5ej274l39n',
      '1': 'aaasqk1jrm3',
      '2': 'aacwe8pf8afa4',
+     '3': 'aayzpxjo78c3f',
 
     }
 
@@ -801,7 +802,7 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
 
             var uploadtoken = document.getElementById("uploadToken").value;
             if (this.id=='random'){
-            var uploadtoken = random_queries[Math.floor(Math.random()*3)];
+            var uploadtoken = random_queries[Math.floor(Math.random()*4)];
             this.src_new = "https://storage.googleapis.com/task-demo-results/predictions/" + uploadtoken + ".png"
             showSourceImage(this.src_new);
             }
