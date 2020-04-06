@@ -61,7 +61,7 @@
         'rgb2normal_taskonomy':'Taskonomy Baseline Normals',
         'rgb2depth_taskonomy' :'Taskonomy Baseline Depth',
         'rgb2reshading_taskonomy': 'Taskonomy Baseline Reshading',
-        'energy': 'Consistency Energy of Query Image (Red Line)',
+        'energy': 'Consistency Energy of the Query (Red Marker)',
         'energy_2d': 'Energy Shown Spatially (Black→White means Certain→Uncertain)',
         'energy_2d1': 'Uncertainty (Consistency Energy)',
          
@@ -852,7 +852,7 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
 
           if (task=='Multitask Baseline Depth') {
 
-            var titleElem = makeRowTitle("Energy");
+            var titleElem = makeRowTitle("Consistency Energy");
             document.getElementById("output-section").appendChild(titleElem);
 
 
