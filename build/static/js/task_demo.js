@@ -62,7 +62,8 @@
         'rgb2depth_taskonomy' :'Taskonomy Baseline Depth',
         'rgb2reshading_taskonomy': 'Taskonomy Baseline Reshading',
         'energy': 'Consistency Energy of Query Image (Red Line)',
-        'energy_2d': '2D Consistency Energy (Black→White meaning Certain→Uncertain)',
+        'energy_2d': 'Energy Shown Spatially (Black→White means Certain→Uncertain)',
+        'energy_2d1': 'Uncertainty (Consistency Energy)',
          
    }
 
@@ -115,6 +116,7 @@
         'edge3d_consistency',
         'keypoint2d_consistency',
         'keypoint3d_consistency',
+        'energy_2d1',
 
         'rgb2sfnorm1',
         'rgb2sfnormb',
@@ -569,6 +571,9 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
         if (curr_task=='rgb2depth1.png'){
             curr_task='rgb2depth.png';
         }
+        if (curr_task=='energy_2d1.png'){
+            curr_task='energy_2d.png';
+        }
 
 
         var checkTaskIntervalId = null;        
@@ -668,6 +673,7 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
 
 
     var makeRowTitle = function(title) {
+     
         var folderName = title == "Source" ? 'video_short' : 'video_short';
         var videoHolder = document.createElement("div");
         videoHolder.classList.add('col-xs-12');
@@ -679,10 +685,10 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
 
         // var titleElem = document.createElement("div");
         // videoHolder.innerHTML = "<h4 style='float:right; transform: translateX(-100%) rotate(-90deg) ;'>" + title + "</h4>";
-        videoHolder.innerHTML = "<h3 style='text-align:center;    text-decoration: underline; '>" + title + "</h4>";
+        videoHolder.innerHTML = "<h3 style='text-align:center;    text-decoration: underline; '>" + title + "</h3>";
         if (title=="3D Ken Burns"){//append link 
         videoHolder.innerHTML = "<h3 style='text-align:center;    text-decoration: underline; '>" + 
-        "<div class=involved-share> <p class=hover>3D Ken Burns(*)</p> <p class=hover-other>Using Niklaus et al’s 3D Ken Burns method (2019) and depth predicted by the consistency-based model</p> </div> </h3> ";
+        "<div class=involved-share> <p class=hover>3D Ken Burns*</p> <p class=hover-other>Using Niklaus et al. 2019 3D Ken Burns method and depth predicted by the consistency-based model</p> </div> </h3> ";
         }
         // videoHolder.appendChild(titleElem);
         return videoHolder;
@@ -696,11 +702,15 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
         var uploadtoken = document.getElementById("uploadToken").value;
         // var selectedTasks = $("#targetpicker").val()
 
-        var titleElem = makeRowTitle("Consistency-based Learning Prediction Results");
-        document.getElementById("output-section").appendChild(titleElem);
+        //var titleElem = makeRowTitle("Consistency-based Learning Prediction Results");
+        //document.getElementById("output-section").appendChild(titleElem);
 
         for (var t in VALID_TARGETS) {
             var task = VALID_TARGETS[t];
+            if (task == 'Normals') {
+                var titleElem = makeRowTitle("Consistency-based Learning Prediction Results");
+                document.getElementById("output-section").appendChild(titleElem);    
+            } 
             // Make the api call here...
             getResponseURLs(uploadtoken, task, function(taskname, imFrame, image_uri){
                 // var imFrame = makeImageFrame(taskname, 4);
@@ -708,7 +718,7 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
             });
             // break;
 
-           if (task=='3D Keypoints')  {
+           if (task=='Uncertainty (Consistency Energy)')  {
 
             var titleElem = makeRowTitle("Consistency-based Learning vs Baselines (Normals)");
         document.getElementById("output-section").appendChild(titleElem);
@@ -736,13 +746,13 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
 
          if (task=='Multitask Baseline Depth') {
 
-            var titleElem = makeRowTitle("Energy");
+            var titleElem = makeRowTitle("Consistency Energy");
        document.getElementById("output-section").appendChild(titleElem);
 
 
            }
 
-       if (task=='2D Consistency Energy (Black→White meaning Certain→Uncertain)') {
+       if (task=='Energy Shown Spatially (Black→White means Certain→Uncertain)') {
 
             var titleElem = makeRowTitle("3D Ken Burns");
        document.getElementById("output-section").appendChild(titleElem);
@@ -785,8 +795,9 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
             
            
 
-            var titleElem = makeRowTitle("Consistency-based Learning Prediction Results");
-            document.getElementById("output-section").appendChild(titleElem);
+            //var titleElem = makeRowTitle("Consistency-based Learning Prediction Results");
+            //document.getElementById("output-section").appendChild(titleElem);
+            
 
             var uploadtoken = document.getElementById("uploadToken").value;
             if (this.id=='random'){
@@ -800,6 +811,11 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
             
             for (var t in VALID_TARGETS) {
                 var task = VALID_TARGETS[t];
+                if (task == 'Normals') {
+                var titleElem = makeRowTitle("Consistency-based Learning Prediction Results");
+                document.getElementById("output-section").appendChild(titleElem); 
+             
+                }
                 // Make the api call here...
                 getResponseURLs(uploadtoken, task, function(taskname, imFrame, image_uri){
                     // var imFrame = makeImageFrame(taskname, 4);
@@ -807,7 +823,8 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
                 });
                 // break;
  
-              if (task=='3D Keypoints')  {
+            
+              if (task=='Uncertainty (Consistency Energy)')  {
 
             var titleElem = makeRowTitle("Consistency-based Learning vs Baselines (Normals)");
         document.getElementById("output-section").appendChild(titleElem);
@@ -842,7 +859,7 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
            }
 
 
-          if (task=='2D Consistency Energy (Black→White meaning Certain→Uncertain)') {
+          if (task=='Energy Shown Spatially (Black→White means Certain→Uncertain)') {
 
             var titleElem = makeRowTitle("3D Ken Burns");
        document.getElementById("output-section").appendChild(titleElem);
