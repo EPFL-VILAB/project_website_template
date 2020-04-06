@@ -62,7 +62,9 @@
         'rgb2depth_taskonomy' :'Taskonomy Baseline Depth',
         'rgb2reshading_taskonomy': 'Taskonomy Baseline Reshading',
         'energy': 'Consistency Energy of Query Image (Red Line)',
-    }
+        'energy_2d': '2D Consistency Energy (Black→White meaning Certain→Uncertain)',
+         
+   }
 
 
     var random_queries = {
@@ -133,6 +135,7 @@
         'rgb2depth_multitask',
         
         'energy',
+        'energy_2d',
         'kenburns',
         ];
 
@@ -679,7 +682,7 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
         videoHolder.innerHTML = "<h3 style='text-align:center;    text-decoration: underline; '>" + title + "</h4>";
         if (title=="3D Ken Burns"){//append link 
         videoHolder.innerHTML = "<h3 style='text-align:center;    text-decoration: underline; '>" + 
-        "<div class=involved-share> <p class=hover>3D Ken Burns(*)</p> <p class=hover-other>Using Niklaus et al’s 3D Ken Burns method and depth predicted by the consistency-based model</p> </div> </h3> ";
+        "<div class=involved-share> <p class=hover>3D Ken Burns(*)</p> <p class=hover-other>Using Niklaus et al’s 3D Ken Burns method (2019) and depth predicted by the consistency-based model</p> </div> </h3> ";
         }
         // videoHolder.appendChild(titleElem);
         return videoHolder;
@@ -739,7 +742,7 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
 
            }
 
-       if (task=='Consistency Energy of Query Image (Red Line)') {
+       if (task=='2D Consistency Energy (Black→White meaning Certain→Uncertain)') {
 
             var titleElem = makeRowTitle("3D Ken Burns");
        document.getElementById("output-section").appendChild(titleElem);
@@ -788,10 +791,12 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
             var uploadtoken = document.getElementById("uploadToken").value;
             if (this.id=='random'){
             var uploadtoken = random_queries[Math.floor(Math.random()*3)];
-            this.src = "https://storage.googleapis.com/task-demo-results/predictions/" + uploadtoken + ".png"
+            this.src_new = "https://storage.googleapis.com/task-demo-results/predictions/" + uploadtoken + ".png"
+            showSourceImage(this.src_new);
             }
-
+            else{
             showSourceImage(this.src);
+            }
             
             for (var t in VALID_TARGETS) {
                 var task = VALID_TARGETS[t];
@@ -837,7 +842,7 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
            }
 
 
-          if (task=='Consistency Energy of Query Image (Red Line)') {
+          if (task=='2D Consistency Energy (Black→White meaning Certain→Uncertain)') {
 
             var titleElem = makeRowTitle("3D Ken Burns");
        document.getElementById("output-section").appendChild(titleElem);
