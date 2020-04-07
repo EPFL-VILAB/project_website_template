@@ -62,7 +62,7 @@
         'rgb2depth_taskonomy' :'Taskonomy Baseline Depth',
         'rgb2reshading_taskonomy': 'Taskonomy Baseline Reshading',
         'energy': 'Consistency Energy of the Query (Red Marker)',
-        'energy_2d': 'Spatial Energy (Black→White means Certain→Uncertain)',
+        'energy_2d': 'Spatial Energy (Darker→More Certain)',
         'energy_2d1': 'Uncertainty (Energy)',
          
    }
@@ -771,7 +771,7 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
 
            }
 
-       if (task=='Spatial Energy (Black→White means Certain→Uncertain)') {
+       if (task=='Spatial Energy (Darker→More Certain)') {
 
             var titleElem = makeRowTitle("3D Ken Burns");
        document.getElementById("output-section").appendChild(titleElem);
@@ -878,7 +878,7 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
            }
 
 
-          if (task=='Spatial Energy (Black→White means Certain→Uncertain)') {
+          if (task=='Spatial Energy (Darker→More Certain)') {
 
             var titleElem = makeRowTitle("3D Ken Burns");
        document.getElementById("output-section").appendChild(titleElem);
@@ -903,4 +903,5 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
         }
     );
 })(jQuery);
+
 
