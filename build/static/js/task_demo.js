@@ -73,6 +73,20 @@
      '1': 'aaasqk1jrm3',
      '2': 'aacwe8pf8afa4',
      '3': 'aayzpxjo78c3f',
+     '4': 'aa00g7y29fsyx3',
+     '5': 'aa2ft2jpvso5j',
+     '6': 'aaax68p6o5lel',
+     '7': 'aagdgixo9h4il',
+     '8': 'aakkbgs6p53kr',
+     '9': 'aam9a9f1gmew',
+     '10': 'aaxemvcc1x1s',
+     '11': 'aa0dgbjxam65b',
+     '12': 'aa8d97h754e7g',
+     '13': 'aacd4t8nu7hmo',
+     '14': 'aahcap8ane1j',
+     '15': 'aalv6qzqhwwp',
+     '16': 'aassesulkwanc'
+
 
     }
 
@@ -579,7 +593,7 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
 
         var checkTaskIntervalId = null;        
         var checkTaskCounter = 0;
-        var maxCheckTaskAttempts = 120
+        var maxCheckTaskAttempts = 480
         var checkTask = function(){
             if (checkTaskCounter >= maxCheckTaskAttempts) {
                 clearInterval(checkTaskIntervalId);
@@ -802,7 +816,7 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
 
             var uploadtoken = document.getElementById("uploadToken").value;
             if (this.id=='random'){
-            var uploadtoken = random_queries[Math.floor(Math.random()*4)];
+            var uploadtoken = random_queries[Math.floor(Math.random()*17)];
             this.src_new = "https://storage.googleapis.com/task-demo-results/predictions/" + uploadtoken + ".png"
             showSourceImage(this.src_new);
             }
