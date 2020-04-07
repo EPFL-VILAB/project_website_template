@@ -44,7 +44,7 @@
         'keypoint3d_baseline' : '3D Keypoints (Baseline Readout)',
         'keypoint3d_consistency' : '3D Keypoints',
 
-        'rgb2normal_cycle' : 'Cycle-Consistency Baseline',
+        'rgb2normal_cycle' : 'Cycle-Consis. Baseline',
         'rgb2normal_geonet' : 'GeoNet Baseline Normals',
         'rgb2normal_multitask' : 'Multitask Baseline Normals',
 
@@ -63,7 +63,7 @@
         'rgb2reshading_taskonomy': 'Taskonomy Baseline Reshading',
         'energy': 'Consistency Energy of the Query (Red Marker)',
         'energy_2d': 'Energy Shown Spatially (Black→White means Certain→Uncertain)',
-        'energy_2d1': 'Uncertainty (Consistency Energy)',
+        'energy_2d1': 'Uncertainty (Energy)',
          
    }
 
@@ -275,6 +275,8 @@
             return $(this).outerHeight();
         }).get());
         // boxes.height(maxHeight);
+        //alert(maxHeight);
+        
         boxes.css('height', maxHeight);        
         return maxHeight;
     };
@@ -733,7 +735,7 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
             });
             // break;
 
-           if (task=='Uncertainty (Consistency Energy)')  {
+           if (task=='Uncertainty (Energy)')  {
 
             var titleElem = makeRowTitle("Consistency-based Learning vs Baselines (Normals)");
         document.getElementById("output-section").appendChild(titleElem);
@@ -839,7 +841,7 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
                 // break;
  
             
-              if (task=='Uncertainty (Consistency Energy)')  {
+              if (task=='Uncertainty (Energy)')  {
 
             var titleElem = makeRowTitle("Consistency-based Learning vs Baselines (Normals)");
         document.getElementById("output-section").appendChild(titleElem);
