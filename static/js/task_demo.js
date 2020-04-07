@@ -276,7 +276,9 @@
         }).get());
         // boxes.height(maxHeight);
         //alert(maxHeight);
-        maxHeight = 55; // I manually set this 
+        if (maxHeight==62){
+        maxHeight = 40; // I manually set this 
+        }
         boxes.css('height', maxHeight);        
         return maxHeight;
     };
