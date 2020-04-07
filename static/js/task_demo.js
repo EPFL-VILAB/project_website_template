@@ -276,7 +276,7 @@
         }).get());
         // boxes.height(maxHeight);
         //alert(maxHeight);
-        
+        maxHeight = 30; // I manually set this 
         boxes.css('height', maxHeight);        
         return maxHeight;
     };
