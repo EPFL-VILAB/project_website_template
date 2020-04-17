@@ -392,7 +392,7 @@
             document.getElementById(vidTitleElementForTarget(selected_target)).appendChild(titleElem);
 
             // document.getElementById(vidElementForTarget(selected_target)).appendChild(makeRowTitle(selected_target));
-            var source = makeVideoFrame("Input video (<b><i>X</i><sub>1</sub> </b>)", "https://storage.googleapis.com/cross-task-website/assets/reduced_flicker/cropped_trimmed/source_final_down.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
+            var source = makeVideoFrame("Input video (<b><i>X</i><sub>1</sub> </b>)", "https://consistency.epfl.ch/viz/source_final_down.mp4");
             //document.getElementById(vidBaselineElementForTarget(selected_target)).setAttribute("data-spy", "affix");
             //document.getElementById(vidBaselineElementForTarget(selected_target)).setAttribute("data-offset-top", "01");
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
@@ -401,7 +401,7 @@
 
             // Add targets
             // Baseline
-            source = makeVideoFrame('Baseline U-Net Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)', transfers_to_videos[selected_target]["target"]['baseline']);
+            source = makeVideoFrame('Baseline Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)', transfers_to_videos[selected_target]["target"]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
@@ -431,14 +431,14 @@
             document.getElementById(vidTitleElementForTarget(selected_target)).appendChild(titleElem);
 
             // document.getElementById(vidElementForTarget(selected_target)).appendChild(makeRowTitle(selected_target));
-            var source = makeVideoFrame("Input video (<b><i>X</i><sub>1</sub> </b>)", "https://storage.googleapis.com/cross-task-website/assets/reduced_flicker/cropped_trimmed/source_final_down.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
+            var source = makeVideoFrame("Input video (<b><i>X</i><sub>1</sub> </b>)", "https://consistency.epfl.ch/viz/source_final_down.mp4");
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
             source_exists.push(selected_target);
 
             // Add targets
             // Baseline
-            source = makeVideoFrame('Baseline U-Net Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)', transfers_to_videos[selected_target]["target"]['baseline']);
+            source = makeVideoFrame('Baseline Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)', transfers_to_videos[selected_target]["target"]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
@@ -454,12 +454,12 @@
 
             // Then add the other baselines
            
-            source = makeVideoFrame("Cycle-Consistency Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['cycle']);
+            source = makeVideoFrame("Cycle Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['cycle']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
                
 
-            source = makeVideoFrame("GeoNet Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['geonet']);
+            source = makeVideoFrame("Geonet Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['geonet']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
@@ -489,14 +489,14 @@
             document.getElementById(vidTitleElementForTarget(selected_target)).appendChild(titleElem);
 
             // document.getElementById(vidElementForTarget(selected_target)).appendChild(makeRowTitle(selected_target));
-            var source = makeVideoFrame("Input video (<b><i>X</i><sub>1</sub> </b>)", "https://storage.googleapis.com/cross-task-website/assets/reduced_flicker/cropped_trimmed/source_final_down.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
+            var source = makeVideoFrame("Input video (<b><i>X</i><sub>1</sub> </b>)", "https://consistency.epfl.ch/viz/source_final_down.mp4");
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
             source_exists.push(selected_target);
 
             // Add targets
             // Baseline
-            source = makeVideoFrame('Baseline U-Net Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)', transfers_to_videos[selected_target]["target"]['baseline']);
+            source = makeVideoFrame('Baseline Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)', transfers_to_videos[selected_target]["target"]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
@@ -532,7 +532,7 @@
 
 
             //Additional baselines for Z-Depth
-            if ((other_baselines == "Yes") && (selected_target=="Depth")){
+            if ((other_baselines == "Yes") && (selected_target=="Z-Depth")){
 
             // First clear everything and add input + targets
             document.getElementById("video-section").innerHTML = "";
@@ -546,14 +546,14 @@
             document.getElementById(vidTitleElementForTarget(selected_target)).appendChild(titleElem);
 
             // document.getElementById(vidElementForTarget(selected_target)).appendChild(makeRowTitle(selected_target));
-            var source = makeVideoFrame("Input video (<b><i>X</i><sub>1</sub> </b>)", "https://storage.googleapis.com/cross-task-website/assets/reduced_flicker/cropped_trimmed/source_final_down.mp4?authuser=0&folder=true&organizationId=true&supportedpurview=project");
+            var source = makeVideoFrame("Input video (<b><i>X</i><sub>1</sub> </b>)", "https://consistency.epfl.ch/viz/source_final_down.mp4");
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
             source_exists.push(selected_target);
 
             // Add targets
             // Baseline
-            source = makeVideoFrame('Baseline U-Net Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)', transfers_to_videos[selected_target]["target"]['baseline']);
+            source = makeVideoFrame('Baseline Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)', transfers_to_videos[selected_target]["target"]['baseline']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
@@ -566,7 +566,7 @@
             }
 
 
-            source = makeVideoFrame("GeoNet Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['geonet']);
+            source = makeVideoFrame("Geonet Prediction (<b><i>X</i><sub>1</sub>→<i>X</i><sub>2</sub> </b>)", transfers_to_videos[selected_target]["Others"]['geonet']);
             document.getElementById(vidBaselineElementForTarget(selected_target)).appendChild(source[0]);
             all_videos.push(source[1]);
 
@@ -793,7 +793,7 @@
             var x = document.getElementById("sourcepicker");
 
             x.options[x.options.length] = new Option('--', '--');        
-            x.options[x.options.length] = new Option('Depth', 'Depth');
+            x.options[x.options.length] = new Option('Z-Depth', 'Z-Depth');
             x.options[x.options.length] = new Option('Reshading', 'Reshading');
             x.options[x.options.length] = new Option('Curvature', 'Curvature');
             x.options[x.options.length] = new Option('2D Keypoints', '2D Keypoints');
@@ -811,7 +811,7 @@
             //.append($('<option value="297x210">297x210</option>)'))
             var x = document.getElementById("sourcepicker");
             x.options[x.options.length] = new Option('--', '--');
-            x.options[x.options.length] = new Option('Depth', 'Depth');
+            x.options[x.options.length] = new Option('Z-Depth', 'Z-Depth');
             x.options[x.options.length] = new Option('Normals', 'Normals');
             x.options[x.options.length] = new Option('Curvature', 'Curvature');
             x.options[x.options.length] = new Option('2D Keypoints', '2D Keypoints');
@@ -824,7 +824,7 @@
 
         }
 
-        if($('#targetpicker option:selected').val()=="Depth"){
+        if($('#targetpicker option:selected').val()=="Z-Depth"){
 
             $('#sourcepicker option').remove();
             //$('#sourcepicker select').append($('<option value="210x100">210x100</option>)'))
@@ -847,7 +847,7 @@
     
 
 
-    $.get('../assets/transfers_to_videos.json', function(data) {
+    $.get('../assets/transfers_to_videos_epfl.json', function(data) {
         transfers_to_videos = data;
         //alert("Hey");
         var transfers_targets = Array.from(Object.keys(transfers_to_videos));
