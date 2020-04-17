@@ -847,7 +847,7 @@
     
 
 
-    $.get('../assets/transfers_to_videos.json', function(data) {
+    $.get('../assets/transfers_to_videos_epfl.json', function(data) {
         transfers_to_videos = data;
         //alert("Hey");
         var transfers_targets = Array.from(Object.keys(transfers_to_videos));
