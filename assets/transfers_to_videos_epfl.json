@@ -1,5 +1,5 @@
-
-rmals": {
+{
+"Normals": {
     "Depth": {
       "ours": "https://consistency.epfl.ch/viz/rgb2normal2x/consistency_rgb2normal2depth_zbuffer.mp4",
       "baseline": "https://consistency.epfl.ch/viz/rgb2normal2x/baseline_rgb2normal2depth_zbuffer.mp4"
