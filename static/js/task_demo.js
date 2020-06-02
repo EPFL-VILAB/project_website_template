@@ -64,7 +64,7 @@
         'energy': 'Energy vs Error Scatterplot',
         'energy_2d': 'Spatial Energy (Darker→More Certain)',
         'energy_2d1': 'Uncertainty (Energy)',
-        'energy_dist': 'Distribution of the Energy of the Dataset',         
+        'energy_dist': 'Distribution of the Energy',         
    }
 
 
