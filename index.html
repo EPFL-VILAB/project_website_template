@@ -275,7 +275,7 @@
 					<p> 
 
 						<div class="figure">
-						<img width="80%" src="./img_consistency/motiv10_all-eps-converted-to.png" alt="" class="center">
+						<img width="80%" src="./img_consistency/pull_april22_3-1.png" alt="" class="center">
 						<p><strong>Learning with Cross-Task Consistency.</strong> The upper and lower rows show the results of consistency-based learning and the baseline (individual learning). The consistency-based model yields higher quality (especially at hard-to-predict fine-grained details) and more consistent predictions.</p>
 						</div>
 						<br>
@@ -293,7 +293,7 @@
                                                 The video below demonstrates the impact of disregarding consistency in learning as well as the effectiveness of augmenting learning with cross-task consistency constraints. Each window shows surface normals predicted out of various domains, which themselves are predicted out of images (i.e. image→{prediction domain X}→surface normals). The normals in the upper row (learning without consistency) are poor and different/inconsistent with each other for the same underlying image. The lower row shows the same except when learning image→{prediction domain X} was augmented with cross-task consistency constraints. Inferred surface normals look better and more similar to each other regardless of the middle prediction domain, which demonstrates all of the middle domains were made cross-task consistent w.r.t to normals. In the paper, we further extend this concept to many arbitrary domains with arbitrary inference path lengths, using a general and fully computational learning framework.  
                                                 </p>
                                                 <div class="figure" style="text-align:center;">
-                                                <iframe width="1279" height="449" src="https://www.youtube.com/embed/W4F1Q_MM2Rw?rel=0&amp;controls=0&amp;showinfo=0&amp;loop=1&amp;playlist=W4F1Q_MM2Rw&amp;modestbranding=1&amp;autoplay=1&amp;start=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+                                                <iframe width="1279" height="449" src="https://www.youtube.com/embed/W4F1Q_MM2Rw?rel=0&vq=hd1080&amp;controls=0&amp;showinfo=0&amp;loop=1&amp;playlist=W4F1Q_MM2Rw&amp;modestbranding=1&amp;autoplay=1&amp;start=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
                                                 </div>    
 
 
@@ -310,15 +310,15 @@
 					</p>
 
 					<div class="figure">
-						<img width="80%" src="./img_consistency/graph_4.png" alt=""  class="center">
+						<img width="80%" src="./img_consistency/graph_overview_april15_1.png" alt=""  class="center">
 						<p><strong>Enforcing cross-task consistency.</strong> <strong>(a)</strong> shows the typical multitask setup where predictors between domains are trained independently (or with a shared encoder and separate decoder heads). Both neither explicitly enforce cross-task consistency among predictions nor empirically achieve that. <strong>(b)</strong> demonstrates the <i><strong>consistency constraint</strong></i>, over three domains. <strong>(c)</strong> shows how the triangle unit from (b) can be an element of a larger system of domains. Finally, <strong>(d)</strong> illustrates the generalized case where in such a larger system of domains, consistency can be enforced along any paths of arbitrary length, as long as their beginning and end are the same. When two different paths with the same endpoints are enforced to yield similar results, that implies none of the middle domains introduced conflicting information, as far as the prediction job from the input endpoint to the output endpoint was concerned. This is the general concept behind <i><strong>path-independence</strong></i> or <i><strong>conservativeness</strong></i>. The triangle in (b) is the smallest unit of such paths.</p>
 					</div>
 		
 					<div class="figure">
-						<img width="80%" src="./img_consistency/method_qualitative_2-eps-converted-to.png" alt="" class="center">
+						<img width="80%" src="./img_consistency/fig_method_results_april17.png" alt="" class="center">
 						<p><strong>Enforcing cross-task consistency using perceptual losses illustrated with an example.</strong>
 <br>
-<strong>Top row</strong> shows the results of standard training (MSE loss). When the predicted normals after converged training are projected onto other domains various inaccuracies transpire.
+<strong>Top row</strong> shows the results of standard training. After convergence of training, the predicted normals are projected onto other domains which reveal various inaccuracies.
 <br>
 <strong>Middle row</strong> shows the results of training enforcing consistency with the other domains. The results are notably improved, <strong>especially in hard to predict fine-grained details</strong>.
 <br>
@@ -326,7 +326,7 @@
 </p>
 					</div>
 
-                                       <div class="figure" style="text-align:center;">                                                                                                                                      <iframe width="1280" height="389" src="https://www.youtube.com/embed/SywH7IbKn9E?rel=0&amp;controls=0&amp;showinfo=0&amp;loop=1&amp;playlist=SywH7IbKn9E&amp;modestbranding=1&amp;autoplay=1&amp;start=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>                                           
+                                       <div class="figure" style="text-align:center;">                                                                                                                                      <iframe width="1279" height="389" src="https://www.youtube.com/embed/SywH7IbKn9E?rel=0&vq=hd1080&amp;controls=0&amp;showinfo=0&amp;loop=1&amp;playlist=SywH7IbKn9E&amp;modestbranding=1&amp;autoplay=1&amp;start=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>                                           
                                        <p> This video demonstrates the same results as the above figure, but over a video and for depth prediction. The video is processed <u>frame-by-frame</u>.</p>
                                        </div>
                 
@@ -374,7 +374,7 @@
                                         </div--!>
           
                                        
-                                        <div class="figure">                                                                                                                                                                                              <iframe width="1280" height="340" src="https://www.youtube.com/embed/30vQWNTPBfA?rel=0&amp;controls=0&amp;showinfo=0&amp;loop=1&amp;playlist=30vQWNTPBfA&amp;modestbranding=1&amp;autoplay=1&amp;start=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>                                                                                                                                                                                                                             <p> The video shows learning with cross-task consistency for surface normals, (re)shading, and depth prediction.</p>
+                                        <div class="figure">                                                                                                                                                                                              <iframe width="1280" height="340" src="https://www.youtube.com/embed/30vQWNTPBfA?rel=0&vq=hd1080&amp;controls=0&amp;showinfo=0&amp;loop=1&amp;playlist=30vQWNTPBfA&amp;modestbranding=1&amp;autoplay=1&amp;start=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>                                                                                                                                                                                                                             <p> The video shows learning with cross-task consistency for surface normals, (re)shading, and depth prediction.</p>
                                        </div>
                                        <br>
                                        <p> Below the results of cross-task consistency are compared with various baselines. </p>
@@ -384,7 +384,7 @@
 
                                        </div>
 
-                                       <div class="figure">                                                                                                                                                                                              <iframe width="1233" height="672" src="https://www.youtube.com/embed/jGdh-aq4r9A?rel=0&amp;controls=0&amp;showinfo=0&amp;loop=1&amp;playlist=jGdh-aq4r9A&amp;modestbranding=1&amp;autoplay=1&amp;start=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>                                                                                                                                                                                                                             <p> The video shows learning with cross-task consistency vs various baselines, compared over surface normal prediction.</p>                                                                             </div>
+                                       <div class="figure">                                                                                                                                                                                              <iframe width="1233" height="672" src="https://www.youtube.com/embed/jGdh-aq4r9A?rel=0&vq=hd1080&amp;controls=0&amp;showinfo=0&amp;loop=1&amp;playlist=jGdh-aq4r9A&amp;modestbranding=1&amp;autoplay=1&amp;start=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>                                                                                                                                                                                                                             <p> The video shows learning with cross-task consistency vs various baselines, compared over surface normal prediction.</p>                                                                             </div>
 				
 				</div>		
 
@@ -433,7 +433,7 @@
                                         </div>
           
                                         <div class="col-sm-6">
-                                        <div class="figure">                                                                                                                                                                                              <iframe width="626" height="432" src="https://www.youtube.com/embed/wIxsCZUguc8?rel=0&amp;controls=0&amp;showinfo=0&amp;loop=1&amp;playlist=wIxsCZUguc8&amp;modestbranding=1&amp;autoplay=1&amp;start=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>                                                                                                                                                                                                                             <p> The video shows the energy vs two continous domain shifts (JPEG compression, Blur). The energy is an unsupervised indicator of domain shift and generally correlates with the magnitude of shift.</p>
+                                        <div class="figure">                                                                                                                                                                                              <iframe width="626" height="432" src="https://www.youtube.com/embed/wIxsCZUguc8?rel=0&vq=hd1080&amp;controls=0&amp;showinfo=0&amp;loop=1&amp;playlist=wIxsCZUguc8&amp;modestbranding=1&amp;autoplay=1&amp;start=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>                                                                                                                                                                                                                             <p> The video shows the energy vs two continous domain shifts (JPEG compression, Blur). The energy is an unsupervised indicator of domain shift and generally correlates with the magnitude of shift.</p>
                                        </div>
                                        </div>
 				
