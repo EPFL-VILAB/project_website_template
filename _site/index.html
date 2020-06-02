@@ -293,7 +293,7 @@
                                                 The video below demonstrates the impact of disregarding consistency in learning as well as the effectiveness of augmenting learning with cross-task consistency constraints. Each window shows surface normals predicted out of various domains, which themselves are predicted out of images (i.e. image→{prediction domain X}→surface normals). The normals in the upper row (learning without consistency) are poor and different/inconsistent with each other for the same underlying image. The lower row shows the same except when learning image→{prediction domain X} was augmented with cross-task consistency constraints. Inferred surface normals look better and more similar to each other regardless of the middle prediction domain, which demonstrates all of the middle domains were made cross-task consistent w.r.t to normals. In the paper, we further extend this concept to many arbitrary domains with arbitrary inference path lengths, using a general and fully computational learning framework.  
                                                 </p>
                                                 <div class="figure" style="text-align:center;">
-                                                <iframe width="1150" height="495" src="https://www.youtube.com/embed/W4F1Q_MM2Rw?rel=0&amp;controls=0&amp;showinfo=0&amp;loop=1&amp;playlist=W4F1Q_MM2Rw&amp;modestbranding=1&amp;autoplay=1&amp;start=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+                                                <iframe width="1280" height="449" src="https://www.youtube.com/embed/W4F1Q_MM2Rw?rel=0&amp;controls=0&amp;showinfo=0&amp;loop=1&amp;playlist=W4F1Q_MM2Rw&amp;modestbranding=1&amp;autoplay=1&amp;start=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
                                                 </div>    
 
 
@@ -364,12 +364,19 @@
 						
 					</p>
 
+                                        <div class="col-sm-6">
 					<div class="figure">
 
-						<img width="80%" src="./img_consistency/svg/all.svg" alt="" class="center">
-
-						<p><strong>Analysis of consistency energy.</strong> <strong>Left:</strong> The consistency energy shown over the course of training, demonstrating a successful optimization to achieve more consistent results, ending significantly lower than that of independent predictions and multi-task baselines. <strong>Middle:</strong> Energy is predictive of estimation error, with a Pearson correlation coefficient of 0.67. <strong>Right:</strong> Out-of-domain samples (blue, red) have an energy distribution significantly higher than in-distribution samples (grey), hence energy can be used as a strong unsupervised method for detecting domain shifts in the data (AUC=0.99).</p>
+						<img width="100%" src="./img_consistency/svg/all_new.svg" alt="" class="center">
+                                                <p> Analyses of consistency energy.</p>
+						<!--p><strong>Analysis of consistency energy.</strong> <strong>Left:</strong> The consistency energy shown over the course of training, demonstrating a successful optimization to achieve more consistent results, ending significantly lower than that of independent predictions and multi-task baselines. <strong>Middle:</strong> Energy is predictive of estimation error, with a Pearson correlation coefficient of 0.67. <strong>Right:</strong> Out-of-domain samples (blue, red) have an energy distribution significantly higher than in-distribution samples (grey), hence energy can be used as a strong unsupervised method for detecting domain shifts in the data (AUC=0.99).</p-->
 					</div>
+                                        </div>
+          
+                                        <div class="col-sm-6">
+                                        <div class="figure">                                                                                                                                                                                              <iframe width="1045" height="721" src="https://www.youtube.com/embed/wIxsCZUguc8?rel=0&amp;controls=0&amp;showinfo=0&amp;loop=1&amp;playlist=wIxsCZUguc8&amp;modestbranding=1&amp;autoplay=1&amp;start=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>                                                                                                                                                                                                                             <p> The video shows the energy vs two continous domain shifts (JPEG compression, Blur). The energy is an unsupervised indicator of domain shift and generally correlates with the magnitude of shift.</p>
+                                       </div>
+                                       </div>
 				
 				</div>		
 
