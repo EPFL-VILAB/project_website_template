@@ -5,14 +5,14 @@
     /* --------------------------------------------------- */
 	/*  Particle JS
 	------------------------------------------------------ */
-	$('.home-particles').particleground({
+/*	$('.home-particles').particleground({
 		dotColor: '#fff',
-		lineColor: '#555555',
-		particleRadius: 6,
+		lineColor: '#fff',
+		particleRadius: 10,
 		curveLines: true,
 		density: 10000,
 		proximity: 110
-    });
+  */  });
     
     document.getElementById("learnmore").onclick = function(e) {
         e.preventDefault();
