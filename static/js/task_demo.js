@@ -61,7 +61,7 @@
         'rgb2normal_taskonomy':'Taskonomy Baseline Normals',
         'rgb2depth_taskonomy' :'Taskonomy Baseline Depth',
         'rgb2reshading_taskonomy': 'Taskonomy Baseline Reshading',
-        'energy': 'Energy vs Error Scatterplot (error shown for labeled data)',
+        'energy': 'Energy vs Error Scatterplot',
         'energy_2d': 'Spatial Energy (Darker→More Certain)',
         'energy_2d1': 'Uncertainty (Energy)',
         'energy_dist': 'Distribution of the Energy of the Dataset',         
@@ -1115,7 +1115,7 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
 
            }
 
-       if (task=='Energy vs Error Scatterplot (error shown for labeled data)') {
+       if (task=='Energy vs Error Scatterplot') {
 
             var titleElem = makeRowTitle("3D Ken Burns");
        document.getElementById("output-section").appendChild(titleElem);
@@ -1222,7 +1222,7 @@ function resizedataURL(datas, wantedWidth, wantedHeight){
            }
 
 
-          if (task=='Energy vs Error Scatterplot (error shown for labeled data)') {
+          if (task=='Energy vs Error Scatterplot') {
 
             var titleElem = makeRowTitle("3D Ken Burns");
        document.getElementById("output-section").appendChild(titleElem);
