@@ -61,10 +61,10 @@
         'rgb2normal_taskonomy':'Taskonomy Baseline Normals',
         'rgb2depth_taskonomy' :'Taskonomy Baseline Depth',
         'rgb2reshading_taskonomy': 'Taskonomy Baseline Reshading',
-        'energy': 'Consistency Energy of the Query (Red Marker)',
+        'energy': 'Energy of the Query (Red Marker) vs ID Scatter',
         'energy_2d': 'Spatial Energy (Darker→More Certain)',
         'energy_2d1': 'Uncertainty (Energy)',
-        'energy_dist': 'Consistency Energy of the Query (Red Marker)',         
+        'energy_dist': 'Energy of the Query (Red Marker) vs ID Distribution',         
    }
 
 
