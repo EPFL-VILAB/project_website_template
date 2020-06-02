@@ -64,7 +64,7 @@
         'energy': 'Consistency Energy of the Query (Red Marker)',
         'energy_2d': 'Spatial Energy (Darker→More Certain)',
         'energy_2d1': 'Uncertainty (Energy)',
-         
+        'energy_dist': 'Consistency Energy of the Query (Red Marker)',         
    }
 
 
@@ -493,7 +493,9 @@
         'rgb2depth_taskonomy',
         'rgb2depth_multitask',
         
+        
         'energy',
+        'energy_dist',
         'energy_2d',
         'kenburns',
         ];
