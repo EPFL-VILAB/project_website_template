@@ -140,14 +140,14 @@
 
 
 
-							<a class="white-text" href="http://www.cs.stanford.edu/~amirz/">Zamir</a><span style="opacity:0.7">,</span>
-							<a class="white-text" href="https://alexsax.github.io/">Sax</a><span style="opacity:0.7">,</span>
+							<a class="white-text" href="http://www.cs.stanford.edu/~amirz/">Zamir*</a><span style="opacity:0.7">,</span>
+							<a class="white-text" href="https://alexsax.github.io/">Sax*</a><span style="opacity:0.7">,</span>
 							<a class="white-text" href="https://aserety.github.io/">Yeo</a><span style="opacity:0.7">,</span>
 							<a class="white-text" href="https://ofkar.github.io/">Kar</a><span style="opacity:0.7">,</span>
-							<a class="white-text" href="">Cheerla</a><span style="opacity:0.7">,</span>
+							<a class="white-text" href="#team">Cheerla</a><span style="opacity:0.7">,</span>
 							<br>
-							<a class="white-text" href="">Suri</a><span style="opacity:0.7">,</span>
-							<a class="white-text" href="">Cao</a><span style="opacity:0.7">,</span>
+							<a class="white-text" href="#team">Suri</a><span style="opacity:0.7">,</span>
+							<a class="white-text" href="#team">Cao</a><span style="opacity:0.7">,</span>
 							<a class="white-text" href="https://people.eecs.berkeley.edu/~malik/">Malik</a><span style="opacity:0.7">,</span>
 							<a class="white-text" href="https://geometry.stanford.edu/member/guibas/">Guibas</a><span style="opacity:0.7"></span>
 							<br>
@@ -285,18 +285,18 @@
 
 				<!-- Section header -->
 				<div class="section-header text-center">
-					<h4 class="">(watch the videos embedded in the webpage in HD)</h4><br>
-					<h2 class="title">Summary</h2>
+					<h2 class="title">Quick Summary</h2>
+					<u><strong>What</strong></u> is consistency, <u><strong>why</strong></u> is it important, and <u><strong>how</strong></u> do we use it?
 				</div>
 				
 				<!-- /Section header -->
 				<div class="abstract-body col-md-12">
 					<p> 
-
-						<div class="figure">
+						<div class="figure row">
 						<img width="80%" src="./img_consistency/pull_april22_3.jpg" alt="" class="center">
-						<p><strong>Cross-Task Consistent Learning.</strong> 
-						The lower and upper rows show the results of the baseline (independent learning) and learning with cross-task consistency. The latter yields higher quality (especially at hard-to-predict fine-grained details) and more consistent predictions. Red boxes provide magnifications.
+						<p class='col-sm-10 col-sm-offset-1' style='text-align: justify;'>
+							<strong>Cross-Task Consistent Learning.</strong> 
+							The lower and upper rows show the results of the baseline (independent learning) and learning with cross-task consistency. The latter yields higher quality (especially at hard-to-predict fine-grained details) and more consistent predictions. Red boxes provide magnifications.
 						</p>
 						</div>
 						<br>
@@ -313,8 +313,9 @@
                                                 <br>
                                                 The video below demonstrates the impact of disregarding consistency in learning as well as the effectiveness of augmenting learning with cross-task consistency constraints. Each window shows surface normals predicted out of a domain itself predicted out of the image (i.e. image→{prediction domain X}→surface normals). The normals in the upper row (learning without consistency) are poor and different/inconsistent with each other for the same underlying image. The lower row shows the same except when learning image→{prediction domain X} was augmented with cross-task consistency constraints with normals. Inferred surface normals look better and more similar to each other regardless of the middle prediction domain, which demonstrates all of the middle domains were successfully made cross-task consistent w.r.t to normals. In the paper, we further extend this concept to many arbitrary domains with arbitrary inference path lengths, using a general and fully computational learning framework.  
                                                 </p>
-                                                <div class="figure" style="text-align:center;">
-                                                <iframe width="1022" height="359" src="https://www.youtube.com/embed/W4F1Q_MM2Rw?rel=0&amp;controls=0&amp;showinfo=0&amp;loop=1&amp;playlist=W4F1Q_MM2Rw&amp;modestbranding=1&amp;autoplay=1&amp;mute=1&amp;start=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+												<div class="figure" style="text-align:center;">
+													<h4 class="">(Note: Videos on page best seen in HD)</h4>
+	                                                <iframe width="1022" height="359" src="https://www.youtube.com/embed/W4F1Q_MM2Rw?rel=0&amp;controls=0&amp;showinfo=0&amp;loop=1&amp;playlist=W4F1Q_MM2Rw&amp;modestbranding=1&amp;autoplay=1&amp;mute=1&amp;start=0&amp;vq=hd1080" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
                                                 </div>    
 
 
@@ -326,7 +327,7 @@
 						This paper proposes a method which, given an arbitrary dictionary of tasks, augments the learning objective with explicit constraints for cross-task consistency. The constraints are learned from data rather than apriori given relationships. For instance, it is not necessary to encode that surface normals are the 3D derivative of depth or occlusion edges are discontinuities in depth. This makes the method applicable to any pairs of tasks as long as they are not statistically independent; even if their analytical relationship is unknown, hard to program, or non-differentiable. 
 						<br>
 						<br>
-						The primary concept behind the method is `inference-path invariance'. That is, the result of inferring an output domain from an input domain should be the same, regardless of the intermediate domains mediating the inference. When inference paths with the same endpoints, but different intermediate domains, yield similar results, this implies the intermediate domain predictions did not conflict as far as the output was concerned. We apply this concept over paths in a graph of tasks, where the nodes and edges are prediction domains and neural network mappings between them, respectively. Satisfying this invariance constraint over \emph{all} paths in the graph ensures the predictions for all domains are in global cross-task agreement.
+						The primary concept behind the method is <emph>inference-path invariance</emph>. That is, the result of inferring an output domain from an input domain should be the same, regardless of the intermediate domains mediating the inference. When inference paths with the same endpoints, but different intermediate domains, yield similar results, this implies the intermediate domain predictions did not conflict as far as the output was concerned. We apply this concept over paths in a graph of tasks, where the nodes and edges are prediction domains and neural network mappings between them, respectively. Satisfying this invariance constraint over <emph>all</emph> paths in the graph ensures the predictions for all domains are in global cross-task agreement.
 						<br>
 						<br>
 
@@ -335,27 +336,29 @@
 						
 					</p>
 
-					<div class="figure">
+					<div class="figure row">
 						<img width="80%" src="./img_consistency/graph_overview_april15_1.jpg" alt=""  class="center">
-						<p><strong>Enforcing cross-task consistency.</strong> <strong>(a)</strong> shows the typical multitask setup where predictors x→y1 and x→y2 are trained without a notation of consistency (either completely independently or with a shared encoder and dedicated decoders). <strong>(b)</strong> depicts the elementary <strong>triangle consistency constraint</strong> where the prediction x→y1 is enforced to be consistent with x→y2 using a function that relates y1 to y2 (i.e. y1→y2). <strong>(c)</strong> shows how the triangle unit from (b) can be an element of a larger system of domains. Finally, <strong>(d)</strong> illustrates the generalized case where in the larger system of domains, consistency can be enforced using invariance along arbitrary paths, as long as their endpoints are the same (here the blue and green paths). This is the general concept behind "inference-path invariance". The triangle in (b) is the smallest unit of such paths.
+						<p class='col-sm-10 col-sm-offset-1' style='text-align: justify;'><strong>Enforcing cross-task consistency.</strong> <strong>(a)</strong> shows the typical multitask setup where predictors x→y1 and x→y2 are trained without a notation of consistency (either completely independently or with a shared encoder and dedicated decoders). <strong>(b)</strong> depicts the elementary <strong>triangle consistency constraint</strong> where the prediction x→y1 is enforced to be consistent with x→y2 using a function that relates y1 to y2 (i.e. y1→y2). <strong>(c)</strong> shows how the triangle unit from (b) can be an element of a larger system of domains. Finally, <strong>(d)</strong> illustrates the generalized case where in the larger system of domains, consistency can be enforced using invariance along arbitrary paths, as long as their endpoints are the same (here the blue and green paths). This is the general concept behind "inference-path invariance". The triangle in (b) is the smallest unit of such paths.
 					</div>
 
-						The figure blow shows sample results of learning to predict surface normals with and without cross-task consistency constraints. 	
+						The figure below shows the effect of training with and without cross-task consistency, for networks trained to do surface normal predictions: 	
 						<br>
 						<br>					
 		
-					<div class="figure">
+					<div class="figure row">
 						<img width="80%" src="./img_consistency/fig_method_results_april17_1.jpg" alt="" class="center">
-						<p><strong>Learning with and without cross-task consistency shown for a sample query.</strong> Using the notation x→y1→Y, here x is RGB image, y1 is surface normals, and five domains in Y are reshading, 3D curvature, texture edges (Sobel filter), depth, and occlusion edges. 
-				<strong>Top row</strong> shows the results of standard training of x→y1. After convergence of training, the predicted normals (y1) are projected onto other domains (Y) which reveal various inaccuracies. This demonstrates such cross-task projections y1→Y can provide additional cues to training x→y1.
-				<strong>Middle row</strong> shows the results of consistent training of x→y1 by leveraging y1→Y in the loss. The predicted normals are notably improved, especially in hard to predict <strong>fine-grained details</strong> (zoom into the yellow markers). 
-				<strong>Bottom row</strong> provides the ground truth.
-</p>
+						<p class='col-sm-10 col-sm-offset-1' style='text-align: justify;'><strong>Learning with and without cross-task consistency shown for a sample query.</strong> Using the notation x→y1→Y, here x is RGB image, y1 is surface normals, and five domains in Y are reshading, 3D curvature, texture edges (Sobel filter), depth, and occlusion edges. 
+						<strong>Top row</strong> shows the results of standard training of x→y1. After convergence of training, the predicted normals (y1) are projected onto other domains (Y) which reveal various inaccuracies. This demonstrates such cross-task projections y1→Y can provide additional cues to training x→y1.
+						<strong>Middle row</strong> shows the results of consistent training of x→y1 by leveraging y1→Y in the loss. The predicted normals are notably improved, especially in hard to predict <strong>fine-grained details</strong> (zoom into the yellow markers). 
+						<strong>Bottom row</strong> provides the ground truth.
+						</p>
 					</div>
 
-                                       <div class="figure" style="text-align:center;">                                                                                                                                      <iframe width="1022" height="311" src="https://www.youtube.com/embed/SywH7IbKn9E?rel=0&amp;controls=0&amp;showinfo=0&amp;loop=1&amp;playlist=SywH7IbKn9E&amp;modestbranding=1&amp;autoplay=1&amp;mute=1&amp;start=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>                                           
-                                       <p> This video demonstrates the same results as the above figure, but over a video and for depth prediction. The video is processed <u>frame-by-frame</u>.</p>
-                                       </div>
+						<div class="figure" style="text-align:center">
+							<h4 class="">(Note: Video best seen in HD)</h4>
+							<iframe width="1022" height="311" src="https://www.youtube.com/embed/SywH7IbKn9E?rel=0&amp;controls=0&amp;showinfo=0&amp;loop=1&amp;playlist=SywH7IbKn9E&amp;modestbranding=1&amp;autoplay=1&amp;mute=1&amp;start=0&amp;vq=hd1080" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>                                           
+							<p> This video demonstrates the same results as the above figure, but over a video and for depth prediction. The video is processed <u>frame-by-frame</u>.</p>
+						</div>
                 
 	
 				</div>			
@@ -368,10 +371,74 @@
 		<!-- /Container -->
 
 	</div>
-	<!-- /Abstract -->
+	
+	<!-- /Summary -->
+
+	<!-- Tryit -->
+	<div id="try_it" class="section md-padding bg-grey">
+
+		<!-- Container -->
+		<div class="container">
+
+			<!-- Row -->
+			<div class="row">
+
+				<!-- Section header -->
+				<div class="section-header text-center">
+					<h2 class="title">Who can use cross-task consistency?</h2>
+					Anyone. <u><strong>Even if you're doing single-task learning.</strong></u> Here's how.
+				</div>
+
+				<div class='row'>
+
+				<div class="col-sm-6">
+				<p>
+					Let's say that you're interested in predicting some y1 given x. For concreteness, we'll predict surface normals from an RGB image, though many domains will work as y1.
+				</p>
+				<p>
+					Instead of simply training a network to do RGB→Surface Normals, train it to do RGB→Surface Normals→y2. It will fit the data better with improved RGB→Surface Normal predictions.
+				</p>
+				</div>
+	
+				<div class="col-sm-6 figure pull-right" style="text-align:center; margin-top:0px;">
+					<img width="100%" src="./assets/main_page/xtc_for_single_tasks.png" alt="How to use cross-task consistency for single-task learning." class="center">
+					<!-- <p  style='text-align: justify;'><strong>Cross-task consistency can augment single-task learning.</strong> Instead of using independent learning, add consistency constraints from additional tasks or pretrained networks.</p> -->
+				</div>
+				</div>
+
+				<br>
+				<p>
+					Many options for y2 work; even if you have only (x,y1) training data. All choices gave some benefit, though some more than others. Some y2 options:
+					<ul style="list-style-type: circle;">
+						<li> 
+							<strong>Use tasks that need no supervision as y2.</strong> For instance, 2D edges (sobel) or 2D keypoints (SURF). The figure below shows that adding such consistency constraints can improve the results. 
+						</li>
+						<li>
+							<strong>Use our released pre-trained cross-task functions</strong> as y1→y2 in your training job. Thos models can be downloaded from our <a href='https://github.com/EPFL-VILAB/XTConsistency#pretrained-models'>github repository</a>.
+						</li>
+					</ul>
+				</p>
+
+				<div class="figure row" style="text-align:center">
+					<div class='col-sm-10 col-sm-offset-1'>
+					<img width="60%" src="./assets/main_page/unsupervised_results.jpg" alt="Results from using cross-task consistency with unsupervised tasks for y2." class="center">
+					<p  style='text-align: justify;'><strong>Results from using unsupervised consistency constraints.</strong> The network trained with cross-task consistency used only 2D edges and 2D keypoints as 'y2' tasks. Since these are unsupervised tasks, they requred no additional supervision. Still, the consistency-trained network better fits the fine-grained details in images, as shown in the area highlighted with yellow circles.</p>
+					</div>
+				</div>
 
 
-       <!-- Sample Results -->
+				To summarize: cross-task consistency can be used to improve even single-task learning. This works for many configurations of x→y1; not just surface normal prediction.
+
+			</div>
+			<!-- /Row -->
+
+		</div>
+		<!-- /Tryit -->
+
+	</div>
+	<!-- /Summary -->
+
+    <!-- Sample Results -->
 	<div id="sample" class="section sm-padding">
 
 		<!-- Container -->
@@ -391,51 +458,46 @@
 				        Below you can see sample results of learning with cross-task consistency for three sample prediction domains (surface normals, depth, (re)shading) over video and image queries. The video results are on external YouTube videos and the predictions are made <u>frame-by-frame</u> with no temporal smoothing. <u>Zoom in to see the fine-grained details</u>.
 					</p>
 
-<div class="figure">
+					<div class="figure row">
 						<img width="80%" src="./img_consistency/domain_comparison_april21_1.jpg" alt="" class="center">
-						<p><strong>Cross-Task Consistent learning results on external domain data.</strong> Queries: Bedroom in Arles, Van Gogh (1888); Cotton Mill Girl, Lewis Hine (1908); Chernobyl Pripyat Abandoned School (c. 2009). Try the models on your own images at the <a href="./demo">live demo page</a>.
-</p>
+						<p class='col-sm-10 col-sm-offset-1' style='text-align: justify;'>
+								<strong>Cross-Task Consistent learning results on external domain data.</strong> Queries: Bedroom in Arles, Van Gogh (1888); Cotton Mill Girl, Lewis Hine (1908); Chernobyl Pripyat Abandoned School (c. 2009). Try the models on your own images at the <a href="./demo">live demo page</a>.
+							</p>
 					</div>
-
-
-                                        <!--div class="col-sm-6">
-					<div class="figure">
-
-						<img width="100%" src="./img_consistency/svg/all_new.svg" alt="" class="center">
-                                                <p> Analyses of consistency energy.</p>
-					 consistency energy.</strong> <strong>Left:</strong> The consistency energy shown over the course of training, demonstrating a successful optimization to achieve more consistent results, ending significantly lower than that of independent predictions and multi-task baselines. <strong>Middle:</strong> Energy is predictive of estimation error, with a Pearson correlation coefficient of 0.67. <strong>Right:</strong> Out-of-domain samples (blue, red) have an energy distribution significantly higher than in-distribution samples (grey), hence energy can be used as a strong unsupervised method for detecting domain shifts in the data (AUC=0.99).</p-->
-					<!--/div>
-                                        </div--!>
-          
-                                       
-                                        <div class="figure" style="text-align:center;">                                                                                                                                                                                              <iframe width="948" height="721" src="https://www.youtube.com/embed/6CSmmrBNX9M?rel=0&amp;controls=0&amp;showinfo=0&amp;loop=1&amp;playlist=6CSmmrBNX9M&amp;modestbranding=1&amp;autoplay=1&amp;mute=1&amp;start=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>                                                                                                                                                                                                                          
-                                       </div>
-                                       <br>
-<br>
-<br>                                       
-                                       <p> Below various baselines are compared with ross-task consistent learning. The queries are from Taskonomy dataset <strong>(top)</strong> or external data <strong>(Cotton Mill Girl, Lewis Hine 1908; bottom)</strong>. </p>
-                                                                           
-                                       <div class="figure">                                                                                                                                                                                                                                                                                                                                                              <img width="80%" src="./img_consistency/method_comparison_april20_2.jpg" alt="" class="center"> 
-
-                                       </div>
-<br>
-<br>
-                                               <p>The video shows a similar comparison where predictions are made frame-by-frame. </p>
-
-
-                                       <div class="figure" style="text-align:center;">                                                                                                                                                                                              <iframe width="960" height="523" src="https://www.youtube.com/embed/jGdh-aq4r9A?rel=0&amp;controls=0&amp;showinfo=0&amp;loop=1&amp;playlist=jGdh-aq4r9A&amp;modestbranding=1&amp;autoplay=1&amp;mute=1&amp;start=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>                                                                                                                                                                                                                                                                                               </div>
-				
+										
+					<div class="figure" style="text-align:center">
+						<h4 class="">(Note: Video best seen in HD)</h4>
+						<iframe width="948" height="721" src="https://www.youtube.com/embed/6CSmmrBNX9M?rel=0&amp;controls=0&amp;showinfo=0&amp;loop=1&amp;playlist=6CSmmrBNX9M&amp;modestbranding=1&amp;autoplay=1&amp;mute=1&amp;start=1&amp;vq=hd1080" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+					</div>
+					<br>
+					<br>
+					<br>                                       
+					<p> <strong>Comparison with baselines:</strong> Below are some representative results from using cross-task consistent learning and various baselines. You can run comparisons yourself by uploading images on our <a href="./demo">live demo</i></a>
+					</p>
+																			
+					<div class="figure row">
+						<img width="80%" src="./img_consistency/method_comparison_april20_2.jpg" alt="" class="center">
+						<p class='col-sm-10 col-sm-offset-1' style='text-align: justify;'>
+							<strong>Networks trained with cross-task consistency, or with alternative baselines.</strong> The queries are from Taskonomy dataset <strong>(top)</strong> or external data <strong>(Cotton Mill Girl, Lewis Hine 1908; bottom)</strong>.
+						</p>
+					</div>
+					<br>
+					<br>
+					<p>The video shows a similar comparison where predictions are made frame-by-frame. </p>
+					<div class="figure" style="text-align:center;">
+						<h4 class="">(Note: Video best seen in HD)</h4>
+						<iframe width="960" height="523" src="https://www.youtube.com/embed/jGdh-aq4r9A?rel=0&amp;controls=0&amp;showinfo=0&amp;loop=1&amp;playlist=jGdh-aq4r9A&amp;modestbranding=1&amp;autoplay=1&amp;mute=1&amp;start=1&amp;vq=hd1080" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+					</div>
 				</div>		
 
-
-			</div>
+			</div> 
 			<!-- /Row -->
 
 		</div>
 		<!-- /Container -->
 
 	</div>
-	<!-- /Abstract -->
+	<!-- /Sample Results -->
 
 
 
@@ -472,7 +534,7 @@
                                         </div>
           
                                         <div class="col-sm-6">
-                                        <div class="figure">                                                                                                                                                                                              <iframe width="480" height="249" src="https://www.youtube.com/embed/DEiSWx7-MX4?rel=0&amp;controls=0&amp;showinfo=0&amp;loop=1&amp;playlist=DEiSWx7-MX4&amp;modestbranding=1&amp;autoplay=1&amp;mute=1&amp;start=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>                                                                                                                                                                                                                             <p> The video shows the energy vs two continuous domain shifts (JPEG compression, Blur). The domain shift distortions are applied on the frames. The energy turns out to be an unsupervised indicator of domain shift and generally correlates with the magnitude of shift.</p>
+                                        <div class="figure">                                                                                                                                                                                              <iframe width="480" height="249" src="https://www.youtube.com/embed/DEiSWx7-MX4?rel=0&amp;controls=0&amp;showinfo=0&amp;loop=1&amp;playlist=DEiSWx7-MX4&amp;modestbranding=1&amp;autoplay=1&amp;mute=1&amp;start=1&amp;vq=hd1080" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>                                                                                                                                                                                                                             <p> The video shows the energy vs two continuous domain shifts (JPEG compression, Blur). The domain shift distortions are applied on the frames. The energy turns out to be an unsupervised indicator of domain shift and generally correlates with the magnitude of shift.</p>
                                        </div>
                                        </div>
 				
@@ -527,11 +589,10 @@
 				<div class="section-header text-center">
 					<h2 class="title">Live Demo on User Uploaded Images</h2>
 				</div>
-                                <div class="col-sm-3">
-                                </div>
+                <!-- <div class="col-sm-3"> </div> -->
                              
 				<!-- /Section header -->
-				<div class="col-sm-3">
+				<div class="col-sm-3 col-sm-offset-3">
 				<div class="col-lg-6 col-md-4 col-sm-4 col-xs-4 work">
 
 				<!-- Section header -->
@@ -641,7 +702,7 @@
 						<h2 class="title">CVPR 2020</h2>
 					</div>
 			        <div class="cvpr-container">
-			            <iframe class="cvpr-oral" border="0" id="" src="https://www.youtube.com/embed/dPzQusIjkQU?start=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style=""></iframe>
+			            <iframe class="cvpr-oral" border="0" id="" src="https://www.youtube.com/embed/dPzQusIjkQU?start=0&amp;vq=hd1080" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style=""></iframe>
 			        </div>
 				</div>
 
@@ -999,7 +1060,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="js/plugins.js"></script>
 	
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 	
 	<script src="js/waypoints.min.js"></script>
 	<script src="js/jquery.counterup.min.js"></script>
