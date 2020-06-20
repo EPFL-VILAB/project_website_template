@@ -582,64 +582,94 @@
 		<!-- Container -->
 		<div class="container">
 
+			<div class="section-header text-center">
+				<h2 class="title">Live Demo on User Uploaded Images</h2>
+			</div>
+
 			<!-- Row -->
 			<div class="row">
 
 				<!-- Section header -->
-				<div class="section-header text-center">
-					<h2 class="title">Live Demo on User Uploaded Images</h2>
-				</div>
-                <!-- <div class="col-sm-3"> </div> -->
-                             
-				<!-- /Section header -->
-				<div class="col-sm-3 col-sm-offset-3">
-				<div class="col-lg-6 col-md-4 col-sm-4 col-xs-4 work">
-
-				<!-- Section header -->
-
-					<img class="img-responsive" src="./img_consistency/svg/Octicons-mark-github.svg" alt="" class="center">
-					<div class="overlay"></div>
-					<div class="work-content">
-						<h4>Download pretrained models.</h4>
-						<div class="work-link">
-							<a href="https://github.com/EPFL-VILAB/XTConsistency"><i class="fa fa-cloud-download"></i></a>
-							
+					<div class="col-sm-4">
+						<div class='col-xs-6'>
+							<p style='text-align: center;'>Input Image</p>
+							<img style='border-top: 0px' width="100%"  src="assets/main_page/demo_teaser_1_input.png" alt="Demo input image 1.">
+						</div>
+						<div class='col-xs-6'>
+							<p style='text-align: center;'>3D Ken Burns*</p>
+							<!-- <p style='text-align: center;'>3D Ken Burns Effect</p> -->
+							<video width="100%" playsinline autoplay center loop muted poster="./loading.gif">
+							<source src="./assets/main_page/demo_teaser_1_vid.mp4" type="video/mp4" alt="Ken Burns effect from demo image 1">
+							</video>
 						</div>
 					</div>
-					<h4>Pretrained Models</h4>
 
-				
+					<div class="col-sm-4">
+						<div class='col-xs-6'>
+							<p style='text-align: center;'>Input Image</p>
+							<img style='border-top: 0px' width="100%"  src="assets/main_page/demo_teaser_3_input.png" alt="Demo input image 3.">
+						</div>
+						<div class='col-xs-6'>
+							<p style='text-align: center;'>3D Ken Burns*</p>
+							<!-- <p style='text-align: center;'>3D Ken Burns Effect</p> -->
+							<video width="100%" playsinline autoplay center loop muted poster="./loading.gif">
+							<source src="./assets/main_page/demo_teaser_3_vid.mp4" type="video/mp4" alt="Ken Burns effect from demo image 3">
+							</video>
+						</div>
+					</div>
+
+					<div class="col-sm-4">
+						<div class='col-xs-6'>
+							<p style='text-align: center;'>Input Image</p>
+							<img style='border-top: 0px' width="100%"  src="assets/main_page/demo_teaser_2_input.png" alt="Demo input image 2.">
+						</div>
+						<div class='col-xs-6'>
+							<p style='text-align: center;'>3D Ken Burns*</p>
+							<!-- <p style='text-align: center;'>3D Ken Burns Effect</p> -->
+							<video width="100%" playsinline autoplay center loop muted poster="./loading.gif">
+							<source src="./assets/main_page/demo_teaser_2_vid.mp4" type="video/mp4" alt="Ken Burns effect from demo image 2">
+							</video>
+						</div>
+					</div>
+				<!-- <div class="col-sm-3"> </div> -->
+			</div>
+	
+			<div class="row">
 				<!-- /Section header -->
-				
-				</div>	
-				</div>			
-				
-				<div class="col-sm-3">
-				<div class="col-lg-6 col-md-4 col-sm-4 col-xs-4 work">
-
-				<!-- Section header -->
-
-				
-
-					<img class="img-responsive" src="./img/icon-demo1_resized.png" alt="">
+				<div class="col-sm-2 col-sm-offset-4 work">
+				<!-- <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4 work"> -->
+					<img class="img-responsive" width="25%" src="./img/icon-demo1_resized.png" alt="">
 					<div class="overlay"></div>
-					<div class="work-content">
+					<div class="work-content" style='text-align: center;'>
 						<h4>Try the live demo on your query image.</h4>
 						<div class="work-link">
 							<a href="./demo"><i class="fa fa-play-circle"></i></a>
-							
 						</div>
 					</div>	
-					<h4>Live Demo</h4>
-				<!-- /Section header -->			
+					<h4  style='text-align: center;'>Live Demo</h4>
 				</div>	
-				</div>		
+
+				<div class="col-sm-2  work">
+					<!-- <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4 work"> -->
+					<img class="img-responsive" width="25%" src="./img_consistency/svg/Octicons-mark-github.svg" alt="">
+					<div class="overlay"></div>
+					<div class="work-content">
+						<h4>Download pretrained models.</h4>
+						<!-- <div class="overlay">
+						</div> -->
+						<div class="work-link">
+							<a href="https://github.com/EPFL-VILAB/XTConsistency"><i class="fa fa-cloud-download"></i></a>
+						</div>
+					</div>
+					<h4 style='text-align: center;'>Pretrained Models</h4>
+				</div>	
+
+			</div>		
                              
-                                <div class="col-sm-3">
-                                </div>
-
-
+			<div class="col-xs-12">
+				<p>*Using Niklaus et al. 2019 using depth predicted by the consistency-based model</p>
 			</div>
+		<!-- </div> -->
 			<!-- /Row -->
 
 		</div>
