@@ -8,7 +8,7 @@
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <link rel="shortcut icon" type="image/x-icon" href="triangle.ico">
 	<title>X-TC | Cross-Task Consistency</title>
-	<meta name="keywords" content="consistency, robust-learning, multitask, computer vision, vision, stanford, tasks, berkeley, EPFL">
+	<meta name="keywords" content="consistency, robust-learning, multitask, computer vision, vision, stanford, tasks, berkeley, EPFL, Swiss Federal Institute of Technology, Lausanne">
 	<meta name="description" content="Robust Learning Through Cross-Task Consistency EPFL, Stanford, UC Berkeley. We propose a flexible and fully computational framework for learning, while respecting consistency across an arbitrary dictionary of tasks.">
 	<!--meta name="google-site-verification" content="tBb4aimY-zxYS_s_z86g6faxMX2G_I_Wp_kzbF3U_RM" />--
 
@@ -83,7 +83,7 @@
 					<!-- Logo -->
 					<div class="navbar-brand">
 						<a class="logo-text" href="//consistency.epfl.ch">X-TC</a>
-						<a href="http://svl.stanford.edu/">
+						<a href="http://vilab.epfl.ch/">
 								<img class="logo" src="./img/stanford-logo.png" alt="logo">
 								<img class="logo-alt" src="./img/stanford-logo-white.png" alt="logo">
 						</a>
@@ -386,17 +386,15 @@
 				<!-- Section header -->
 				<div class="section-header text-center">
 					<h2 class="title">Who can use cross-task consistency?</h2>
-					Anyone. <u><strong>Even if you're doing single-task learning.</strong></u> Here's how.
+					<u><strong>Cross-Task constraints are useful for common single-task learning too, not just multi-task.</strong></u> Here's how.
 				</div>
 
 				<div class='row'>
 
 				<div class="col-sm-6">
 				<p>
-					Let's say that you're interested in predicting some y1 given x. For concreteness, we'll predict surface normals from an RGB image, though many domains will work as y1.
-				</p>
-				<p>
-					Instead of simply training a network to do RGB→Surface Normals, train it to do RGB→Surface Normals→y2. It will fit the data better with improved RGB→Surface Normal predictions.
+					Let's say that you're interested in predicting some y1 given x (For example surface normals given an RGB image).
+					Instead of simply training a network to do x→y1 (i.e. RGB→Surface Normals), train it to do x→y1→y2 (i.e. RGB→Surface Normals→y2). It will fit the data better with improved RGB→Surface Normal predictions.
 				</p>
 				</div>
 	
@@ -411,10 +409,10 @@
 					Many options for y2 work; even if you have only (x,y1) training data. All choices gave some benefit, though some more than others. Some y2 options:
 					<ul style="list-style-type: circle;">
 						<li> 
-							<strong>Use tasks that need no supervision as y2.</strong> For instance, 2D edges (sobel) or 2D keypoints (SURF). The figure below shows that adding such consistency constraints can improve the results. 
+							<strong>Use tasks that need no supervision as y2.</strong> For instance, 2D texture edges (sobel) or 2D keypoints (SURF). The figure below shows that adding such consistency constraints improved the RGB→Surface Normals results. See section "Using Consistency with Unsupervised Tasks" in the paper.
 						</li>
 						<li>
-							<strong>Use our released pre-trained cross-task functions</strong> as y1→y2 in your training job. Thos models can be downloaded from our <a href='https://github.com/EPFL-VILAB/XTConsistency#pretrained-models'>github repository</a>.
+							<strong>Use our released pre-trained cross-task functions</strong> as y1→y2 in your training job. Those models can be downloaded from our <a href='https://github.com/EPFL-VILAB/XTConsistency#pretrained-models'>github repository</a>.
 						</li>
 					</ul>
 				</p>
@@ -422,12 +420,12 @@
 				<div class="figure row" style="text-align:center">
 					<div class='col-sm-10 col-sm-offset-1'>
 					<img width="60%" src="./assets/main_page/unsupervised_results.jpg" alt="Results from using cross-task consistency with unsupervised tasks for y2." class="center">
-					<p  style='text-align: justify;'><strong>Results from using unsupervised consistency constraints.</strong> The network trained with cross-task consistency used only 2D edges and 2D keypoints as 'y2' tasks. Since these are unsupervised tasks, they requred no additional supervision. Still, the consistency-trained network better fits the fine-grained details in images, as shown in the area highlighted with yellow circles.</p>
+					<p  style='text-align: justify;'><strong>Results from using unsupervised consistency constraints.</strong> The network trained with cross-task consistency used only 2D edges and 2D keypoints as 'y2' tasks. Since these are unsupervised tasks, they required no additional supervision. Still, the consistency-trained network better fits the fine-grained details in images, as shown in the area highlighted with yellow circles. This echoes cross-task constraints are useful for common single-task learning too, even when no additional tasks/data/labels are available.</p>
 					</div>
 				</div>
 
 
-				To summarize: cross-task consistency can be used to improve even single-task learning. This works for many configurations of x→y1; not just surface normal prediction.
+				To summarize: cross-task consistency can be used to improve most every-day neural network training jobs, not just multi-task learning.  
 
 			</div>
 			<!-- /Row -->
@@ -529,7 +527,6 @@
 
 						<img width="60%" src="./img_consistency/svg/all_new.svg" alt="" class="center">
                                                 <p> Empirical analyses of consistency energy.</p>
-						<!--p><strong>Analysis of consistency energy.</strong> <strong>Left:</strong> The consistency energy shown over the course of training, demonstrating a successful optimization to achieve more consistent results, ending significantly lower than that of independent predictions and multi-task baselines. <strong>Middle:</strong> Energy is predictive of estimation error, with a Pearson correlation coefficient of 0.67. <strong>Right:</strong> Out-of-domain samples (blue, red) have an energy distribution significantly higher than in-distribution samples (grey), hence energy can be used as a strong unsupervised method for detecting domain shifts in the data (AUC=0.99).</p-->
 					</div>
                                         </div>
           
@@ -667,7 +664,7 @@
 			</div>		
                              
 			<div class="col-xs-12">
-				<p>*Using Niklaus et al. 2019 using depth predicted by the consistency-based model</p>
+				<p>*Using the depth predicted by the consistency-based models and Niklaus et al. 2019 Ken Burn codeusing depth predicted by the consistency-based model</p>
 			</div>
 		<!-- </div> -->
 			<!-- /Row -->
@@ -744,66 +741,7 @@
 		<!-- /Container -->
 
 	</div>
-	<!-- /Paper -->
 
-	<!-- Methods -/-/>
-	<div id="methods" class="section md-padding">
-		<div class="container">
-			<div class="row">
-				<div class="section-header text-center">
-					<h2 class="title">Methods</h2>
-				</div>
-				<div class="abstract-body col-md-12">
-					<p> 
-						We create our taxonomy in a three-step process:
-						<ul>
-							<li><strong>Train tasks:</strong> Train each task using fully supervised learning on a large amount of data.</li>
-							<li><strong>Train transfers:</strong> Train all possible pairwise transfers. A transfer takes the learned representation for one task, and then uses this to predict the output for another task. For example, we trained a network to use the intermediate representation of the normals prediction network to then use these features to do scene classification. We trained all possible pairwise transfers. We also trained higher-order transfers which used more than one source task (e.g. normals AND curvature).</li>
-							<li><strong>Normalize results:</strong> Comparing transfers is nontrivial. For example, how do we determine if normals transfers to scene classification better than edges detection transfers to depth estimation? Scene classification uses cross-entropy loss while depth estimation uses mean L1 loss. The two average losses of the task-specific networks even have different orders of magnitude! We use a tournament graph of all transfers to a task to determine each pairwise win-rate, or how often one transfer achieved a lower loss than another. We come up with a total-ordering based on this pairwise tournament matrix via the Analytic Hierarchy Process. The resulting ordering gives us a priority value for each source, valued between 0 and 1. These values can then be compared across tasks. When computing our taxonomy, we will maximize the total priority.</li>
-						</ul>
-					</p>
-					<p> 						
-						Then we can solve for the taxonomy using a Boolean Integer Program (BIP).<br><br>
-						Page under construction. More details coming soon.
-					</p>
-				</div>			
-				<div class="col-md-12 figure">
-					<img width="100%" class="center" src="./img/svg/taxonomy_significance_transparent.svg">
-					<p><strong>Taxonomy significance.</strong> The green line is our taxonomy, and the grey lines show the performance of a random feasible solution (error bars show standard deviation).</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	</!-/- /Methods -->
-
-
-    
-	<!--  Results -/-!/>
-	<div id="significance" class="section md-padding bg-grey">
-		<div class="container">
-			<div class="row">
-				<div class="section-header text-center">
-					<h2 class="title">Evaluation</h2>
-				</div>
-				<div class="abstract-body col-md-12">
-					<p> 
-						We measure the effectiveness of our networks using two different metrics.
-						<ul>
-							<li><strong>Gain:</strong> The win rate of a network versus standard supervised learning on the same number of data points.</li>
-							<li><strong>Quality:</strong> The win rate of a network versus the task-specific networks trained on 120k images.</li>
-							<br>Page under construction. More details coming soon.
-						</ul>
-
-					</p>
-				</div>			
-				<div class="col-md-12 figure">
-					<img width="100%" class="center" src="./img/svg/taxonomy_significance_transparent.svg">
-					<p><strong>Taxonomy significance.</strong> The green line is our taxonomy, and the grey lines show the performance of a random feasible solution (error bars show standard deviation).</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	</!-/- /Results -->
 
 	<div id="team" class="section md-padding">
 		
@@ -1035,28 +973,20 @@
 			<div class="row">
 
 				<div class="col-md-12">
-
-					<!-- footer logo -->
-					<!-- <div class="footer-logo">
-							<img width="10%" style="margin-right:25px" class="logo-alt" src="./img/svg/SVLLogo_white.svg" alt="logo">
-							<img width="10%" class="logo-alt" src="./img/svg/bair_white.svg" alt="logo">
-					</div> -->
-					<!-- /footer logo -->
+ 
 
 					<!-- footer follow -->
 					<ul class="footer-follow">
 						<li><a href="https://github.com/EPFL-VILAB/XTConsistency"><i class="fa fa-github"></i></a></li>
-						<!--<li><a href="https://svl.stanford.edu/home"><i class="fa fa-globe"></i></a></li>-->
-						<!--<li><a href="https://twitter.com/StanfordCVGL"><i class="fa fa-twitter"></i></a></li>-->
-						<!-- <li><a href="#"><i class="ai ai-google-scholar big-icon"></i></a></li> -->
-						<!-- <li><a href="#"><i class="fa fa-instagram"></i></a></li> -->
-						<!-- <li><a href="#"><i class="fa fa-linkedin"></i></a></li> -->
+ 
 					</ul>
 					<!-- /footer follow -->
 
 					<!-- footer copyright -->
 					<div class="footer-copyright">
-						<p>Copyright © 2020. EPFL. All Rights Reserved.</p>
+						<p>Copyright © 2020. Swiss Federal Institute of Technology (EPFL). All Rights Reserved.</p>
+						<p>The source code of this website template is available <a href='https://github.com/EPFL-VILAB/project_website_template'>here</a>.</p>
+
 					</div>
 					<!-- /footer copyright -->
 
@@ -1105,23 +1035,9 @@
 	<script src="js/particles.js"></script>	
 	<script src="js/app.js"></script>
 
-<!-- Default Statcounter code for Consistency.epfl.ch
-https://consistency.epfl.ch/ -->
-<script type="text/javascript">
-var sc_project=12227943; 
-var sc_invisible=1; 
-var sc_security="03ed03c6"; 
-var sc_https=1; 
-</script>
-<script type="text/javascript"
-src="https://www.statcounter.com/counter/counter.js"
-async></script>
-<noscript><div class="statcounter"><a title="Web Analytics"
-href="https://statcounter.com/" target="_blank"><img
-class="statcounter"
-src="https://c.statcounter.com/12227943/0/03ed03c6/1/"
-alt="Web Analytics"></a></div></noscript>
-<!-- End of Statcounter Code -->
+<!-- Start of counter Code -->
+<!--you can put some website tracker/counter code (eg Statcounter, Google Analytics) here if you're interested in tracking the activity on your website. -->
+<!-- End of counter Code -->
 
 </body>
 
